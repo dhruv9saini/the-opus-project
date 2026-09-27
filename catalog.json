@@ -2,20 +2,6 @@
   "schema": 3,
   "scores": [
     {
-      "slug": "amy-beach-op-54-no-1",
-      "title": "Scottish Legend",
-      "composer": "Amy Beach",
-      "catalogue": "Op. 54, No. 1",
-      "year": "1903",
-      "instrumentation": "Piano",
-      "step": 1,
-      "verified_by": null,
-      "lilypond_url": "pieces/amy-beach-op-54-no-1/attempts/01.ly",
-      "pdf_url": "pieces/amy-beach-op-54-no-1/attempts/01.pdf",
-      "source_page": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)",
-      "source_pdf": "https://imslp.org/tools/getindex/867556"
-    },
-    {
       "slug": "louise-farrenc-op-50-no-1",
       "title": "Étude No. 1",
       "composer": "Louise Farrenc",

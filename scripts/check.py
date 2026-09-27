@@ -36,7 +36,7 @@ def load_metadata(path: Path) -> dict[str, object]:
     if not isinstance(data, dict):
         fail(f"{path.relative_to(ROOT)}: root must be an object")
     missing = REQUIRED - data.keys()
-    extra = data.keys() - REQUIRED
+    extra = data.keys() - (REQUIRED | {"withdrawn"})
     if missing or extra:
         fail(
             f"{path.relative_to(ROOT)}: schema mismatch; "
@@ -48,6 +48,8 @@ def load_metadata(path: Path) -> dict[str, object]:
             fail(f"{path.relative_to(ROOT)}: {key} must be a non-empty string")
     if data["slug"] != path.parent.name:
         fail(f"{path.relative_to(ROOT)}: slug must match its directory")
+    if "withdrawn" in data and not isinstance(data["withdrawn"], bool):
+        fail(f"{path.relative_to(ROOT)}: withdrawn must be a boolean")
     step = data["step"]
     if not isinstance(step, int) or isinstance(step, bool) or not 1 <= step <= 3:
         fail(f"{path.relative_to(ROOT)}: step must be an integer from 1 to 3")
@@ -109,6 +111,8 @@ def expected_catalog() -> tuple[dict[str, object], list[Path]]:
             current_source = final_score
         else:
             current_source = attempts[-1]
+        if data.get("withdrawn", False):
+            continue
         current_relative = current_source.relative_to(ROOT).as_posix()
         entries.append(
             {

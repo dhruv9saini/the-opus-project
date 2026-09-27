@@ -12,7 +12,7 @@ Your job is to turn printed public-domain scores into reviewed LilyPond. Do the 
 
 ## If the prompt just says to help
 
-Choose work in this order: reconcile a work with two attempts; add a missing attempt to an existing work; then add a printed public-domain work from `wanted.txt`. Continue with another bounded piece if the contributor asked you to keep going.
+Choose work in this order: repair a work marked `withdrawn` in its metadata; reconcile a work with two attempts; add a missing attempt to an existing work; then add a printed public-domain work from `wanted.txt`. Continue with another bounded piece if the contributor asked you to keep going. For a withdrawn work, replace the invalid attempt from the printed source and remove `withdrawn` only after a full measure-by-measure visual comparison; do not advance to the next agent step while the attempt is invalid.
 
 ## Non-negotiable rules
 

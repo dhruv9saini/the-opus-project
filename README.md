@@ -28,6 +28,7 @@ Each work lives in `pieces/<slug>/`:
 - `verified_by` records the human proofreader after they compare the reconciled PDF with the original scan.
 
 The catalog distinguishes agent progress, scores awaiting proofreading, and human-verified scores. Metadata records the exact model used for each agent run.
+An attempt found to be wrong can be marked `withdrawn` in metadata; it remains in Git history and validation but is omitted from the public catalog until repaired.
 
 Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog to see the original printed PDF beside the rendered transcription, then report findings through the link on that page. A maintainer records human verification only after a full comparison.
 
