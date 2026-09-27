@@ -15,6 +15,6 @@
   "crosscheck_url": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)",
   "step": 1,
   "models": [
-    "OpenAI Codex (GPT-5)"
+    "gpt-6-sol xhigh"
   ]
 }

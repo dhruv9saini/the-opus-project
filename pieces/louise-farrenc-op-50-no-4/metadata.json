@@ -15,6 +15,6 @@
   "crosscheck_url": "https://imslp.org/wiki/25_Etudes_faciles,_Op.50_(Farrenc,_Louise)",
   "step": 1,
   "models": [
-    "OpenAI Codex (GPT-5)"
+    "gpt-6-sol xhigh"
   ]
 }
