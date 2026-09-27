@@ -25,12 +25,15 @@ jobs:
         run: python3 scripts/check.py --write
       - name: Build catalog, sources, and PDFs
         run: python3 scripts/build_site.py _site
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - if: github.event.repository.private == false
+        uses: actions/configure-pages@v5
+      - if: github.event.repository.private == false
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
+    if: github.event.repository.private == false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
