@@ -40,8 +40,8 @@ if (!piece) {
 
       const reportTitle = `Proofreading: ${score.composer} — ${score.title}`;
       const reportBody = `Work: ${score.composer} — ${score.title}\nResult: [no errors found / corrections needed]\nPages and measures checked:\nDetails:\nSource PDF: ${score.source_pdf}\nRendered PDF: ${new URL(score.pdf_url, window.location.href).href}`;
-      const params = new URLSearchParams({title: reportTitle, body: reportBody});
-      document.querySelector('[data-feedback]').href = `https://github.com/dhruv9saini/the-opus-project/issues/new?${params}`;
+      const params = new URLSearchParams({category: 'general', title: reportTitle, body: reportBody});
+      document.querySelector('[data-feedback]').href = `https://github.com/dhruv9saini/the-opus-project/discussions/new?${params}`;
 
       document.querySelector('[data-compare]').hidden = false;
       document.querySelector('[data-report]').hidden = false;
