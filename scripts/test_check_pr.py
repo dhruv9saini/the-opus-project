@@ -45,7 +45,7 @@ def check(repo: Path, base: str, head: str, body: str) -> int:
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="score-home-pr-test-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="opus-project-pr-test-") as temporary:
         repo = Path(temporary)
         assert run("git", "init", "--quiet", cwd=repo).returncode == 0
         assert run("git", "config", "user.name", "Fixture", cwd=repo).returncode == 0

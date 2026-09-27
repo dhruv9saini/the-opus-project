@@ -1,4 +1,4 @@
-# Working on score@home
+# Working on The OPUS Project
 
 Your job is to turn printed public-domain scores into reviewed LilyPond. Do the work directly; do not ask the contributor to know notation software.
 

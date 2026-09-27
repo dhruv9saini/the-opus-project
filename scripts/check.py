@@ -146,7 +146,7 @@ def compile_sources(sources: list[Path]) -> None:
     lilypond = shutil.which("lilypond")
     if not lilypond:
         fail("lilypond is not installed")
-    with tempfile.TemporaryDirectory(prefix="score-home-check-") as temp_dir:
+    with tempfile.TemporaryDirectory(prefix="opus-project-check-") as temp_dir:
         output_root = Path(temp_dir)
         for source in sources:
             source_text = source.read_text(encoding="utf-8")

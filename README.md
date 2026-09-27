@@ -1,11 +1,13 @@
-# score@home
+# The OPUS Project
+
+Open Public-domain Universal Scores.
 
 A crowdsourced project to transcribe the world's music with AI.
 
 Clone the repository, open it in Codex or Claude Code, and ask for one thing:
 
 ```text
-Help out with score@home until my usage runs down.
+Help out with The OPUS Project until my usage runs down.
 ```
 
 or:
