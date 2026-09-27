@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A crowdsourced project to transcribe the world's music with AI.">
+  <title>score@home — open LilyPond scores</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="./">score<span>@</span>home</a>
+      <nav aria-label="Primary navigation">
+        <a href="#scores">Scores</a>
+        <a href="about.html">About</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="https://github.com/dhruv9saini/score-home">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">score@home</h1>
+      <p>A crowdsourced project to transcribe the world's music with AI.</p>
+      <p><a href="about.html">About the project</a> · <a href="contribute.html">Contribution instructions</a></p>
+    </section>
+
+    <section class="panel" id="scores" aria-labelledby="scores-title">
+      <div class="panel-heading">
+        <h2 id="scores-title">Scores</h2>
+        <label class="search">
+          <span class="visually-hidden">Search scores</span>
+          <input type="search" data-search placeholder="Search scores">
+        </label>
+      </div>
+      <div class="table-heading" aria-hidden="true">
+        <span>Composer</span><span>Work</span><span>Catalogue</span><span>Status</span><span>Files</span>
+      </div>
+      <div class="catalog" data-catalog aria-live="polite"><p>Loading catalog…</p></div>
+    </section>
+
+    <section class="panel" id="contribute" aria-labelledby="contribute-title">
+      <div class="panel-heading"><h2 id="contribute-title">Contribute</h2></div>
+      <div class="panel-body">
+        <p>Choose a public-domain score, clone the repository, and ask an AI coding agent to transcribe it in LilyPond.</p>
+        <div class="command"><code>Help out with score@home until my usage runs down.</code></div>
+        <p><a href="contribute.html">Read the contribution instructions</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

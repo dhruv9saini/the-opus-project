@@ -1,0 +1,17 @@
+{
+  "schema": 2,
+  "scores": [
+    {
+      "slug": "amy-beach-op-54-no-1",
+      "title": "Scottish Legend",
+      "composer": "Amy Beach",
+      "catalogue": "Op. 54, No. 1",
+      "year": "1903",
+      "instrumentation": "Piano",
+      "step": 1,
+      "lilypond_url": "pieces/amy-beach-op-54-no-1/attempts/01.ly",
+      "pdf_url": "pieces/amy-beach-op-54-no-1/attempts/01.pdf",
+      "source_page": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)"
+    }
+  ]
+}

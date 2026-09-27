@@ -1,0 +1,24 @@
+name: check
+
+on:
+  pull_request:
+
+jobs:
+  scores:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install LilyPond
+        run: sudo apt-get update && sudo apt-get install --yes lilypond
+      - name: Validate catalog and scores
+        run: python3 scripts/check.py
+      - name: Test pull-request checker
+        run: python3 -B scripts/test_check_pr.py
+      - name: Validate transcription provenance
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: python3 scripts/check_pr.py

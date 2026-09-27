@@ -1,0 +1,20 @@
+{
+  "slug": "amy-beach-op-54-no-1",
+  "title": "Scottish Legend",
+  "composer": "Amy Beach",
+  "catalogue": "Op. 54, No. 1",
+  "year": "1903",
+  "instrumentation": "Piano",
+  "license": "CC0 1.0",
+  "source_library": "IMSLP",
+  "source_id": "IMSLP867556",
+  "source_page": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)",
+  "source_pdf": "https://imslp.org/wiki/Special:ImagefromIndex/867556",
+  "source_sha256": "0ab6ba017412949ef3e629e2514095f4908304e63f89a9d7ef87b5cf726784fe",
+  "crosscheck_name": "IMSLP file record #867556",
+  "crosscheck_url": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)",
+  "step": 1,
+  "models": [
+    "OpenAI Codex (GPT-5)"
+  ]
+}
