@@ -52,12 +52,16 @@ def main() -> int:
         assert run("git", "config", "user.email", "fixture@example.invalid", cwd=repo).returncode == 0
         base = commit(repo, "README.md", "fixture\n", "base")
         score_head = commit(repo, "pieces/work/attempts/01.ly", "\\version \"2.26.0\"\n", "score")
-        valid = "Step: 1/5\nModel: openai/gpt-5\nSource: https://example.invalid/source.pdf\n"
+        valid = "Step: 1/3\nModel: openai/gpt-5\nSource: https://example.invalid/source.pdf\n"
         assert check(repo, base, score_head, valid) == 0
-        assert check(repo, base, score_head, "Step: 1/5\nSource: https://example.invalid\n") == 1
+        assert check(repo, base, score_head, "Step: 1/5\nModel: openai/gpt-5\nSource: https://example.invalid\n") == 1
+        assert check(repo, base, score_head, "Step: 1/3\nSource: https://example.invalid\n") == 1
+        human = "Review: human\nProofreader: @fixture\nSource: https://example.invalid/source.pdf\n"
+        assert check(repo, base, score_head, human) == 0
+        assert check(repo, base, score_head, "Review: human\nProofreader: @github-username\nSource: https://example.invalid/source.pdf\n") == 1
         docs_head = commit(repo, "README.md", "fixture updated\n", "docs")
         assert check(repo, score_head, docs_head, "") == 0
-    print("check_pr fixtures: positive=pass negative=pass non_score=pass")
+    print("check_pr fixtures: agent=pass human=pass negative=pass non_score=pass")
     return 0
 
 

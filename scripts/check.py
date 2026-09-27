@@ -21,7 +21,7 @@ STRING_FIELDS = {
     "license", "source_library", "source_id", "source_page", "source_pdf",
     "source_sha256", "crosscheck_name", "crosscheck_url",
 }
-REQUIRED = STRING_FIELDS | {"step", "models"}
+REQUIRED = STRING_FIELDS | {"step", "models", "verified_by"}
 
 
 def fail(message: str) -> None:
@@ -49,8 +49,8 @@ def load_metadata(path: Path) -> dict[str, object]:
     if data["slug"] != path.parent.name:
         fail(f"{path.relative_to(ROOT)}: slug must match its directory")
     step = data["step"]
-    if not isinstance(step, int) or isinstance(step, bool) or not 1 <= step <= 5:
-        fail(f"{path.relative_to(ROOT)}: step must be an integer from 1 to 5")
+    if not isinstance(step, int) or isinstance(step, bool) or not 1 <= step <= 3:
+        fail(f"{path.relative_to(ROOT)}: step must be an integer from 1 to 3")
     models = data["models"]
     if (
         not isinstance(models, list)
@@ -61,6 +61,14 @@ def load_metadata(path: Path) -> dict[str, object]:
             f"{path.relative_to(ROOT)}: models must contain one exact model "
             "identifier for every completed step"
         )
+    verified_by = data["verified_by"]
+    if verified_by is not None:
+        username = r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?"
+        if step != 3 or not isinstance(verified_by, str) or not re.fullmatch(username, verified_by):
+            fail(
+                f"{path.relative_to(ROOT)}: verified_by must be a GitHub "
+                "username after Step 3/3, or null"
+            )
     if not SHA256.fullmatch(str(data["source_sha256"])):
         fail(
             f"{path.relative_to(ROOT)}: source_sha256 must be "
@@ -81,24 +89,22 @@ def expected_catalog() -> tuple[dict[str, object], list[Path]]:
         step = int(data["step"])
         attempts_dir = piece_dir / "attempts"
         attempts = sorted(attempts_dir.glob("*.ly")) if attempts_dir.is_dir() else []
-        expected_names = [
-            f"{number:02}.ly" for number in range(1, min(step, 4) + 1)
-        ]
+        expected_names = [f"{number:02}.ly" for number in range(1, min(step, 2) + 1)]
         if [path.name for path in attempts] != expected_names:
             fail(
-                f"{piece_dir.relative_to(ROOT)}: Step {step}/5 requires "
+                f"{piece_dir.relative_to(ROOT)}: Step {step}/3 requires "
                 f"attempts {expected_names}"
             )
         final_score = piece_dir / "score.ly"
-        if step == 5 and not final_score.is_file():
-            fail(f"{piece_dir.relative_to(ROOT)}: Step 5/5 requires score.ly")
-        if step < 5 and final_score.exists():
+        if step == 3 and not final_score.is_file():
+            fail(f"{piece_dir.relative_to(ROOT)}: Step 3/3 requires score.ly")
+        if step < 3 and final_score.exists():
             fail(
                 f"{piece_dir.relative_to(ROOT)}: score.ly is reserved for "
-                "the Step 5/5 meta-review"
+                "the Step 3/3 reconciliation"
             )
         sources.extend(attempts)
-        if step == 5:
+        if step == 3:
             sources.append(final_score)
             current_source = final_score
         else:
@@ -113,9 +119,11 @@ def expected_catalog() -> tuple[dict[str, object], list[Path]]:
                 "year": data["year"],
                 "instrumentation": data["instrumentation"],
                 "step": step,
+                "verified_by": data["verified_by"],
                 "lilypond_url": current_relative,
                 "pdf_url": str(Path(current_relative).with_suffix(".pdf")),
                 "source_page": data["source_page"],
+                "source_pdf": data["source_pdf"],
             }
         )
     entries.sort(
@@ -125,7 +133,7 @@ def expected_catalog() -> tuple[dict[str, object], list[Path]]:
             str(entry["title"]).casefold(),
         )
     )
-    return {"schema": 2, "scores": entries}, sources
+    return {"schema": 3, "scores": entries}, sources
 
 
 def render_catalog(catalog: dict[str, object]) -> str:

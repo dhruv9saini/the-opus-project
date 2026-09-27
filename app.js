@@ -23,7 +23,7 @@ function render(query = '') {
   if (!visible.length) {
     const message = scores.length
       ? 'No scores match that search.'
-      : 'No scores have reached Step 1/5 yet.';
+      : 'No scores have reached Step 1/3 yet.';
     addText(catalogNode, 'p', 'empty', message);
     return;
   }
@@ -37,7 +37,12 @@ function render(query = '') {
     addText(row, 'p', 'composer', score.composer);
     addText(row, 'p', 'work', score.title);
     addText(row, 'p', 'catalog-meta', score.catalogue);
-    addText(row, 'span', 'badge', `Step ${score.step}/5`);
+    const status = score.verified_by
+      ? 'Human verified'
+      : score.step === 3
+        ? 'Needs proofreading'
+        : `Step ${score.step}/3`;
+    addText(row, 'span', 'badge', status);
 
     const links = document.createElement('div');
     links.className = 'score-links';
@@ -45,9 +50,8 @@ function render(query = '') {
     lilypond.href = score.lilypond_url;
     const pdf = addText(links, 'a', '', 'PDF');
     pdf.href = score.pdf_url;
-    const source = addText(links, 'a', '', 'Printed source');
-    source.href = score.source_page;
-    source.rel = 'external';
+    const compare = addText(links, 'a', '', 'Compare PDFs');
+    compare.href = `proofread.html?piece=${encodeURIComponent(score.slug)}`;
     row.append(links);
     catalogNode.append(row);
   }
@@ -60,6 +64,7 @@ fetch('catalog.json')
   })
   .then((data) => {
     scores = data.scores.sort((left, right) =>
+      Number(Boolean(right.verified_by)) - Number(Boolean(left.verified_by)) ||
       right.step - left.step ||
       left.composer.localeCompare(right.composer) ||
       left.title.localeCompare(right.title)

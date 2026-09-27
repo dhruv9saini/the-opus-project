@@ -23,10 +23,13 @@ The agent reads [AGENTS.md](AGENTS.md), chooses the next independent transcripti
 Each work lives in `pieces/<slug>/`:
 
 - `metadata.json` records the exact printed source.
-- `attempts/01.ly` through `attempts/04.ly` are independent transcriptions made by different agents.
-- `score.ly` is the Step 5 meta-review: a fifth agent's reconciliation of those four attempts against the source.
+- `attempts/01.ly` and `attempts/02.ly` are independent transcriptions made by different agents.
+- `score.ly` is the third agent's reconciliation of both attempts against the printed source.
+- `verified_by` records the human proofreader after they compare the reconciled PDF with the original scan.
 
-The catalog labels every work `Step N/5`; it never presents an initial transcription as a reviewed score. Metadata also records the exact model used for each completed step.
+The catalog distinguishes agent progress, scores awaiting proofreading, and human-verified scores. Metadata records the exact model used for each agent run.
+
+Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog to see the original printed PDF beside the rendered transcription, then report findings through the link on that page. A maintainer records human verification only after a full comparison.
 
 Only LilyPond notation belongs in the repository. Every attempt is entered visually from the printed edition; OMR/OCR score recognition, MusicXML or MIDI conversion, and existing digital transcriptions are forbidden. Source PDFs stay at the public library; their URL and SHA-256 digest go in metadata.
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="About The OPUS Project, a crowdsourced project to transcribe the world's music with AI.">
   <title>About — The OPUS Project</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <header class="site-header">
@@ -38,8 +38,8 @@
     <section class="panel" aria-labelledby="review-title">
       <div class="panel-heading"><h2 id="review-title">How the review works</h2></div>
       <div class="panel-body">
-        <p>Every piece moves through five steps. Steps 1–4 are independent transcriptions made by different agents without reading one another's work. At Step 5, another agent compares all four versions against the printed source and reconciles them into the published score.</p>
-        <p>The catalog shows exactly where each piece is in that process. A first pass is useful, but it is never presented as a verified edition.</p>
+        <p>Two agents independently transcribe the same printed score without reading one another's work. A third agent compares both versions with the source and reconciles them into a LilyPond score. A human then proofreads the rendered PDF against the original scan.</p>
+        <p>The catalog shows agent progress, which scores need proofreading, and which have been checked by a person. An AI pass is never presented as human-verified.</p>
       </div>
     </section>
 
@@ -47,6 +47,7 @@
       <div class="panel-heading"><h2 id="archive-title">One open archive</h2></div>
       <div class="panel-body">
         <p>The LilyPond sources, rendered PDFs, source references, and review history live together in the GitHub repository. When a contribution is merged, the catalog is rebuilt from the repository and the piece appears here automatically.</p>
+        <p>To help proofread, open a work's <em>Compare PDFs</em> link in the catalog. It puts the original scan and rendered transcription together; no repository clone or notation software is needed to inspect them.</p>
         <p><a href="contribute.html">How to contribute</a> · <a href="https://github.com/dhruv9saini/the-opus-project">View the repository on GitHub</a></p>
       </div>
     </section>

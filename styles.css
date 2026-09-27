@@ -69,7 +69,7 @@ main { padding: 24px 0 48px; }
 .catalog-summary { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.88rem; }
 .table-heading, .score-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.5fr) minmax(90px, 0.55fr) 90px 210px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(90px, 0.55fr) 150px 230px;
   gap: 18px;
   align-items: center;
 }
@@ -81,7 +81,7 @@ main { padding: 24px 0 48px; }
 .score-row > * { min-width: 0; }
 .composer, .catalog-meta { color: var(--muted); }
 .catalog-meta { font-size: 0.88rem; }
-.badge { width: max-content; padding: 2px 6px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--muted); font-size: 0.72rem; }
+.badge { width: max-content; padding: 2px 6px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--muted); font-size: 0.72rem; white-space: nowrap; }
 .score-links { display: flex; gap: 12px; white-space: nowrap; }
 .empty { margin: 0; padding: 18px 14px; color: var(--muted); }
 .panel-body { max-width: 800px; padding: 18px 14px; }
@@ -91,6 +91,14 @@ main { padding: 24px 0 48px; }
 .prose li + li { margin-top: 7px; }
 .command { margin: 14px 0; padding: 11px 12px; border: 1px solid var(--border); background: var(--code); overflow-x: auto; }
 .command code { white-space: nowrap; }
+
+.comparison-page main { width: min(1600px, calc(100% - 32px)); }
+.compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.compare-panel { min-width: 0; border: 1px solid var(--border); background: var(--surface); }
+.compare-panel h2 { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface-alt); font-size: 1.05rem; }
+.compare-panel p { margin: 0; padding: 10px 14px; }
+.pdf-frame { display: block; width: 100%; height: min(78vh, 1000px); min-height: 520px; border: 0; border-top: 1px solid var(--border); background: var(--surface); }
+.compare-grid[hidden], .panel[hidden] { display: none; }
 
 .visually-hidden {
   position: absolute;
@@ -112,4 +120,6 @@ main { padding: 24px 0 48px; }
   .composer, .work { grid-column: 1; }
   .catalog-meta, .badge { grid-column: 2; }
   .score-links { grid-column: 1 / -1; margin-top: 5px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .pdf-frame { height: 70vh; }
 }

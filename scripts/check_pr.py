@@ -34,20 +34,19 @@ def main() -> int:
         print("no score files changed")
         return 0
 
-    rules = {
-        "Step": r"(?m)^Step: [1-5]/5\s*$",
-        "Model": r"(?m)^Model: (?!provider/exact-model-id\s*$).+\S\s*$",
-        "Source": r"(?m)^Source: https://\S+\s*$",
-    }
-    missing = [label for label, pattern in rules.items() if not re.search(pattern, body)]
-    if missing:
-        print(
-            "error: score pull request is missing valid annotations: "
-            + ", ".join(missing),
-            file=sys.stderr,
-        )
+    source = re.search(r"(?m)^Source: https://\S+\s*$", body)
+    agent = (
+        re.search(r"(?m)^Step: [1-3]/3\s*$", body)
+        and re.search(r"(?m)^Model: (?!provider/exact-model-id\s*$).+\S\s*$", body)
+    )
+    human = (
+        re.search(r"(?m)^Review: human\s*$", body)
+        and re.search(r"(?m)^Proofreader: @(?!github-username\s*$)[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?\s*$", body)
+    )
+    if not source or not (agent or human):
+        print("error: score pull request needs Source and either Step/Model or Review/Proofreader annotations", file=sys.stderr)
         return 1
-    print("pull-request transcription provenance is present")
+    print("pull-request score provenance is present")
     return 0
 
 

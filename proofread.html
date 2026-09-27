@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare an original public-domain score with its LilyPond transcription.">
+  <title>Proofread a score — The OPUS Project</title>
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body class="comparison-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="./">The <span>OPUS</span> Project</a>
+      <nav aria-label="Primary navigation">
+        <a href="./#scores">Scores</a>
+        <a href="about.html">About</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="https://github.com/dhruv9saini/the-opus-project">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title" data-title>Compare PDFs</h1>
+      <p data-status>Loading score…</p>
+      <p>Compare the printed source with the rendered transcription. You can open either PDF in its own tab to zoom in.</p>
+      <p data-message role="status"></p>
+    </section>
+
+    <div class="compare-grid" data-compare hidden>
+      <section class="compare-panel" aria-labelledby="source-title">
+        <h2 id="source-title">Printed source</h2>
+        <p><a data-source-link target="_blank" rel="noopener noreferrer">Open original PDF</a> · <a data-library-link target="_blank" rel="noopener noreferrer">Library record</a></p>
+        <iframe class="pdf-frame" data-source-frame title="Printed source PDF"></iframe>
+      </section>
+      <section class="compare-panel" aria-labelledby="rendered-title">
+        <h2 id="rendered-title">LilyPond transcription</h2>
+        <p><a data-rendered-link target="_blank" rel="noopener noreferrer">Open rendered PDF</a> · <a data-lilypond-link>View LilyPond</a></p>
+        <iframe class="pdf-frame" data-rendered-frame title="Rendered transcription PDF"></iframe>
+      </section>
+    </div>
+
+    <section class="panel" data-report hidden aria-labelledby="report-title">
+      <div class="panel-heading"><h2 id="report-title">Report what you found</h2></div>
+      <div class="panel-body">
+        <p>Check the whole piece, including pitches, rhythm, dynamics, articulations, pedal marks, and text. If you find a difference—or finish a full check—tell us which pages and measures you checked.</p>
+        <p><a data-feedback>Report findings on GitHub</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="proofread.js" defer></script>
+</body>
+</html>

@@ -14,8 +14,10 @@ PUBLIC_FILES = (
     "index.html",
     "about.html",
     "contribute.html",
+    "proofread.html",
     "styles.css",
     "app.js",
+    "proofread.js",
     "LICENSE",
 )
 
