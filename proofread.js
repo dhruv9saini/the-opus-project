@@ -43,6 +43,29 @@ if (!piece) {
       const params = new URLSearchParams({category: 'general', title: reportTitle, body: reportBody});
       document.querySelector('[data-feedback]').href = `https://github.com/dhruv9saini/the-opus-project/discussions/new?${params}`;
 
+      const discussionScript = document.createElement('script');
+      discussionScript.src = 'https://giscus.app/client.js';
+      discussionScript.async = true;
+      discussionScript.crossOrigin = 'anonymous';
+      const discussionOptions = {
+        repo: 'dhruv9saini/the-opus-project',
+        'repo-id': 'R_kgDOUtZHyQ',
+        category: 'General',
+        'category-id': 'DIC_kwDOUtZHyc4DGioB',
+        mapping: 'specific',
+        term: `Score reports: ${score.slug}`,
+        strict: '1',
+        'reactions-enabled': '0',
+        'emit-metadata': '0',
+        'input-position': 'top',
+        theme: 'preferred_color_scheme',
+        lang: 'en',
+      };
+      for (const [key, value] of Object.entries(discussionOptions)) {
+        discussionScript.setAttribute(`data-${key}`, value);
+      }
+      document.querySelector('[data-discussion]').append(discussionScript);
+
       document.querySelector('[data-compare]').hidden = false;
       document.querySelector('[data-report]').hidden = false;
     })

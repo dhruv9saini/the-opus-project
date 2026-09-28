@@ -30,25 +30,25 @@
     <section class="panel" aria-labelledby="project-title">
       <div class="panel-heading"><h2 id="project-title">The project</h2></div>
       <div class="panel-body">
-        <p>Printed scores preserve an enormous part of the world's musical history, but scans are difficult to edit, search, hear, or turn into new editions. The OPUS Project turns those public-domain editions into open LilyPond source files.</p>
-        <p>Anyone can choose a score, clone the repository, and ask an AI coding agent to do the notation work. Contributions are ordinary pull requests: the source edition, LilyPond file, generated PDF, progress step, and model used are all visible.</p>
+        <p>Many public-domain scores are available only as scans. This project encodes one printed edition at a time in LilyPond, so the notation can be edited and rendered from source.</p>
+        <p>Choose a work, clone the repository, and ask an AI coding agent to transcribe it. A pull request names the scan and pages used, the model, the LilyPond source, and the rendered score.</p>
       </div>
     </section>
 
     <section class="panel" aria-labelledby="review-title">
       <div class="panel-heading"><h2 id="review-title">How the review works</h2></div>
       <div class="panel-body">
-        <p>Two agents independently transcribe the same printed score without reading one another's work. A third agent compares both versions with the source and reconciles them into a LilyPond score. A human then proofreads the rendered PDF against the original scan.</p>
-        <p>The catalog shows agent progress, which scores need proofreading, and which have been checked by a person. An AI pass is never presented as human-verified.</p>
+        <p>Two agents independently transcribe the same printed score without reading one another's work. Each must compare its render with the source and make at least one targeted correction pass. A third agent reconciles both versions against the scan. A human then checks the complete score.</p>
+        <p>The catalog labels in-progress attempts separately from human verification. A verifier approves a specific revision only after complete review coverage. We reproduce apparent mistakes in the printed source and note them separately from transcription errors.</p>
       </div>
     </section>
 
     <section class="panel" aria-labelledby="archive-title">
       <div class="panel-heading"><h2 id="archive-title">One open archive</h2></div>
       <div class="panel-body">
-        <p>The LilyPond sources, rendered PDFs, source references, and review history live together in the GitHub repository. When a contribution is merged, the catalog is rebuilt from the repository and the piece appears here automatically.</p>
+        <p>LilyPond is the canonical source. Rendered PDFs and any future SVG, MIDI, or MusicXML files derive from a recorded revision; their validation is separate from verification of the notation. When a contribution is merged, the catalog is rebuilt from the repository.</p>
         <p>To help proofread, open a work's <em>Compare PDFs</em> link in the catalog. It puts the original scan and rendered transcription together; no repository clone or notation software is needed to inspect them.</p>
-        <p><a href="contribute.html">How to contribute</a> · <a href="https://github.com/dhruv9saini/the-opus-project">View the repository on GitHub</a></p>
+        <p><a href="contribute.html">How to contribute</a> · <a href="https://github.com/dhruv9saini/the-opus-project/blob/main/HANDBOOK.md">Project handbook</a> · <a href="https://github.com/dhruv9saini/the-opus-project">GitHub repository</a></p>
       </div>
     </section>
   </main>

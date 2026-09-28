@@ -18,6 +18,8 @@ Transcribe Schubert's Impromptu in G-flat major, D 899 No. 3.
 
 The agent reads [AGENTS.md](AGENTS.md), chooses the next independent transcription or review, validates it, and leaves a pull-request-ready change. Contributors do not need to know LilyPond.
 
+The [Score Encoding Project Handbook](HANDBOOK.md) defines source fidelity, self-review, human verification, corrections, and publication. Each AI transcription needs an initial encoding and at least one targeted correction pass after comparing its render with the printed score; a third validation pass is preferred.
+
 ## The whole system
 
 Each work lives in `pieces/<slug>/`:
@@ -30,7 +32,7 @@ Each work lives in `pieces/<slug>/`:
 The catalog distinguishes agent progress, scores awaiting proofreading, and human-verified scores. Metadata records the exact model used for each agent run.
 An attempt found to be wrong can be marked `withdrawn` in metadata; it remains in Git history and validation but is omitted from the public catalog until repaired.
 
-Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog to see the original printed PDF beside the rendered transcription, then report findings through the link on that page. A maintainer records human verification only after a full comparison.
+Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog to see the original printed PDF beside the rendered transcription, then report findings in the on-page discussion. A maintainer records human verification only after a full comparison of a specific revision. GitHub sign-in is required to post; reading the PDFs is open.
 
 Only LilyPond notation belongs in the repository. Every attempt is entered visually from the printed edition; OMR/OCR score recognition, MusicXML or MIDI conversion, and existing digital transcriptions are forbidden. Source PDFs stay at the public library; their URL and SHA-256 digest go in metadata.
 
@@ -42,14 +44,16 @@ Install LilyPond and run:
 python3 scripts/check.py --write
 ```
 
-To preview the dependency-free website:
+To preview the site with generated PDFs (choose an output path that does not already exist):
 
 ```sh
-python3 -m http.server 8000
+mkdir -p .build
+python3 scripts/build_site.py .build/site
+python3 -m http.server 8000 --directory .build/site
 ```
 
 Then open `http://localhost:8000`. A merge to `main` validates the repository, derives the catalog from piece metadata, compiles the current LilyPond sources to PDF, and deploys the site through GitHub Pages.
 
 ## Licensing
 
-Repository code is MIT licensed. The LilyPond editions are public-domain transcriptions of public-domain music; their provenance is recorded in each work's metadata and in [SCORES.md](SCORES.md).
+Original repository code, documentation, metadata, and LilyPond transcriptions are dedicated to the public domain under [CC0 1.0](LICENSE). This dedication does not cover linked third-party scans. Their provenance is recorded in each work's metadata and in [SCORES.md](SCORES.md).

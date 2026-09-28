@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Compare an original public-domain score with its LilyPond transcription.">
   <title>Proofread a score — The OPUS Project</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body class="comparison-page">
   <header class="site-header">
@@ -44,12 +44,13 @@
     <section class="panel" data-report hidden aria-labelledby="report-title">
       <div class="panel-heading"><h2 id="report-title">Report what you found</h2></div>
       <div class="panel-body">
-        <p>Check the whole piece, including pitches, rhythm, dynamics, articulations, pedal marks, and text. If you find a difference—or finish a full check—tell us which pages and measures you checked.</p>
-        <p><a data-feedback>Open a GitHub discussion</a> (GitHub sign-in required)</p>
+        <p>Check the whole piece, including pitches, rhythm, dynamics, articulations, pedal marks, and text. If the scan and render differ, report enough to locate the problem: page and measure or system, what each shows, and the revision checked. For a full check, name every page covered.</p>
+        <p>Reports go to GitHub Discussions. Reading the PDFs is open; posting requires GitHub sign-in. If the form does not load, <a data-feedback target="_blank" rel="noopener noreferrer">open a discussion on GitHub</a>.</p>
+        <div class="giscus" data-discussion></div>
       </div>
     </section>
   </main>
 
-  <script src="proofread.js" defer></script>
+  <script src="proofread.js?v=3" defer></script>
 </body>
 </html>

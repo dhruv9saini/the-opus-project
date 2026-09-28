@@ -46,6 +46,8 @@ def load_metadata(path: Path) -> dict[str, object]:
         value = data[key]
         if not isinstance(value, str) or not value.strip():
             fail(f"{path.relative_to(ROOT)}: {key} must be a non-empty string")
+    if data["license"] != "CC0 1.0":
+        fail(f"{path.relative_to(ROOT)}: project transcriptions must be CC0 1.0")
     if data["slug"] != path.parent.name:
         fail(f"{path.relative_to(ROOT)}: slug must match its directory")
     if "withdrawn" in data and not isinstance(data["withdrawn"], bool):

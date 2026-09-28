@@ -1,3 +1,5 @@
+% WITHDRAWN: this historical attempt is not a faithful transcription.
+% Do not use it as a score or as the source for Step 2. See ../REWORK.md.
 \version "2.24.3"
 
 #(set-global-staff-size 16)

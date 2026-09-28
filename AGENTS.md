@@ -2,13 +2,15 @@
 
 Your job is to turn printed public-domain scores into reviewed LilyPond. Do the work directly; do not ask the contributor to know notation software.
 
+Follow [HANDBOOK.md](HANDBOOK.md) for source fidelity, self-review, findings, and verification. A broad request to “help out” includes the required self-review; the contributor should not have to supply each correction prompt.
+
 ## If the prompt names a piece
 
 1. Find the work under `pieces/`. If it is absent, add it using a clearly printed, public-domain edition from IMSLP or another stable public library. Do not use a manuscript or handwritten source.
 2. Read `metadata.json`, then inspect the exact source PDF visually. Never commit the PDF, MusicXML, MIDI, or another notation format.
-3. If `step` is below 3 and fewer than two attempt files exist, create the next `attempts/0N.ly`. Make it independently from the printed source: do not read the musical contents of the earlier attempt first. Steps 1 and 2 must be completed by different agents.
+3. If `step` is below 3 and fewer than two attempt files exist, create the next `attempts/0N.ly`. Make it independently from the printed source: do not read the musical contents of the earlier attempt first. Steps 1 and 2 must be completed by different agents. Within this run, make an initial encoding pass and at least one targeted correction pass after comparing source and render; a third validation pass is preferred.
 4. If `step` is 2 and two attempts exist, act as the third agent. Compare both attempts measure by measure with the printed source, resolve every disagreement, and write the canonical `score.ly`. If `step` is already 3, choose another work; the remaining verification is for a human.
-5. Set `step` in `metadata.json` to the completed agent step, append the exact model identifier to `models`, and leave `verified_by` as `null`. Run `python3 scripts/check.py --write`, fix every failure, and summarize the exact work completed. A human proofreader verifies the reconciled score later.
+5. Set `step` in `metadata.json` to the completed agent step, append the exact model identifier to `models`, and leave `verified_by` as `null`. Run `python3 scripts/check.py --write`, fix every failure, and summarize the pages and systems compared, corrections made, unresolved readings, LilyPond version, and exact source. A human proofreader verifies the reconciled score later.
 
 ## If the prompt just says to help
 
@@ -25,7 +27,9 @@ Choose work in this order: repair a work marked `withdrawn` in its metadata; rec
 - Keep one work per pull request unless the contributor explicitly asks for a batch.
 - Every agent transcription pull request body must include `Step: N/3`, `Model: provider/exact-model-id`, and the printed `Source: https://…` URL. A human verification pull request instead uses `Review: human`, `Proofreader: @github-name`, and `Source: https://…`.
 - Preserve editorial details visible in the source: pitches, rhythm, voices, articulations, dynamics, text, repeats, clefs, and page turns when practical.
+- Reproduce apparent mistakes in the printed source and document them separately. Do not silently "correct" the edition; escalate unreadable or ambiguous notation.
 - A file compiling is necessary, not proof that the music is correct. Compare the rendered result with the printed source.
+- A claim of human verification must identify complete review coverage and the exact approved revision. An error found after publication reopens review; correct LilyPond, then rebuild derived files.
 
 ## Cleanup and disk use
 

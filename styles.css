@@ -87,6 +87,8 @@ main { padding: 24px 0 48px; }
 .panel-body { max-width: 800px; padding: 18px 14px; }
 .panel-body p { margin: 0 0 12px; }
 .panel-body p:last-child { margin-bottom: 0; }
+.giscus, .giscus-frame { width: 100%; }
+.giscus { margin-top: 20px; }
 .prose ol { margin: 0 0 12px; padding-left: 24px; }
 .prose li + li { margin-top: 7px; }
 .command { margin: 14px 0; padding: 11px 12px; border: 1px solid var(--border); background: var(--code); overflow-x: auto; }
