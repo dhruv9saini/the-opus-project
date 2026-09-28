@@ -6,4 +6,4 @@ The catalog contains agent transcriptions at their current stage. A work is not 
 
 Step 2 is an independent transcription made by a different agent. Step 3 compares both attempts against the printed source and produces the reconciled `score.ly`. A separate human proofreader compares the original and rendered PDFs before the catalog marks a score as verified.
 
-The existing catalog includes clearly labelled in-progress attempts so volunteers can inspect them. These are not verified archive releases. See [HANDBOOK.md](HANDBOOK.md) for the required correction pass, finding statuses, and the distinction between verification and publication.
+The catalog may include clearly labelled in-progress attempts, but these are not verified archive releases. Attempts found to be unreliable are marked `withdrawn` and omitted from the public catalog while they are reworked; their history remains in Git. See [HANDBOOK.md](HANDBOOK.md) for the required correction pass, finding statuses, and the distinction between verification and publication.

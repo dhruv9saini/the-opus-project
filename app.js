@@ -23,7 +23,7 @@ function render(query = '') {
   if (!visible.length) {
     const message = scores.length
       ? 'No scores match that search.'
-      : 'No scores have reached Step 1/3 yet.';
+      : 'No scores are ready to show yet.';
     addText(catalogNode, 'p', 'empty', message);
     return;
   }

@@ -1,33 +1,4 @@
 {
   "schema": 3,
-  "scores": [
-    {
-      "slug": "louise-farrenc-op-50-no-1",
-      "title": "Étude No. 1",
-      "composer": "Louise Farrenc",
-      "catalogue": "Op. 50, No. 1",
-      "year": "ca. 1859–1863",
-      "instrumentation": "Piano",
-      "step": 1,
-      "verified_by": null,
-      "lilypond_url": "pieces/louise-farrenc-op-50-no-1/attempts/01.ly",
-      "pdf_url": "pieces/louise-farrenc-op-50-no-1/attempts/01.pdf",
-      "source_page": "https://imslp.org/wiki/25_Etudes_faciles,_Op.50_(Farrenc,_Louise)",
-      "source_pdf": "https://imslp.org/tools/getindex/511615"
-    },
-    {
-      "slug": "louise-farrenc-op-50-no-4",
-      "title": "Étude No. 4",
-      "composer": "Louise Farrenc",
-      "catalogue": "Op. 50, No. 4",
-      "year": "ca. 1859–1863",
-      "instrumentation": "Piano",
-      "step": 1,
-      "verified_by": null,
-      "lilypond_url": "pieces/louise-farrenc-op-50-no-4/attempts/01.ly",
-      "pdf_url": "pieces/louise-farrenc-op-50-no-4/attempts/01.pdf",
-      "source_page": "https://imslp.org/wiki/25_Etudes_faciles,_Op.50_(Farrenc,_Louise)",
-      "source_pdf": "https://imslp.org/tools/getindex/511615"
-    }
-  ]
+  "scores": []
 }
