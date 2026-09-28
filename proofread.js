@@ -43,6 +43,13 @@ if (!piece) {
       const params = new URLSearchParams({category: 'general', title: reportTitle, body: reportBody});
       document.querySelector('[data-feedback]').href = `https://github.com/dhruv9saini/the-opus-project/discussions/new?${params}`;
 
+      const discussionNode = document.querySelector('[data-discussion]');
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return;
+        if (event.source !== discussionNode.querySelector('iframe')?.contentWindow) return;
+        if (typeof event.data?.giscus?.error === 'string') discussionNode.hidden = true;
+      });
+
       const discussionScript = document.createElement('script');
       discussionScript.src = 'https://giscus.app/client.js';
       discussionScript.async = true;
@@ -64,7 +71,7 @@ if (!piece) {
       for (const [key, value] of Object.entries(discussionOptions)) {
         discussionScript.setAttribute(`data-${key}`, value);
       }
-      document.querySelector('[data-discussion]').append(discussionScript);
+      discussionNode.append(discussionScript);
 
       document.querySelector('[data-compare]').hidden = false;
       document.querySelector('[data-report]').hidden = false;
