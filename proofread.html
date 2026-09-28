@@ -24,14 +24,15 @@
     <section class="intro" aria-labelledby="page-title">
       <h1 id="page-title" data-title>Compare PDFs</h1>
       <p data-status>Loading score…</p>
-      <p>Compare the printed source with the rendered transcription. You can open either PDF in its own tab to zoom in.</p>
+      <p>Compare the printed source with the rendered transcription. Open either PDF in its own tab to zoom in; a higher-resolution scan is linked when available.</p>
       <p data-message role="status"></p>
+      <ul data-queue hidden></ul>
     </section>
 
     <div class="compare-grid" data-compare hidden>
       <section class="compare-panel" aria-labelledby="source-title">
         <h2 id="source-title">Printed source</h2>
-        <p><a data-source-link target="_blank" rel="noopener noreferrer">Open original PDF</a> · <a data-library-link target="_blank" rel="noopener noreferrer">Library record</a></p>
+        <p><a data-source-link target="_blank" rel="noopener noreferrer">Open original PDF</a> · <a data-library-link target="_blank" rel="noopener noreferrer">Library record</a> · <a data-crosscheck-link target="_blank" rel="noopener noreferrer">High-resolution scan</a></p>
         <iframe class="pdf-frame" data-source-frame title="Printed source PDF"></iframe>
       </section>
       <section class="compare-panel" aria-labelledby="rendered-title">
@@ -51,6 +52,6 @@
     </section>
   </main>
 
-  <script src="proofread.js?v=4" defer></script>
+  <script src="proofread.js?v=5" defer></script>
 </body>
 </html>

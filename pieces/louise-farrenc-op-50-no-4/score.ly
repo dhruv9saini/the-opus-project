@@ -2,6 +2,7 @@
 
 % Agent reconciliation candidate, not human verified.
 % Source: IMSLP #511615, PDF page 6, printed page 5, A. L. 5854.
+% Rechecked against BnF A-38757 (same Leduc plate), Commons page 9.
 \header {
   title = "Étude No. 4"
   subtitle = "Pour les batteries avec une partie soutenue"
@@ -35,7 +36,7 @@ upperBattery = {
   g'16 [e' b e' b e']
     a'16 [e' c' e' c' e'] |
   g'16 [e' a e' a e']
-    fis'16-3 [cis' a cis' fis' b'] | \break
+    fis'16-3 [dis' b dis' fis' b'] | \break
 
   % Second system, bars 5–8 and the two-eighth pickup.
   b'4.-3\mf \acciaccatura d''8 c''4. |
@@ -62,10 +63,10 @@ upperBattery = {
   b'4.-2 g'4. | \break
 
   % Fifth system, bars 17–20.
-  e''16 [c'' g' c'' g' c'']
-    g''16_\markup { \italic "cresc." } [e'' g' e'' g' e''] |
-  g''16 [c'' a' c'' a' c'']
-    fis''16 [c'' a' c'' e'' b'] |
+  e''16-4 [c''-2 g' c'' g' c'']
+    g''16-5_\markup { \italic "cresc." } [e''-4 g' e'' g' e''] |
+  g''16-5 [c'' a' c'' a' c'']
+    fis''16-4 [c'' a' c'' e'' b'] |
   e''16_\markup { \italic "Dim." } [a' fis' a' fis' a']
     dis''16 [b' fis' b' fis' b'] |
   \set Timing.measureLength = #1/2
@@ -149,24 +150,9 @@ lowerSustained = {
   g2. |
   c'4.-1 b4. |
   a4.~ a4 b8 |
-  c'4. b4. |
+  c'4. b4.-3 |
   \set Timing.measureLength = #1/2
   e'4. e8 \bar ":|."
-}
-
-% The last bass measure also prints a suspended whole-bar rest in another voice.
-lowerPrintedRest = {
-  \global
-  s2.*7
-  \set Timing.measureLength = #1/2
-  s2
-  \set Timing.measureLength = #1/4
-  s4
-  \set Timing.measureLength = #3/4
-  s2.*11
-  \set Timing.measureLength = #1/2
-  \once \override MultiMeasureRest.extra-offset = #'(0 . -1)
-  R2
 }
 
 \score {
@@ -178,7 +164,6 @@ lowerPrintedRest = {
     \new Staff = "lower" <<
       \new Voice { \voiceOne \lowerBattery }
       \new Voice { \voiceTwo \lowerSustained }
-      \new Voice { \voiceThree \lowerPrintedRest }
     >>
   >>
   \layout { }

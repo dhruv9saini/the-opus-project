@@ -130,6 +130,8 @@ def expected_catalog() -> tuple[dict[str, object], list[Path]]:
                 "pdf_url": str(Path(current_relative).with_suffix(".pdf")),
                 "source_page": data["source_page"],
                 "source_pdf": data["source_pdf"],
+                "crosscheck_name": data["crosscheck_name"],
+                "crosscheck_url": data["crosscheck_url"],
             }
         )
     entries.sort(

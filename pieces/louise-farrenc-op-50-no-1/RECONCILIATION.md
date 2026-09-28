@@ -1,37 +1,31 @@
-# Reconciliation notes
+# Étude No. 1: reconciliation notes
 
-This is the third-pass candidate for Louise Farrenc, *25 Études faciles*, Op.
-50, No. 1. It was compared with both independent LilyPond attempts and with
-IMSLP scan #511615, PDF page 3 (printed page 2). The scan is the authority;
-the two attempts are evidence only.
+Status: **draft; not human verified; withdrawn from the catalog.** `score.ly`
+is the current third-agent candidate. The two files in `attempts/` are
+independent drafts, not approved scores.
 
-The reconciliation corrected the opening lower voice in measure 3 to the
-printed D–F–A figure and the sustained upper G voice in measure 4. The later
-lower-voice figures in measures 20–22 were checked against the staff lines and
-retained as C–E–G / G–D–F, A–D–F / C–E–G, and F–A–C / D–F–C respectively.
+The chosen source is IMSLP file 511615, PDF page 3 (printed page 2), Leduc
+plate 5854. Its downloaded PDF has SHA-256
+`72acbae8f1c9a683036bb77b5a644387a2e1bb2622728b6b4c2884aca836ee66`.
+A higher-resolution photograph of another copy of the same plate, [BnF
+A-38757, page 6](https://commons.wikimedia.org/wiki/File:25_Etudes_progressives_pour_le_piano_compos%C3%A9es_par_L._Farrenc..._Op._50_-_btv1b10075962b_(06_of_36).jpg),
+was used to check details obscured in the IMSLP scan. The downloaded image
+has SHA-256
+`9858b9808b3406aece5bcc4cf560b6d826117ee332efb8873c612fa6621ad02d`.
+No score-recognition tool or existing digital transcription supplied notes.
 
-The scan does not make every short three-note group unambiguous. In measures
-4, 10, 11, 18, 19, 23, 26, and 27 the secondary beam detail is blurred or
-partly lost. The candidate preserves the visible pitches and the time-span of
-each group, but its 8+16+16 or 16+16+8 subdivision is provisional. An
-unmarked triplet reading remains possible and must be settled by a human
-proofreader with the source beside the render. Fingerings are likewise not
-claimed complete where the scan does not provide a legible numeral.
+The high-resolution print resolves the earlier rhythm question. The
+three-note arpeggios in both staves have a single beam and no printed tuplet
+number. In the printed common-time bars, each group occupies one quarter;
+the candidate now encodes them as eighth-note triplets with hidden tuplet
+numbers and brackets. The former 8+16+16 and 16+16+8 readings were wrong.
+All affected groups were corrected, then the one-page render was inspected.
+The LilyPond source declares 2.24.3 and compiles with 2.26.0.
 
-The source declares LilyPond 2.24.3. It compiles with the installed LilyPond
-2.26.0 and was rendered for a full-page visual check. It is not verified or
-published; human comparison is still required.
-
-## Additional audit
-
-A second full visual pass checked all 27 measures in both staves against the
-original and the processed same-edition scan, including the visible accidentals,
-ties, dynamics, and fingering numerals. No further pitch or marking change was
-demonstrable from the available scans. The short groups listed above remain
-the material uncertainty: the scan preserves their pitches and beam direction,
-but not enough secondary-beam detail to establish their exact subdivision.
-
-The source heading also contains the performance direction “Pour bien lier le
-chant.” and the dedication “Dédiées à Mes petites Elèves.” These are now
-represented visibly in the LilyPond output rather than being left only in
-provenance comments.
+The earlier pitch reconciliation remains in place: bar 3's lower D–F–A
+figure, bar 4's sustained upper G, and the later lower figures in bars
+20–22. The printed heading, dedication, dynamics and visible fingerings are
+represented. These observations do not amount to independent human review.
+A proofreader still needs to compare all 27 measures, both staves and every
+mark against the printed page, and report any remaining discrepancies before
+the candidate can enter the catalog or be marked verified.
