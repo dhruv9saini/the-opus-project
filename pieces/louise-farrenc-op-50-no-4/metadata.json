@@ -13,9 +13,11 @@
   "source_sha256": "72acbae8f1c9a683036bb77b5a644387a2e1bb2622728b6b4c2884aca836ee66",
   "crosscheck_name": "IMSLP file record #511615, printed page 5",
   "crosscheck_url": "https://imslp.org/wiki/25_Etudes_faciles,_Op.50_(Farrenc,_Louise)",
-  "step": 1,
+  "step": 3,
   "withdrawn": true,
   "models": [
+    "gpt-6-sol xhigh",
+    "gpt-6-sol xhigh",
     "gpt-6-sol xhigh"
   ],
   "verified_by": null

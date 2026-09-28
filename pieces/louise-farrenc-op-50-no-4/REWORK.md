@@ -1,13 +1,19 @@
-# Étude No. 4: blocked transcription
+# Étude No. 4: Step 1 source-rework record
 
-Status: **Blocked during Transcribing.** The historical Step 1 attempt is not an accepted encoding and must not appear in the public catalog as a usable score. There is no verified LilyPond source for this work.
+This records the first agent attempt, not the current workflow status. The earlier Step 1 file was musically wrong. This replacement was a complete, compiled LilyPond draft; a second independent attempt and third-agent reconciliation have since followed. See `RECONCILIATION.md` and `score.ly`. The work remains withdrawn until human proofreading is complete.
 
-Source: IMSLP file 511615, PDF page 6 (printed page 5), the complete Étude No. 4.
+Source: [IMSLP file 511615](https://imslp.org/tools/getindex/511615), PDF page 6, printed page 5, the complete Étude No. 4. The local source PDF used for this run has SHA-256 `72acbae8f1c9a683036bb77b5a644387a2e1bb2622728b6b4c2884aca836ee66`. This Step 1 replacement was made by `gpt-6-sol` at xhigh reasoning effort on 2026-09-28. A processed scan of the same Leduc edition, IMSLP file 828379, helped clarify a few blurred staff positions; readings were checked against file 511615. No existing digital encoding or score-recognition tool supplied notes.
 
-Open findings against `attempts/01.ly`:
+## Scope and passes
 
-- **Open:** The opening right hand combines a sustained upper part with rapid lower notes. The attempt's pitches and note groupings do not follow the printed passage.
-- **Open:** The left hand changes from sustained bass notes to rapid figures within the piece. The attempt substitutes a different sequence and does not reproduce the printed notes and rests.
-- **Open:** The printed repeat structure, fingerings, slurs, dynamics, and text have not been checked measure by measure against the attempt.
+The file covers both staves of all five printed systems: twenty measures and the two-eighth-note pickup between the two repeated sections. Measures 8 and 20 are 4/8 long in print. The pickup is 2/8. The music otherwise has a printed 6/8 meter and one-sharp key signature.
 
-These are examples, not a complete review. Treat every measure and staff as unverified. Replace the attempt from the exact printed page, compile, compare every measure and marking, and make at least one targeted correction pass before removing `withdrawn`. Do not advance to Step 2/3 while Step 1 is invalid. Do not use score recognition or another digital transcription.
+The first encoding pass rebuilt the rapid figures and separate held voices from the scan. The required correction pass compared the compiled PDF with each printed system. It corrected the former draft's invented opening; moved the battery into the bass for measures 5–10 and 13–16 and into the treble for measures 11–12 and 17–20; restored the shortened bars, pickup, grace note, ties, dynamics and text; and corrected specific pitches including the G♯3 at measure 13, the descending E4–D4–C4–D4 high bass notes in measures 13–16, the F♯3 in measure 15, the D4 at the start of measure 16's second battery group, and the D♯5 in measure 19. This draft misread the final bass eighth as D3; reconciliation corrected it to E3. LilyPond 2.26.0 compiles the Step 1 draft without warnings.
+
+## Findings at the end of Step 1
+
+- **Later resolved in reconciliation:** PDF page 6, printed system 5, measure 20, bass staff: the final eighth is E3, and the small rectangular mark is present in the original. `score.ly` encodes it as a separate whole-measure rest; its voice continuity remains for human review.
+- **Open:** Not every printed fingering in the repetitive bass figures has been entered or checked at note level. Clear melody and several bass fingerings are present, but the bass fingerings in printed systems 3–4 need a separate mark-by-mark pass.
+- **Later advanced:** Independent Step 2 and agent reconciliation are complete. Human comparison of every note and mark remains to be done. Compilation and agent visual passes do not establish verification.
+
+Do not publish this Step 1 draft as a usable or verified score. The reconciled candidate is `score.ly`; it too remains withdrawn pending human review.
