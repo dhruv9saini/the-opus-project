@@ -77,8 +77,8 @@ upperSustained = {
   \global
   \override Fingering.direction = #UP
   b'4. c''4.-1 |
-  b'4. a'4.-3 |
-  g'4.-1 a'4.-1 |
+  b'4. a'4.-5 |
+  g'4. a'4. |
   g'4.-4 s4. |
   s2.*3 |
   \set Timing.measureLength = #1/2
@@ -113,7 +113,7 @@ lowerBattery = {
   s4
   \set Timing.measureLength = #3/4
   fis16-5 [a d' a d' a] fis16 [a d' a d' a] |
-  g16 [b d' b d' b] g16 [b d' b d' b] |
+  g16-4 [b d' b d' b] g16 [b d' b d' b] |
   s2.*2 |
   gis16-4 [b e' b e' b] a16-4 [c' e' c' e' c'] |
   fis16 [a d' a d' a] g16-4 [b d' b d' b] |
@@ -142,8 +142,8 @@ lowerSustained = {
   \set Timing.measureLength = #3/4
   fis4. fis4. |
   g4. g4. |
-  fis4. a4. |
-  g4. b4. |
+  fis4.-5 a4. |
+  g4.-5 b4. |
   gis4. a4. |
   fis4. g4. |
   e4. fis4. |
