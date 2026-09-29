@@ -91,12 +91,12 @@ leftHand = {
   \tuplet 3/2 { d8-4~ f8~ a8~ } <d f a>4
   \tuplet 3/2 { a,8~ e8~ a8~ } <a, e a>4 |
   << { \voiceOne \set tieWaitForNote = ##t c'8-5~ es'8~ <c' es'>4 } \\ { \voiceTwo fis4~ fis4 } >> \oneVoice <a c' e'>4 <a c' e'>4 |
-  <f a d'>4 <g b d'>4 <c' e'>4 d4 |
+  <f_5 a d'>4 <g_4 b d'>4 <c' e'>4 d4 |
   \tuplet 3/2 { g8~ b8~ e'8~ } <g b e'>4
   \tuplet 3/2 { g8~ ais8~ cis'8~ } <g ais cis'>4 |
-  \tuplet 3/2 { g8~ b8~ e'8~ } <g b e'>4
-  \tuplet 3/2 { g8~ b8~ e'8~ } <g b e'>4 |
-  \tuplet 3/2 { d8~ a8~ c'8~ } <d a c'>4
+  \tuplet 3/2 { g8_5~ b8~ e'8~ } <g b e'>4
+  \tuplet 3/2 { g8_4~ b8~ e'8~ } <g b e'>4 |
+  \tuplet 3/2 { d8_5~ a8~ c'8~ } <d a c'>4
   \tuplet 3/2 { d8~ fis8~ c'8~ } <d fis c'>4 |
   \tuplet 3/2 { g8-4~ b8~ d'8~ } <g b d'>4
   \tuplet 3/2 { g8~ b8~ d'8~ } <g b d'>4 |
