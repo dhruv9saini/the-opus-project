@@ -63,10 +63,10 @@ upperBattery = {
   b'4.-2 g'4. | \break
 
   % Fifth system, bars 17–20.
-  e''16-4 [c''-2 g' c'' g' c'']
-    g''16-5_\markup { \italic "cresc." } [e''-4 g' e'' g' e''] |
-  g''16-5 [c'' a' c'' a' c'']
-    fis''16-4 [c'' a' c'' e'' b'] |
+  e''16 [c''-2 g' c'' g' c'']
+    g''16_\markup { \italic "cresc." } [e''-4 g' e'' g' e''] |
+  g''16 [c''-2 a' c'' a' c'']
+    fis''16 [c'' a' c'' e'' b'] |
   e''16_\markup { \italic "Dim." } [a' fis' a' fis' a']
     dis''16 [b' fis' b' fis' b'] |
   \set Timing.measureLength = #1/2
