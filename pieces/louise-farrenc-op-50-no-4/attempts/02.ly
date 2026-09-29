@@ -1,4 +1,4 @@
-\version "2.26.0"
+\version "2.24.3"
 
 % Independent visual transcription of IMSLP #511615, PDF page 6 (printed p. 5).
 % The short bar before the repeat start and the two-eighth pickup make 6/8.
