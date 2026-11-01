@@ -97,8 +97,25 @@ try{
   assert.equal(zipBytes.readUInt32LE(0),0x04034b50);
   await frame.locator('#closeFinish').click();
   pass('ScoreBrush saves a real portable review backup ZIP');
+  const restoreContext=await browser.newContext({viewport:{width:1440,height:1000}});
+  const restorePage=await restoreContext.newPage();
+  await restorePage.goto(base+'reviewer/scorebrush/');
+  await restorePage.waitForFunction(()=>document.body.dataset.ready==='true');
+  await restorePage.locator('#packageFile').setInputFiles({name:'scorebrush-backup.zip',mimeType:'application/zip',buffer:zipBytes});
+  await restorePage.waitForFunction(()=>{const s=window.opusScoreBrush.current();return !s.busy&&Boolean(s.snapshotId);});
+  const independent=await restorePage.evaluate(()=>window.opusScoreBrush.capture());
+  assert.equal(independent.review.files.source.sha256,work.source_sha256);
+  assert.equal(independent.review.files.rendered.sha256,work.render_sha256);
+  assert.equal(independent.review.files.ly.sha256,work.code_sha256);
+  assert.equal(independent.review.findings[0].comment,scene.review.findings[0].comment);
+  assert.deepEqual(independent.review.findings[1].strokes,scene.review.findings[1].strokes);
+  await restoreContext.close();
+  pass('backup independently restores file identities, findings and strokes in a fresh profile');
+
   await page.reload();await page.waitForSelector('#reportForm:not([hidden])',{timeout:45000});
   scene=await capture();assert.equal(scene.review.findings.length,2);assert(scene.review.findings.some(f=>f.strokes.length));
+  assert.equal(await page.locator('#coverage').inputValue(),'Page 1, all synthetic systems');
+  assert.equal(await page.locator('#outcome').inputValue(),'corrections-needed');
   pass('reload resumes both findings and drawn geometry');
   const fallback=await context.newPage();
   await fallback.route('https://library.example/**',route=>route.abort('failed'));

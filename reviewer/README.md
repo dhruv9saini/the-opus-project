@@ -11,7 +11,9 @@ edition hash. If a public library blocks browser downloads, use **Download the
 recorded source**, then select that original PDF. A different edition is rejected.
 Downloads are bounded to 100 MiB per file and never execute notation or code.
 
-Drafts and history save in this browser's ScoreBrush databases. They remain
+Findings and history save in this browser's ScoreBrush databases. Coverage drafts
+save separately for the exact source/code/PDF snapshot; changing revisions never
+carries an old coverage claim onto the new revision. They remain
 separate from Score Desk's databases in proposed PR #8. Keep downloaded backups;
 browser storage is not a shared project submission or a redundant backup.
 

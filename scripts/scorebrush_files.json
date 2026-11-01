@@ -340,8 +340,8 @@
     },
     {
       "path": "opus-bridge.js",
-      "sha256": "52af9088a62fcd441f54bd54dc542c86848220b07be783e02c37e25ca857a68f",
-      "size": 1449,
+      "sha256": "caa6d63d83ac4f15712a4d360de15e4bf38a925d033f1a210b1b7fc3ae8714f2",
+      "size": 1484,
       "upstream_sha256": null
     },
     {

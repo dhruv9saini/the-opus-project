@@ -2,11 +2,29 @@ import {fetchBounded,validateWork,verified,projectId,projectFiles,makeReport,rep
 const $=id=>document.getElementById(id);
 const root=new URL('../',import.meta.url);
 const slug=new URLSearchParams(location.search).get('piece');
-let work,rendered,ly,bridge,sourceBusy=false,exportBusy=false;
+let work,rendered,ly,bridge,sourceBusy=false,exportBusy=false,scopeKey=null,scopeListener=false;
 const status=message=>{$('status').textContent=message;};
 function download(blob,name){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
   a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
+}
+function syncScope(){
+  const snapshot=bridge?.current().snapshotId;
+  if(!snapshot)return;
+  const next='opus-human-review-scope:'+work.slug+':'+snapshot;
+  if(next===scopeKey)return;
+  scopeKey=next;$('coverage').value='';$('outcome').value='partial';$('discussion').hidden=true;
+  try{
+    const saved=JSON.parse(localStorage.getItem(scopeKey));
+    if(saved&&typeof saved.coverage==='string'&&saved.coverage.length<=2000&&
+      ['partial','corrections-needed','no-errors-found'].includes(saved.outcome)){
+      $('coverage').value=saved.coverage;$('outcome').value=saved.outcome;
+    }
+  }catch{/* Scope drafting remains available when local storage is unavailable. */}
+}
+function saveScope(){
+  $('discussion').hidden=true;
+  if(scopeKey)try{localStorage.setItem(scopeKey,JSON.stringify({coverage:$('coverage').value,outcome:$('outcome').value}));}catch{}
 }
 async function open(source){
   if(sourceBusy)return;sourceBusy=true;$('sourceFile').disabled=true;
@@ -18,6 +36,10 @@ async function open(source){
     if(actual.source.sha256!==work.source_sha256||actual.ly.sha256!==work.code_sha256||actual.rendered.sha256!==work.render_sha256)
       throw new Error('The workspace did not open the selected score revision.');
     $('workspace').inert=false;$('sourceRecovery').hidden=true;$('reportForm').hidden=false;
+    syncScope();
+    if(!scopeListener){
+      $('workspace').contentDocument.addEventListener('score-desk-controls',syncScope);scopeListener=true;
+    }
     status('Compare the printed source with the transcription, mark findings, then record your coverage. Saved drafts stay on this device.');
   }catch(error){$('workspace').hidden=true;$('sourceRecovery').hidden=false;$('sourceError').textContent=error.message;status('The score has not opened. Select the recorded source PDF to retry.');}
   finally{sourceBusy=false;$('sourceFile').disabled=false;}
@@ -35,7 +57,7 @@ $('reportForm').onsubmit=async event=>{
   }catch(error){status(error.message);}
   finally{exportBusy=false;button.disabled=false;}
 };
-for(const field of ['coverage','outcome'])$(field).addEventListener('input',()=>{$('discussion').hidden=true;});
+for(const field of ['coverage','outcome'])$(field).addEventListener('input',saveScope);
 async function start(){
   const index=JSON.parse(await (await fetchBounded(new URL('works.json',import.meta.url),{limit:2*1024*1024})).text());
   if(index.schema!==1||!Array.isArray(index.scores))throw new Error('The review score list is unavailable. Rebuild the site.');

@@ -22,5 +22,6 @@ window.opusScoreBrush=Object.freeze({
     return api.capture();
   },
   async capture(){await api.flush();return api.capture();},
+  current(){return api.status();},
   backup(){completion.open();}
 });
