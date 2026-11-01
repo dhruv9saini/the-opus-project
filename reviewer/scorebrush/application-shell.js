@@ -105,7 +105,7 @@ export function installApplicationShell(api,layout){
     if(transition){transitioning=true;refresh();}
     try{
       switch(id){
-        case 'new-project':$('workspaceDialog').close();void api.folder.choose({mode:'new'});break;
+        case 'new-project':$('workspaceDialog').close();if(!native&&api.openWebProject)api.openWebProject();else void api.folder.choose({mode:'new'});break;
         case 'open-folder':void projects.open();break;
         case 'explorer':$('showFolderFiles').click();break;
         case 'versions':$('openPreviousVersions').click();break;

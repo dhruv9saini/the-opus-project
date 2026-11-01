@@ -5,7 +5,8 @@
   "upstream": "https://github.com/aug5thmusic/scorebrush",
   "modified_upstream_files": [
     "app.js",
-    "index.html"
+    "application-shell.js",
+    "startup.js"
   ],
   "files": [
     {
@@ -40,8 +41,8 @@
     },
     {
       "path": "application-shell.js",
-      "sha256": "ac17718bfdda4eb143d30ce29b4a7a7dab0842adba75a3c246ec7dcef5359906",
-      "size": 16718,
+      "sha256": "3726274c9849bc4b93ed2364b580db8156f412fb0ee690313034cab61bb76701",
+      "size": 16775,
       "upstream_sha256": "ac17718bfdda4eb143d30ce29b4a7a7dab0842adba75a3c246ec7dcef5359906"
     },
     {
@@ -291,12 +292,6 @@
       "upstream_sha256": "1a0d4256589ec2b38b03946d4d1666bb5933f5316b16dc0adf7aa1ef0d001736"
     },
     {
-      "path": "index.html",
-      "sha256": "c2344597b25e0d5cbe2516f9c0b8a7e5b68b769b4e6ffb1770f94aa82706a440",
-      "size": 96461,
-      "upstream_sha256": "75be39c71608135cd07d82e654acb2a0bd0d806f23708ebe6812afea3fca6dec"
-    },
-    {
       "path": "interface.css",
       "sha256": "0e3e4e4a69b64a4f0daa6ce70795eedff7da992a7337accc1534e9116d0ce93c",
       "size": 11195,
@@ -337,12 +332,6 @@
       "sha256": "757525de73f6d8d3bc64d7491fd0c90997256a4696f93be608b50d42745d7a1f",
       "size": 5961,
       "upstream_sha256": "757525de73f6d8d3bc64d7491fd0c90997256a4696f93be608b50d42745d7a1f"
-    },
-    {
-      "path": "opus-bridge.js",
-      "sha256": "caa6d63d83ac4f15712a4d360de15e4bf38a925d033f1a210b1b7fc3ae8714f2",
-      "size": 1484,
-      "upstream_sha256": null
     },
     {
       "path": "package-limits.js",
@@ -466,8 +455,8 @@
     },
     {
       "path": "startup.js",
-      "sha256": "9227595bd16724458c7fe61b44ccb89ff499bc822e2937b9a16d384789275903",
-      "size": 3205,
+      "sha256": "c9022bd0a47247e362c520fb4a0495c471fe0a1efeb08b0d23c534f1c5380cc8",
+      "size": 3274,
       "upstream_sha256": "9227595bd16724458c7fe61b44ccb89ff499bc822e2937b9a16d384789275903"
     },
     {
@@ -1802,5 +1791,10 @@
       "size": 11987,
       "upstream_sha256": "6eb28526e73c65ba0cc234efb1f2909bc05da31793e8f18ba3b3ab9cb5977415"
     }
-  ]
+  ],
+  "entrypoint": {
+    "path": "reviewer/index.html",
+    "derived_from": "app/index.html",
+    "upstream_sha256": "75be39c71608135cd07d82e654acb2a0bd0d806f23708ebe6812afea3fca6dec"
+  }
 }

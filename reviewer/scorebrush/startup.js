@@ -3,6 +3,7 @@
 // Additional permissions: see LICENSING.md at the source root.
 // Loaded before app modules, so module/asset failures leave an actionable screen.
 (() => {
+  const metadataUrl=new URL('./build-info.json',document.currentScript.src);
   let complete=false;
   const panel=document.getElementById('startupScreen');
   // A parsed document is not yet a displayed frame. Keep the native splash
@@ -26,7 +27,7 @@
     document.getElementById('startupRecovery').hidden=false;
   };
   const metadata=import('./build-info.js').then(async({validateBuildInfo})=>{
-    const response=await fetch('./build-info.json');
+    const response=await fetch(metadataUrl);
     if(!response.ok)throw new Error('Build information is missing. Extract the complete review ZIP and reopen ScoreBrush.');
     const raw=await response.json().catch(()=>{throw new Error('Invalid build information: unreadable JSON. Extract the complete review ZIP.');});
     return validateBuildInfo(raw);

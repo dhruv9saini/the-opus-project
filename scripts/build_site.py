@@ -51,7 +51,7 @@ def scorebrush_assets(root: Path | None = None) -> dict[Path, Path]:
                 or hashlib.sha256(source.read_bytes()).hexdigest() != record.get("sha256")):
             fail(f"missing or changed ScoreBrush runtime asset: {name}")
         assets[relative] = source
-    for name in ("index.html", "style.css", "app.mjs", "opus-review.mjs", "README.md"):
+    for name in ("index.html", "opus-web.css", "app.mjs", "opus-review.mjs", "README.md"):
         relative = Path("reviewer") / name
         source = root / relative
         if not source.is_file() or source.is_symlink():

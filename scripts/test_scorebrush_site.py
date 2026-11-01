@@ -22,7 +22,7 @@ class ScoreBrushSiteTests(unittest.TestCase):
         runtime = root / "reviewer/scorebrush"
         runtime.mkdir(parents=True)
         (runtime / "test.js").write_bytes(b"// pinned")
-        for name in ("index.html", "style.css", "app.mjs", "opus-review.mjs", "README.md"):
+        for name in ("index.html", "opus-web.css", "app.mjs", "opus-review.mjs", "README.md"):
             (root / "reviewer" / name).write_text("fixture")
         record = {"path": "test.js", "size": 9, "sha256": hashlib.sha256(b"// pinned").hexdigest()}
         manifest = root / "scripts/scorebrush_files.json"
