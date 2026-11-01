@@ -34,6 +34,8 @@ An attempt found to be wrong can be marked `withdrawn` in metadata; it remains i
 
 Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog, or choose a draft from the [proofreading page](proofread.html), to see the original printed PDF beside the rendered transcription. An alternate high-resolution scan is linked when available. Report findings in the on-page discussion. A maintainer records human verification only after a full comparison of a specific revision. GitHub sign-in is required to post; reading the scores is open.
 
+The human review page also offers **Open human review in ScoreBrush**. This opens the pinned ScoreBrush 0.1.1 web UI with the selected source, rendered PDF and LilyPond file. Mark findings, save a review backup, state the pages you checked, and download an OPUS report for the discussion. A blocked library download can be replaced with the exact original PDF, checked against its recorded digest. Drafts remain local; exporting a report does not submit it or set `verified_by`. See the [integration guide](reviewer/README.md).
+
 Only LilyPond notation belongs in the repository. Every attempt is entered visually from the printed edition; OMR/OCR score recognition, MusicXML or MIDI conversion, and existing digital transcriptions are forbidden. Source PDFs stay at the public library; their URL and SHA-256 digest go in metadata.
 
 ## Check a change
@@ -57,3 +59,5 @@ Then open `http://localhost:8000`. A merge to `main` validates the repository, d
 ## Licensing
 
 Original repository code, documentation, metadata, and LilyPond transcriptions are dedicated to the public domain under [CC0 1.0](LICENSE). This dedication does not cover linked third-party scans. Their provenance is recorded in each work's metadata and in [SCORES.md](SCORES.md).
+
+The bundled ScoreBrush web application in `reviewer/scorebrush/` is copyright Auggie and licensed **AGPL-3.0-or-later**, with its additional permissions and third-party notices retained. It is excluded from the repository's CC0 dedication. The OPUS adapter within that directory is also AGPL-3.0-or-later. Other OPUS integration files retain CC0. Exact release provenance, modifications, and source links are in [reviewer/README.md](reviewer/README.md).
