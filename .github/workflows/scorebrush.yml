@@ -10,8 +10,6 @@ on:
       - 'proofread.html'
       - 'proofread.js'
       - '.github/workflows/scorebrush.yml'
-  push:
-    branches: ['codex/scorebrush-human-review']
 
 permissions:
   contents: read
