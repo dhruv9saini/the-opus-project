@@ -34,15 +34,27 @@ An attempt found to be wrong can be marked `withdrawn` in metadata; it remains i
 
 Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog, or choose a draft from the [proofreading page](proofread.html), to see the original printed PDF beside the rendered transcription. An alternate high-resolution scan is linked when available. Report findings in the on-page discussion. A maintainer records human verification only after a full comparison of a specific revision. GitHub sign-in is required to post; reading the scores is open.
 
+[Score Desk](contributor/index.html) offers three ways to help:
+
+- **Proofread:** compare the score with the printed source and mark or describe errors, then **Submit findings**. You can also record which pages you checked, including when you found no errors.
+- **Send corrections to AI:** download the correction package, attach its ZIP to your AI, paste the instructions, then **Return AI response**.
+- **Check AI corrections:** compare the AI’s changes with the original and record a decision for each finding you checked.
+
+The static frontend still runs on GitHub Pages. Shared submissions use the optional [project service](service/README.md), with durable SQLite storage and GitHub sign-in; reading and local drafting need no account. **Shared service is not activated by this code change.** Until the owner configures it, the interface says so and local reviews/recovery exports remain available. No contributor runs the service, provides an access token, or needs Git. Existing Encodings search remains outside this workflow.
+
+When active, the service assembles exact source, LilyPond and rendering assets automatically. A library download failure can be recovered by selecting the one source PDF, checked against the recorded digest. Shared task records let another browser validate a returned response against its original task. Older local reviews and packages remain usable. See [package contracts](contributor/score/HANDOFF_FORMATS.md) and [development and testing](contributor/README.md). Approval, repository application and human verification are separate events; opening, submitting or exporting a review never sets `verified_by`.
+
 Only LilyPond notation belongs in the repository. Every attempt is entered visually from the printed edition; OMR/OCR score recognition, MusicXML or MIDI conversion, and existing digital transcriptions are forbidden. Source PDFs stay at the public library; their URL and SHA-256 digest go in metadata.
 
 ## Check a change
 
-Install LilyPond and run:
+Set up the [isolated compiler](scripts/ISOLATED_RUNTIME.md), then run:
 
 ```sh
 python3 scripts/check.py --write
 ```
+
+Compilation requires the supported local container runtime and fails closed when it is unavailable. Imported LilyPond can execute code; the project does not compile it directly on the host. The optional [restricted local AI runner](scripts/RESTRICTED_AGENT.md) uses an already installed vision model, with no paid API requirement.
 
 To preview the site with generated PDFs (choose an output path that does not already exist):
 
@@ -54,6 +66,10 @@ python3 -m http.server 8000 --directory .build/site
 
 Then open `http://localhost:8000`. A merge to `main` validates the repository, derives the catalog from piece metadata, compiles the current LilyPond sources to PDF, and deploys the site through GitHub Pages.
 
+The same build includes Score Desk, its local PDF workers/fonts and package tools. It excludes browser QA harnesses, generated test files and local review data. All application assets use relative URLs so the build also works below a site path prefix.
+
 ## Licensing
 
 Original repository code, documentation, metadata, and LilyPond transcriptions are dedicated to the public domain under [CC0 1.0](LICENSE). This dedication does not cover linked third-party scans. Their provenance is recorded in each work's metadata and in [SCORES.md](SCORES.md).
+
+Bundled third-party libraries, fonts and decoders in `contributor/score/vendor/` retain their own licenses, which are included beside the files. They are not relicensed under CC0. See [third-party notices](THIRD_PARTY_NOTICES.md).
