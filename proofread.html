@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Compare an original public-domain score with its LilyPond transcription.">
-  <title>Proofread a score — The OPUS Project</title>
+  <title>Proofread — The OPUS Project</title>
   <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body class="comparison-page">
@@ -15,6 +15,7 @@
         <a href="./#scores">Scores</a>
         <a href="about.html">About</a>
         <a href="contribute.html">Contribute</a>
+        <a href="contributor/">Score Desk</a>
         <a href="https://github.com/the-opus-project/the-opus-project.github.io">GitHub</a>
       </nav>
     </div>
@@ -26,6 +27,7 @@
       <p data-status>Loading score…</p>
       <p>Compare the printed source with the rendered transcription. Open either PDF in its own tab to zoom in; a higher-resolution scan is linked when available.</p>
       <p><a data-scorebrush href="reviewer/">Open ScoreBrush Web →</a></p>
+      <p><a data-score-desk href="contributor/">Proofread in Score Desk →</a></p>
       <p data-message role="status"></p>
       <ul data-queue hidden></ul>
     </section>
@@ -48,11 +50,14 @@
       <div class="panel-body">
         <p>Use <a data-scorebrush href="reviewer/">ScoreBrush Web</a> to compare the scores, mark findings, and export a review report and backup. Then post them to OPUS below. Check the whole piece, including pitches, rhythm, dynamics, articulations, pedal marks, and text. If the scan and render differ, report enough to locate the problem: page and measure or system, what each shows, and the revision checked. For a full check, name every page covered.</p>
         <p>Reports go to GitHub Discussions. Reading the PDFs is open; posting requires GitHub sign-in. If the form does not load, <a data-feedback target="_blank" rel="noopener noreferrer">open a discussion on GitHub</a>.</p>
+        <p>Use <a data-score-desk href="contributor/">Score Desk</a> to mark errors and record what you checked. Shared submissions are not yet active, but you can save a local draft or post a report below.</p>
+        <p>For a full check, compare every page, including pitches, rhythm, dynamics, articulations, pedal marks, and text.</p>
+        <p>Posting to GitHub Discussions requires sign-in. If the form does not load, <a data-feedback target="_blank" rel="noopener noreferrer">open a discussion on GitHub</a>.</p>
         <div class="giscus" data-discussion></div>
       </div>
     </section>
   </main>
 
-  <script src="proofread.js?v=6" defer></script>
+  <script src="proofread.js?v=7" defer></script>
 </body>
 </html>

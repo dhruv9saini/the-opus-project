@@ -41,6 +41,9 @@ function showScore(score) {
   for (const link of document.querySelectorAll('[data-scorebrush]')) {
     link.href = 'reviewer/?piece=' + encodeURIComponent(score.slug);
   }
+  for (const link of document.querySelectorAll('[data-score-desk]')) {
+    link.href = `contributor/?piece=${encodeURIComponent(score.slug)}`;
+  }
   titleNode.textContent = `${score.composer} — ${score.title}`;
   document.title = `${score.title} — Proofread — The OPUS Project`;
   statusNode.textContent = score.draft

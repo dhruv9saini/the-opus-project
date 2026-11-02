@@ -33,6 +33,7 @@ const server=createServer(async(req,res)=>{
     if(!url.pathname.startsWith(prefix)){res.writeHead(404).end();return;}
     const name=decodeURIComponent(url.pathname.slice(prefix.length));
     if(name==='reviewer/works.json'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({schema:1,scores:[work,other]}));return;}
+    if(name==='catalog.json'||name==='reviews.json'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({schema:1,scores:name==='catalog.json'?[work]:[]}));return;}
     if(/^pieces\/(synthetic|other)\/score\.(pdf|ly)$/.test(name)){
       res.setHeader('Content-Type',name.endsWith('.pdf')?'application/pdf':'text/plain');res.end(name.endsWith('.pdf')?rendered:code);return;
     }
@@ -66,6 +67,15 @@ const pass=name=>{checks.push(name);console.log('PASS '+name);};
 const evidence=process.env.OPUS_TEST_EVIDENCE;
 try{
   browser=await chromium.launch({headless:true,executablePath:process.env.SCOREBRUSH_BROWSER||'/run/current-system/sw/bin/chromium'});
+  const links=await browser.newContext();
+  const proofread=await links.newPage();
+  await proofread.route('https://giscus.app/**',route=>route.abort());
+  await proofread.goto(base+'proofread.html?piece=synthetic');
+  await proofread.locator('[data-compare]').waitFor({state:'visible'});
+  assert.equal(await proofread.locator('[data-scorebrush]').first().getAttribute('href'),'reviewer/?piece=synthetic');
+  assert.equal(await proofread.locator('[data-score-desk]').first().getAttribute('href'),'contributor/?piece=synthetic');
+  await links.close();
+  pass('proofreading routes the selected work to both standalone ScoreBrush and shared Score Desk');
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   const own=await context.newPage();
   await own.goto(base+'reviewer/');await apiFor(own);

@@ -16,6 +16,28 @@ class ScoreBrushSiteTests(unittest.TestCase):
         self.assertFalse(any("qa" in p.parts for p in assets))
         self.assertFalse(any(p.suffix in (".pdf", ".zip") for p in assets))
 
+    def test_combined_build_publishes_both_review_workflows(self):
+        # This compiler stub tests packaging only; CI separately requires isolation.
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "site"
+            def fixture_pdf(source, target, *, cwd):
+                target.write_bytes(b"%PDF-1.4 synthetic packaging fixture")
+            with patch.object(build_site.sys, "argv", ["build_site.py", str(output)]), patch.object(build_site, "ensure_available"), patch.object(build_site, "compile_score", side_effect=fixture_pdf):
+                self.assertEqual(build_site.main(), 0)
+            for path in ("reviewer/index.html", "reviewer/scorebrush/app.js",
+                         "reviewer/works.json", "contributor/index.html",
+                         "contributor/score/shared-client.js", "contributor/score/shared-config.json"):
+                self.assertTrue((output / path).is_file(), path)
+            works = json.loads((output / "reviewer/works.json").read_text())["scores"]
+            self.assertTrue(works)
+            for work in works:
+                self.assertEqual(work["render_sha256"], hashlib.sha256(
+                    (output / work["pdf_url"]).read_bytes()).hexdigest())
+            self.assertFalse((output / "reviewer/tests").exists())
+            self.assertFalse((output / "contributor/score/qa").exists())
+            self.assertFalse((output / "service").exists())
+            self.assertIsNone(json.loads((output / "contributor/score/shared-config.json").read_text())["apiBase"])
+
     def fake_root(self, directory):
         root = Path(directory)
         (root / "scripts").mkdir()

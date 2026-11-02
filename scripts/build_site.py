@@ -11,6 +11,7 @@ import sys
 from pathlib import Path
 
 from check import PIECES, ROOT, expected_catalog, load_metadata, render_catalog
+from isolated_runner import compile_lilypond, ensure_available
 
 PUBLIC_FILES = (
     "index.html",
@@ -21,6 +22,15 @@ PUBLIC_FILES = (
     "app.js",
     "proofread.js",
     "LICENSE",
+)
+
+CONTRIBUTOR_FILES = ("index.html", "style.css", "app.js", "work-links.mjs")
+SCORE_FILES = (
+    "index.html", "style.css", "app.js", "model.js", "storage.js", "export.js",
+    "workflow.js", "handoff-store.js", "handoff-ui.js", "returned.js", "comparison-model.js", "comparison-ui.js",
+    "returned-ui.js", "completion-model.js", "completion.js", "completion-ui.js",
+    "HANDOFF_FORMATS.md", "github-handoff.js", "shared-client.js", "shared-ui.js",
+    "shared-packages.js", "shared-config.json", "SECURITY.md",
 )
 
 
@@ -70,6 +80,67 @@ def copy_reviewer_assets(output: Path, root: Path | None = None) -> None:
         shutil.copy2(source, target)
 
 
+def compile_score(source: Path, pdf: Path, *, cwd: Path) -> dict:
+    """Production compilation always crosses the enforced isolation boundary.
+
+    cwd is retained for callers; no working-tree directory is mounted. Only
+    the selected source bytes and trusted image resources reach the compiler.
+    """
+    return compile_lilypond(source, pdf)
+
+
+def contributor_assets(root: Path | None = None) -> dict[Path, Path]:
+    """Validate the complete public runtime before copying any contributor files.
+
+    Do not recursively publish the source tree: it contains QA harnesses and may
+    acquire local review data. The vendor manifest also makes a missing decoder,
+    font or CMap fail the build instead of breaking selected PDFs after release.
+    """
+    root = ROOT if root is None else root
+    assets = {Path("contributor") / name: root / "contributor" / name
+              for name in CONTRIBUTOR_FILES}
+    assets.update({Path("contributor/score") / name: root / "contributor/score" / name
+                   for name in SCORE_FILES})
+    # Exported packages should carry the instructions of this exact checkout.
+    for name in ("AGENTS.md", "HANDBOOK.md"):
+        assets[Path("contributor/score/project-guidance") / name] = root / name
+    manifest = json.loads((root / "scripts/contributor_vendor_files.json").read_text(encoding="utf-8"))
+    names = manifest.get("files") if isinstance(manifest, dict) else None
+    if not isinstance(manifest, dict) or manifest.get("schema") != 1 or not isinstance(names, list) or not names:
+        fail("invalid contributor vendor manifest")
+    seen: set[str] = set()
+    for name in names:
+        if (not isinstance(name, str) or not name or "\\" in name
+                or ":" in name or name.startswith("/")
+                or any(part in ("", ".", "..") for part in name.split("/"))):
+            fail("unsafe contributor vendor path")
+        if name.casefold() in seen:
+            fail("duplicate contributor vendor path")
+        seen.add(name.casefold())
+        relative = Path("contributor/score/vendor") / name
+        assets[relative] = root / relative
+    for relative, source in assets.items():
+        parents = source.relative_to(root).parts
+        if (not source.is_file() or any((root.joinpath(*parents[:i])).is_symlink()
+                                      for i in range(1, len(parents) + 1))):
+            fail(f"missing or linked contributor runtime asset: {relative.as_posix()}")
+    return assets
+
+
+def copy_contributor_assets(output: Path, root: Path | None = None) -> None:
+    """Copy only the validated production workspace; never overwrite a tree."""
+    assets = contributor_assets(root)
+    destination = output / "contributor"
+    if destination.exists() or destination.is_symlink():
+        fail(f"contributor output already exists: {destination}")
+    if not output.is_dir() or output.is_symlink():
+        fail("contributor output parent must be an existing, non-symlink directory")
+    for relative, source in assets.items():
+        target = output / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+
+
 def write_reviewer_index(output: Path, entries: list[dict]) -> None:
     """Bind human review to the source edition and the actual deployed bytes."""
     result = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, timeout=10, check=False)
@@ -102,7 +173,7 @@ def review_queue() -> dict[str, object]:
             "step": data["step"],
             "verified_by": None,
             "lilypond_url": source_relative,
-            "pdf_url": str(Path(source_relative).with_suffix(".pdf")),
+            "pdf_url": Path(source_relative).with_suffix(".pdf").as_posix(),
             "source_page": data["source_page"],
             "source_pdf": data["source_pdf"],
             "crosscheck_name": data["crosscheck_name"],
@@ -123,16 +194,16 @@ def main() -> int:
     if not parent.is_dir() or parent.is_symlink():
         fail(f"output parent must be an existing, non-symlink directory: {parent}")
 
-    lilypond = shutil.which("lilypond")
-    if not lilypond:
-        fail("lilypond is not installed")
+    ensure_available()
     catalog, _ = expected_catalog()
     reviews = review_queue()
+    contributor_assets()
     scorebrush_assets()
 
     output.mkdir(mode=0o755)
     for relative in PUBLIC_FILES:
         shutil.copy2(ROOT / relative, output / relative)
+    copy_contributor_assets(output)
     copy_reviewer_assets(output)
     (output / "catalog.json").write_text(render_catalog(catalog), encoding="utf-8")
     (output / "reviews.json").write_text(render_catalog(reviews), encoding="utf-8")
@@ -143,27 +214,8 @@ def main() -> int:
         deployed_source = output / source_relative
         deployed_source.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
         shutil.copy2(source, deployed_source)
-        output_base = (output / Path(str(entry["pdf_url"]))).with_suffix("")
-        result = subprocess.run(
-            [
-                lilypond,
-                "-dno-point-and-click",
-                "-o",
-                str(output_base),
-                str(deployed_source),
-            ],
-            cwd=output,
-            capture_output=True,
-            text=True,
-            timeout=120,
-            check=False,
-        )
-        if result.returncode:
-            detail = (result.stdout + result.stderr)[-4000:]
-            fail(f"{source_relative}: LilyPond failed\n{detail}")
         pdf = output / Path(str(entry["pdf_url"]))
-        if not pdf.is_file() or pdf.stat().st_size == 0:
-            fail(f"{source_relative}: LilyPond did not produce {pdf}")
+        compile_score(deployed_source, pdf, cwd=output)
 
     write_reviewer_index(output, [*catalog["scores"], *reviews["scores"]])
 

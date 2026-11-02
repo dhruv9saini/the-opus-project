@@ -1,0 +1,64 @@
+import {prepareCompletion} from './completion.js';
+import {SCOPES,completionFindings} from './completion-model.js';
+import {LIMITS} from './workflow.js';
+import {GITHUB_INSTRUCTIONS} from './github-handoff.js';
+const $=id=>document.getElementById(id);
+export function installCompletion(api){
+  let job=null,attempt=null,urls=[],published=null,publishedPackage=null;
+  const sendProject=document.createElement('button');sendProject.id='sendCompletionToProject';sendProject.type='button';sendProject.className='primary';sendProject.textContent='Send to project';sendProject.hidden=true;$('finishDownloads').after(sendProject);
+  const io={prepare:prepareCompletion,zip:api.zip,commit:api.commitCompletion,copy:text=>navigator.clipboard.writeText(text)};
+  const declaration=()=>({scope:document.querySelector('input[name="finishScope"]:checked')?.value??'',note:$('finishNote').value,reviewer:$('finishReviewer').value});
+  const status=text=>{$('finishStatus').textContent=text;};
+  function clear(){for(const url of urls)URL.revokeObjectURL(url);urls=[];$('finishDownloads').replaceChildren();$('finishSummary').textContent='';$('githubHandoff').hidden=true;$('githubPrompt').hidden=true;$('githubInstructions').value='';$('prepareGithub').setAttribute('aria-expanded','false');$('finishForm').hidden=false;$('finishIntro').hidden=false;$('finishOverview').hidden=false;$('finishTitle').textContent='Finish review';published=null;publishedPackage=null;sendProject.hidden=true;}
+  function controls(){
+    const busy=Boolean(job);for(const field of $('finishForm').querySelectorAll('input,textarea'))field.disabled=busy;
+    $('prepareFinish').disabled=busy||!declaration().scope||Boolean(published);$('closeFinish').disabled=busy;$('cancelFinish').hidden=!busy;$('cancelFinish').disabled=job?.phase==='committing';
+    sendProject.disabled=busy||!publishedPackage||!published||!api.matches(published);
+  }
+  function history(){const s=api.capture();$('completionHistory').replaceChildren();for(const r of [...s.completions].reverse()){const p=document.createElement('p');p.textContent=`${r.revision.id===s.revisionId?'Matches current review state':'Historical completion · does not declare the current revision'} · ${SCOPES[r.scope]} · ${r.createdAt} · ${r.reviewer??'Reviewer unknown'} · ${r.totals.unresolved} unresolved · ${r.totals.missingDecisions} missing decisions · ${r.id}`;$('completionHistory').append(p);}$('completionCount').textContent=s.completions.length;}
+  function open(){
+    if(api.status().busy||!api.capture().review)return;clear();attempt=null;$('finishForm').reset();try{$('finishReviewer').value=localStorage.getItem('score-desk-reviewer')??'';}catch{}
+    const s=api.capture(),findings=completionFindings(s.review,s.returned);$('finishRevision').textContent=`Current review: ${s.files.ly.name} · ${s.files.rendered.name}${s.returned?' · response '+s.returned.responseId:''}`;
+    $('finishOverview').textContent=`${findings.length} findings · ${findings.filter(f=>f.state!=='resolved').length} unresolved · ${findings.filter(f=>f.kind==='reported'&&!f.decision).length} reported findings without a decision. All are included.`;
+    status('Choose what you reviewed.');controls();$('finishDialog').showModal();
+  }
+  function cancel(){if(job?.phase==='preparing'){job.cancelled=true;status('Cancelling preparation. Your work is retained; editing resumes when preparation stops.');}else if(job)status('Saving your review. Please wait.');else $('finishDialog').close();}
+  $('finishReview').onclick=open;$('closeFinish').onclick=cancel;$('cancelFinish').onclick=cancel;
+  sendProject.onclick=()=>{if(job||!publishedPackage||!published||!api.matches(published))return;document.dispatchEvent(new CustomEvent('score-desk-send-completion',{detail:{...publishedPackage,stamp:published}}));};
+  $('prepareGithub').onclick=()=>{if(!published||!api.matches(published))return;$('githubPrompt').hidden=false;$('prepareGithub').setAttribute('aria-expanded','true');};
+  $('copyGithub').onclick=async()=>{
+    if(!published||!api.matches(published))return;
+    try{await io.copy($('githubInstructions').value);$('githubCopyStatus').textContent='Instructions copied.';}
+    catch{$('githubCopyStatus').textContent='Select and copy the instructions below.';$('githubInstructions').focus();$('githubInstructions').select();}
+  };
+  $('finishDialog').addEventListener('cancel',e=>{if(job){e.preventDefault();cancel();}});
+  $('finishDialog').addEventListener('close',()=>{if(job&&!$('finishDialog').open)job.cancelled=true;});
+  $('finishForm').oninput=()=>{if(!job){attempt=null;clear();status('Ready to prepare the selected review scope.');}controls();};
+  $('finishForm').onsubmit=async e=>{
+    e.preventDefault();if(job||api.status().busy||!declaration().scope||published)return;
+    const fields=declaration(),key=JSON.stringify({stamp:api.capture().stamp,fields});
+    if(attempt?.key!==key)attempt={key,id:crypto.randomUUID(),createdAt:new Date().toISOString()};
+    const thisJob=job={phase:'preparing',cancelled:false};clear();controls();
+    const valid=s=>{const reason=job!==thisJob?'Operation replaced':thisJob.cancelled?'Preparation cancelled':!$('finishDialog').open?'Dialog closed':!api.matches(s.stamp)?'Review revision changed':JSON.stringify(declaration())!==JSON.stringify(fields)?'Scope fields changed':null;if(reason)throw new Error(reason);return true;};
+    try{await api.lock(async()=>{
+      await api.flush();const scene=api.capture();if(!valid(scene))throw new Error('Preparation cancelled or review changed.');
+      const {record,payloads}=await io.prepare(scene,fields,attempt,text=>status(text),api.packageMaker);if(!valid(scene))throw new Error('Preparation cancelled or review changed.');
+      const zip=await io.zip(payloads,text=>status(text));if(!valid(scene))throw new Error('Preparation cancelled or review changed.');
+      if(zip.size>LIMITS.zip)throw new Error('Completed ZIP exceeds the 256 MB import limit.');
+      const summary=await payloads.get('completion-summary.txt').text(),instructions=await payloads.get(GITHUB_INSTRUCTIONS).text();if(!valid(scene))throw new Error('Preparation cancelled or review changed.');
+      thisJob.phase='committing';controls();status('Saving the completion for this exact revision…');await io.commit(record,scene.stamp);
+      if(!valid(scene))throw new Error('Completion retained as history; downloads were not published because the dialog was closed.');
+      const fragment=document.createDocumentFragment(),individual=document.createElement('details'),label=document.createElement('summary');label.textContent=`Individual files (${payloads.size})`;individual.append(label);
+      for(const [path,blob]of [['score-desk-completed-review.zip',zip],...payloads]){const a=document.createElement('a'),url=URL.createObjectURL(blob);urls.push(url);a.href=url;a.download=path.replaceAll('/','__');a.textContent=path==='score-desk-completed-review.zip'?'Download completed-review ZIP':path;a.className='download';(path==='score-desk-completed-review.zip'?fragment:individual).append(a);}fragment.append(individual);
+      fragment.firstChild.after(document.createTextNode(' '),sendProject);
+      $('finishSummary').textContent=summary;$('finishDownloads').append(fragment);published=scene.stamp;publishedPackage={blob:zip,completionId:record.id};sendProject.hidden=false;
+      $('githubInstructions').value=instructions;$('githubCopyStatus').textContent='';$('githubHandoff').hidden=false;$('finishForm').hidden=true;$('finishIntro').hidden=true;$('finishOverview').hidden=true;$('finishTitle').textContent='Review saved locally';$('finishDialog').scrollTop=0;
+      try{if(fields.reviewer.trim())localStorage.setItem('score-desk-reviewer',fields.reviewer.trim());else localStorage.removeItem('score-desk-reviewer');}catch{}
+      status(`Package ready · ${{corrections:'Corrections reviewed',entire:'Entire work reviewed',partial:'Partial review'}[record.scope]} · ${record.totals.unresolved} unresolved · ${record.totals.missingDecisions} missing decisions.`);history();
+    });}catch(error){clear();status(`Not finished: ${error.message} Your review is retained. Retry when ready.`);api.message($('finishStatus').textContent,true);if(thisJob.cancelled)attempt=null;}
+    finally{if(job===thisJob)job=null;controls();}
+  };
+  document.addEventListener('score-desk-change',()=>{if(published&&!api.matches(published)){clear();status('Review changed. Earlier completions remain historical; choose Finish review for this revision.');}history();});
+  document.addEventListener('score-desk-completions',history);
+  return {io,open,capture:api.capture,job:()=>job};
+}
