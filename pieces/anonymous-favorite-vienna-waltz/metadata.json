@@ -1,0 +1,23 @@
+{
+  "slug": "anonymous-favorite-vienna-waltz",
+  "title": "The Favorite Vienna Waltz",
+  "composer": "Anonymous",
+  "catalogue": "LOC2014568419",
+  "year": "Before 1820?",
+  "instrumentation": "Piano",
+  "license": "CC0 1.0",
+  "source_library": "Library of Congress",
+  "source_id": "LOC2014568419 / music.musm1a1-10161 | scope: PDF page 1, complete waltz, five systems, both staves",
+  "source_page": "https://www.loc.gov/item/2014568419/",
+  "source_pdf": "https://tile.loc.gov/storage-services/public/music/musm1a1-10161/musm1a1-10161.pdf#page=1",
+  "source_sha256": "e9f9985beaaf9c3c0c5ea9d51b6c81f5df85eb358f57bb88ae3b24dba6016225",
+  "crosscheck_name": "Library of Congress IIIF image of the same printed leaf",
+  "crosscheck_url": "https://www.loc.gov/resource/music.musm1a1-10161/?sp=1",
+  "step": 3,
+  "models": [
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6.1-sol"
+  ],
+  "verified_by": null
+}
