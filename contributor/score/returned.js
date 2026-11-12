@@ -101,7 +101,7 @@ export async function makeReturnedBackup(review,files,round,payloads=null,{looku
   metadata.originalTaskData='history/original-task-data.json';payloads.set(metadata.originalTaskData,await originalTaskData(issued.payloads,delivery.payloads));
   for(const [path,blob]of entry.payloads){payloads.set('history/response/'+path,blob);metadata.responsePaths.push(path);}
   payloads.set('returned-workspace.json',json(metadata));const manifest=JSON.parse(await payloads.get('manifest.json').text());manifest.extensions=[{schema:metadata.schema,version:1,path:'returned-workspace.json'}];
-  payloads.set('review.txt',plain(await payloads.get('review.txt').text()+'\n'+observationText('RETURNED REVISION — historical, not approval',round.reported)));return seal(payloads,manifest);
+  payloads.set('review.txt',plain(await payloads.get('review.txt').text()+'\n'+observationText('RETURNED REVISION - historical, not approval',round.reported)));return seal(payloads,manifest);
 }
 export async function restoreReturnedBackup(parsed,inspectPdf){
   const extensions=parsed.manifest.extensions?.filter(e=>e.schema==='score-desk-returned-workspace-backup');if(!extensions?.length)return null;

@@ -19,7 +19,7 @@ if (slug) {
   })).then(lists => {
     const score = lists.flat().find(item => item.slug === slug);
     if (!score) throw new Error('This work is not in the current score lists. You can still open a package below.');
-    document.getElementById('selected-title').textContent = `${score.composer} — ${score.title}`;
+    document.getElementById('selected-title').textContent = `${score.composer} - ${score.title}`;
     status.textContent = score.draft ? 'Draft' : score.verified_by
       ? `Proofread by @${score.verified_by}.`
       : 'Ready for proofreading.';

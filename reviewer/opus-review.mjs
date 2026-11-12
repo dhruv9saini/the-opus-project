@@ -53,7 +53,7 @@ export async function makeReport(work,scene,coverage,outcome){
   if(!review||!files)throw new Error('Open the selected OPUS score before exporting a report.');
   const source_sha256=await digest(files.source.blob),code_sha256=await digest(files.ly.blob),render_sha256=await digest(files.rendered.blob);
   if(source_sha256!==work.source_sha256||scene.projectId!==await projectId(work.slug))
-    throw new Error('The open workspace belongs to a different OPUS work. Reopen the selected score before exporting.');
+    throw new Error('The open workspace belongs to a different score. Reopen the selected score before exporting.');
   const builtRevision=code_sha256===work.code_sha256&&render_sha256===work.render_sha256;
   return {schema:'opus-human-review',version:1,piece:work.slug,title:work.title,composer:work.composer,
     created_at:new Date().toISOString(),coverage:coverage.trim(),outcome,verified_by:null,
@@ -66,7 +66,7 @@ export async function makeReport(work,scene,coverage,outcome){
 }
 export function reportDiscussion(report){
   const body=[
-    'Work: '+report.composer+' — '+report.title,
+    'Work: '+report.composer+' - '+report.title,
     'Result: '+report.outcome,'Pages and passages checked: '+report.coverage,
     'Revision: '+(report.revision||'Local candidate; see the attached report and review backup'),
     'Source SHA-256: '+report.source_sha256,'LilyPond SHA-256: '+report.code_sha256,
@@ -75,5 +75,5 @@ export function reportDiscussion(report){
     'Attach the downloaded OPUS report and ScoreBrush review backup here.',
     'This is a review report; it does not record project verification.'
   ].join('\n');
-  return REPOSITORY+'/discussions/new?'+new URLSearchParams({category:'general',title:'Proofreading: '+report.composer+' — '+report.title,body});
+  return REPOSITORY+'/discussions/new?'+new URLSearchParams({category:'general',title:'Proofreading: '+report.composer+' - '+report.title,body});
 }

@@ -44,7 +44,7 @@ run.onclick=async()=>{
       else await retain(entry);
     }
     const initialRecords=await records(),initialFingerprint=await fingerprint(initialRecords);
-    await ask('latest');await ask('edit',{text:'UNSAVED historical local edit before database upgrade — E♭ 𝄞'});
+    await ask('latest');await ask('edit',{text:'UNSAVED historical local edit before database upgrade - E♭ 𝄞'});
     check((await ask('stats')).expectedRevision===historicalHead.storageRevision,'old client has latest CAS token and local unsaved edits before upgrade');
     frame.src='../index.html';await wait(()=>frame.contentDocument?.body?.dataset.ready==='true','updated app startup');
     const bridge=frame.contentDocument.createElement('script');bridge.type='module';bridge.src='./qa/bridge.js';frame.contentDocument.body.append(bridge);await wait(()=>api(),'actual app bridge');
@@ -63,7 +63,7 @@ run.onclick=async()=>{
     const latest=await ask('latest');log('Historical read of latest head: '+JSON.stringify({ok:latest.ok,error:latest.error,revision:latest.expectedRevision}));
     if(!latest.ok)await ask('latestToken',{revision:head.storageRevision}); // Give it the exact token anyway: CAS must not be the protection.
     const token=await ask('stats');check(token.expectedRevision===head.storageRevision,'old writer attempts the exact latest CAS revision (explicitly supplied even when its closed connection cannot read)');
-    await ask('edit',{text:'UNSAVED historical local edit with latest CAS — E♭ 𝄞'});
+    await ask('edit',{text:'UNSAVED historical local edit with latest CAS - E♭ 𝄞'});
     const held=await ask('heldWrite');log('Held v2 writer result: '+JSON.stringify(held));
     check(held.dirty&&held.lastError?.startsWith('InvalidStateError'),'historical writer cannot transact through its previously held v2 connection');
     const reopen=await ask('reopen');check(!reopen.ok&&reopen.error==='VersionError','historical indexedDB.open(name, 2) cannot reopen the upgraded database');

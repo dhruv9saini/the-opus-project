@@ -76,7 +76,7 @@ A correction task captures an immutable shared snapshot and its outstanding find
 
 Retain the composer, title, catalogue number, instrumentation, movements and version, transcription boundaries, edition/editor/arranger/publisher/date where known, exact scan URL or identifier and page range, and a documented eligibility basis with jurisdiction. Record contributors, canonical revision, LilyPond version, review coverage, verifier/date, open findings, source notes, output filenames, build or conversion versions, validation results, and limitations. Unknown fields remain unknown; do not invent them.
 
-The verified LilyPond revision is canonical. PDF is the reference render; SVG, MIDI, and MusicXML are optional derived formats. Test conversion methods—including non-AI tools—and check whether they preserve the music. Correct source mistakes in LilyPond and rebuild. Fix conversion-only errors in the conversion process or record a reproducible exception. Track LilyPond verification and each format’s validation separately: a verified LilyPond score may be released while MusicXML remains pending.
+The verified LilyPond revision is canonical. PDF is the reference render; SVG, MIDI, and MusicXML are optional derived formats. Test conversion methods - including non-AI tools - and check whether they preserve the music. Correct source mistakes in LilyPond and rebuild. Fix conversion-only errors in the conversion process or record a reproducible exception. Track LilyPond verification and each format’s validation separately: a verified LilyPond score may be released while MusicXML remains pending.
 
 ## Start small
 

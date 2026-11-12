@@ -31,7 +31,7 @@ document.getElementById('run').onclick=async()=>{
     await choose('sourceFile',source,'qa-source.pdf');await choose('renderedFile',uniqueRender,'qa-rendered.pdf');await choose('lyFile',ly,'qa-score.ly');$('load').click();
     await wait(()=>$('message').textContent.includes('Snapshot ready'),'load exact local bytes');await settle();
     assert($('sourceCount').textContent==='/ 1'&&$('renderedCount').textContent==='/ 4','independent 1-page source and 4-page render loaded');
-    $('newFinding').click();input('comment','should be E♭ — compare ♯ and 𝄞');await stroke(90,110);await stroke(130,116);
+    $('newFinding').click();input('comment','should be E♭ - compare ♯ and 𝄞');await stroke(90,110);await stroke(130,116);
     let record=await settle();assert(record.review.findings.length===1&&record.review.findings[0].strokes.length===2,'two brush strokes share one comment');
     const first=clone(record.review.findings[0]);await stroke(160,120,30,true);record=await settle();assert(record.review.findings[0].strokes.length===2,'cancelled gesture leaves no phantom stroke');
     $('saveFinding').click();await wait(()=>!$('comment').disabled,'finding completion');$('newFinding').click();input('comment','beam together');await stroke(175,160);$('saveFinding').click();await wait(()=>!$('comment').disabled,'finding completion');record=await settle();assert(record.review.findings.length===2&&record.review.findings[1].strokes.length===1,'separate pitch and beam findings');
@@ -46,7 +46,7 @@ document.getElementById('run').onclick=async()=>{
     assert(record.review.findings[2].color===PALETTE[3].color&&record.review.findings[3].color===PALETTE[4].color,'each new finding advances through the allowed palette');
     for(let i=0;i<2;i++){frame.contentDocument.querySelectorAll('.finding')[2].click();$('deleteFinding').click();await settle();}
     $('autoColor').checked=false;event('autoColor','change');$('highlightColor').value=PALETTE[1].color;event('highlightColor','change');$('newFinding').click();input('comment','manual color example');await stroke(90,210);record=await settle();assert(record.review.findings[2].color===PALETTE[1].color,'manual default color used with cycling disabled');$('deleteFinding').click();await settle();$('autoColor').checked=true;event('autoColor','change');await settle();
-    frame.contentDocument.querySelectorAll('.finding')[0].click();await wait(()=>$('comment').value===first.comment,'select first comment');input('comment','should be E♭ — edited; ♯ and 𝄞');$('saveFinding').click();await wait(()=>!$('comment').disabled,'finding completion');record=await settle();
+    frame.contentDocument.querySelectorAll('.finding')[0].click();await wait(()=>$('comment').value===first.comment,'select first comment');input('comment','should be E♭ - edited; ♯ and 𝄞');$('saveFinding').click();await wait(()=>!$('comment').disabled,'finding completion');record=await settle();
     const stable=canonical(record.review.findings.map(f=>f.strokes));
     $('renderedZoom').value='2';event('renderedZoom','change');await wait(()=>$('renderedCanvas').style.width.replace('px','')>1000,'200% render');
     await markAligned(record,geometryDoc,'mark stays on expected PDF point at 200%');
@@ -79,7 +79,7 @@ document.getElementById('run').onclick=async()=>{
     const links=[...frame.contentDocument.querySelectorAll('#downloads a')];assert(links.length===14,'ZIP and all 13 individual payloads offered');
     const get=async name=>{const a=links.find(a=>a.textContent===name);if(!a)throw new Error('Missing '+name);return (await fetch(a.href)).blob();};
     const manifest=JSON.parse(await (await get('manifest.json')).text());for(const [path,expected]of Object.entries(manifest.payloads))assert(await sha256(await (await get(path)).arrayBuffer())===expected.sha256,'export integrity: '+path);
-    const report=await (await get('review.txt')).text();assert(report.includes('should be E♭ — edited; ♯ and 𝄞')&&report.includes('beam together'),'all Unicode comments readable as ordinary report text');
+    const report=await (await get('review.txt')).text();assert(report.includes('should be E♭ - edited; ♯ and 𝄞')&&report.includes('beam together'),'all Unicode comments readable as ordinary report text');
     const exported=JSON.parse(await (await get('annotations.json')).text());assert(exported.findings.length===2&&exported.findings[0].strokes.every(s=>s.color===PALETTE[2].color),'hidden view exports all findings with their chosen colors');
     for(const f of record.review.findings){const paths=manifest.context.filesByFinding[f.id];const clean=await createImageBitmap(await get(paths[1])),marked=await createImageBitmap(await get(paths[0]));assert(clean.width===marked.width&&clean.height===marked.height&&clean.width>1500,'clean and marked context dimensions match for #'+f.number);clean.close();marked.close();}
     log('\nALL CHECKS PASSED. Export downloads are in the embedded actual interface.');

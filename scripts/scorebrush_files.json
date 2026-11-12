@@ -6,7 +6,18 @@
   "modified_upstream_files": [
     "app.js",
     "application-shell.js",
-    "startup.js"
+    "branding/proofread.svg",
+    "branding/review-changes.svg",
+    "branding/send-to-ai.svg",
+    "completion-model.js",
+    "export.js",
+    "folder-workspace.js",
+    "guidance/review-guide.txt",
+    "handoff-ui.js",
+    "index.html",
+    "returned.js",
+    "startup.js",
+    "workflow.js"
   ],
   "files": [
     {
@@ -47,14 +58,14 @@
     },
     {
       "path": "branding/proofread.svg",
-      "sha256": "62f9588ce72810ffe39f88e3a8e8d11ba243e50f03086f502b496746cd24ec93",
-      "size": 1207,
+      "sha256": "90436f50daf28bf2c48ab2212f2b0ae3a42f6473950892ea219a769a4d625225",
+      "size": 1205,
       "upstream_sha256": "62f9588ce72810ffe39f88e3a8e8d11ba243e50f03086f502b496746cd24ec93"
     },
     {
       "path": "branding/review-changes.svg",
-      "sha256": "bfd9cae83904f7e08cce3ea0375ca8be30e2b6da664e13fca5b4d6774056e126",
-      "size": 1056,
+      "sha256": "74d1a26020a196e4e01ab074fa1795a6bb87e94b16cd91e2166e79f3f280a425",
+      "size": 1054,
       "upstream_sha256": "bfd9cae83904f7e08cce3ea0375ca8be30e2b6da664e13fca5b4d6774056e126"
     },
     {
@@ -71,8 +82,8 @@
     },
     {
       "path": "branding/send-to-ai.svg",
-      "sha256": "2bb1842f381e78a1183cc00aeee74b77b09a80de48db4034654fbfd421a927e6",
-      "size": 710,
+      "sha256": "00e65355956cd2bd18dbbe33cb2ac171a3e61655a810cddbba36c84d7fb3c4f4",
+      "size": 708,
       "upstream_sha256": "2bb1842f381e78a1183cc00aeee74b77b09a80de48db4034654fbfd421a927e6"
     },
     {
@@ -161,8 +172,8 @@
     },
     {
       "path": "completion-model.js",
-      "sha256": "788b94ddba866675c7e704153a93c15d3c82b25793c21281a28c91204d593e0a",
-      "size": 11952,
+      "sha256": "bb507c34be6d3234653b93bad501dcaa175c11fc5efffdc1f43211270c7116df",
+      "size": 11948,
       "upstream_sha256": "788b94ddba866675c7e704153a93c15d3c82b25793c21281a28c91204d593e0a"
     },
     {
@@ -209,8 +220,8 @@
     },
     {
       "path": "export.js",
-      "sha256": "8701e6e6dc78f447847fb422709434cacf1c5ec5a7fca8d51d85dd00c2f0491d",
-      "size": 15162,
+      "sha256": "bfbddebeec6b6fecaa8c83f8c2785b31484c73dbf2730cc87a544804f52a6892",
+      "size": 15158,
       "upstream_sha256": "8701e6e6dc78f447847fb422709434cacf1c5ec5a7fca8d51d85dd00c2f0491d"
     },
     {
@@ -269,14 +280,14 @@
     },
     {
       "path": "folder-workspace.js",
-      "sha256": "5004ddaa8122dcfc83d6d49864428c5863de69fd4957b0ddd7ae7d0c53374aa2",
-      "size": 103738,
+      "sha256": "34c9bb81e77123ee1cb3a4ffa9f6d8037b704d96b7e90e8052008d631d69a704",
+      "size": 103732,
       "upstream_sha256": "5004ddaa8122dcfc83d6d49864428c5863de69fd4957b0ddd7ae7d0c53374aa2"
     },
     {
       "path": "guidance/review-guide.txt",
-      "sha256": "00041751c42206b2b5bf969691078b5a743439d6227072a7147710c64c5d169e",
-      "size": 4778,
+      "sha256": "1509dc049c51f1952e33d40e257aa64e14f721bedf1d2d932cd9b57cd7b3bc98",
+      "size": 4776,
       "upstream_sha256": "00041751c42206b2b5bf969691078b5a743439d6227072a7147710c64c5d169e"
     },
     {
@@ -287,8 +298,8 @@
     },
     {
       "path": "handoff-ui.js",
-      "sha256": "1a0d4256589ec2b38b03946d4d1666bb5933f5316b16dc0adf7aa1ef0d001736",
-      "size": 22385,
+      "sha256": "66ebe9ec64101e3890ac6584c7a202465d8d016310fa2f5249c82a8c8489e6e0",
+      "size": 22379,
       "upstream_sha256": "1a0d4256589ec2b38b03946d4d1666bb5933f5316b16dc0adf7aa1ef0d001736"
     },
     {
@@ -419,8 +430,8 @@
     },
     {
       "path": "returned.js",
-      "sha256": "621bdc72c97ebe9eff72bcee516b35e176a7178274cac2700ce10e86cac0a9ea",
-      "size": 20288,
+      "sha256": "6c84b3a1abf22d52b8be1f43c760a72081250b1a4e1b709aef9b6ec4c75496ec",
+      "size": 20286,
       "upstream_sha256": "621bdc72c97ebe9eff72bcee516b35e176a7178274cac2700ce10e86cac0a9ea"
     },
     {
@@ -1769,8 +1780,8 @@
     },
     {
       "path": "workflow.js",
-      "sha256": "1d3d876d0bc54e0ee36f680a8c10be3855748833e3615af5138f87d7c5aa0a9f",
-      "size": 39617,
+      "sha256": "f7f53043e3475085be984fa6813ff6c1323f8e54e2d799df75971d1977f61e9c",
+      "size": 39615,
       "upstream_sha256": "1d3d876d0bc54e0ee36f680a8c10be3855748833e3615af5138f87d7c5aa0a9f"
     },
     {
