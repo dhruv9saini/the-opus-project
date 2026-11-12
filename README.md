@@ -34,6 +34,9 @@ An attempt found to be wrong can be marked `withdrawn` in metadata; it remains i
 
 Proofreading does not require a clone or LilyPond. Open a work's **Compare PDFs** link in the catalog, or choose a draft from the [proofreading page](proofread.html), to see the original printed PDF beside the rendered transcription. An alternate high-resolution scan is linked when available. Report findings in the on-page discussion. A maintainer records human verification only after a full comparison of a specific revision. GitHub sign-in is required to post; reading the scores is open.
 
+[**ScoreBrush Web**](reviewer/) is a standalone browser version of ScoreBrush. Choose **New Project** to open your own source PDF, transcription PDF, and LilyPond file. You can mark findings, exchange correction packages, review returned changes, and save or restore backups without installing the Windows app. OPUS scores and human-review reports are available from the app's **OPUS scores & report** menu.
+
+The human review page also offers **Open ScoreBrush Web**. This opens the pinned ScoreBrush 0.1.1 web UI with the selected source, rendered PDF and LilyPond file. Mark findings, save a review backup, state the pages you checked, and download an OPUS report for the discussion. A blocked library download can be replaced with the exact original PDF, checked against its recorded digest. Drafts remain local; exporting a report does not submit it or set `verified_by`. See the [integration guide](reviewer/README.md).
 [Score Desk](contributor/index.html) offers three ways to help:
 
 - **Proofread:** compare the score with the printed source and mark or describe errors, then **Submit findings**. You can also record which pages you checked, including when you found no errors.
@@ -72,4 +75,5 @@ The same build includes Score Desk, its local PDF workers/fonts and package tool
 
 Original repository code, documentation, metadata, and LilyPond transcriptions are dedicated to the public domain under [CC0 1.0](LICENSE). This dedication does not cover linked third-party scans. Their provenance is recorded in each work's metadata and in [SCORES.md](SCORES.md).
 
+The ScoreBrush-derived HTML in `reviewer/index.html` and bundled runtime in `reviewer/scorebrush/` are copyright Auggie and licensed **AGPL-3.0-or-later**, with its additional permissions and third-party notices retained. It is excluded from the repository's CC0 dedication. Other OPUS integration files retain CC0. Exact release provenance, modifications, and source links are in [reviewer/README.md](reviewer/README.md).
 Bundled third-party libraries, fonts and decoders in `contributor/score/vendor/` retain their own licenses, which are included beside the files. They are not relicensed under CC0. See [third-party notices](THIRD_PARTY_NOTICES.md).

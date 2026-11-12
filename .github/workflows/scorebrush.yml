@@ -1,0 +1,54 @@
+name: ScoreBrush human review
+
+on:
+  pull_request:
+    paths:
+      - 'reviewer/**'
+      - 'scripts/build_site.py'
+      - 'scripts/scorebrush_files.json'
+      - 'scripts/test_scorebrush_site.py'
+      - 'proofread.html'
+      - 'proofread.js'
+      - '.github/workflows/scorebrush.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.27.0'
+      - name: Validate runtime packaging and revision binding
+        run: python3 -B -m unittest discover -s scripts -p test_scorebrush_site.py -v
+      - name: Test source validation and review reports
+        run: node --test reviewer/tests/opus-review.test.mjs
+      - name: Install the pinned browser test driver
+        run: pnpm --dir reviewer/tests install --frozen-lockfile --ignore-scripts
+      - name: Explicitly provision the trusted isolated runtime image
+        run: docker build --pull=false --build-arg OPUS_POLICY_SHA256="$(python3 scripts/isolated_runner.py policy)" -t opus-isolated-runtime:1 scripts/isolated-runtime
+      - name: Require genuine compiler, PDF and controlled network isolation acceptance
+        env:
+          OPUS_REQUIRE_ISOLATION: "1"
+        run: python3 -B scripts/test_isolated_runner.py
+      - name: Build the actual deployable site
+        run: python3 scripts/build_site.py "$RUNNER_TEMP/opus-site"
+      - name: Exercise the released UI with synthetic scores
+        env:
+          SCOREBRUSH_BROWSER: /usr/bin/google-chrome
+          OPUS_TEST_SITE: ${{ runner.temp }}/opus-site
+          OPUS_TEST_EVIDENCE: ${{ runner.temp }}/scorebrush-evidence
+        run: node reviewer/tests/browser.mjs
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scorebrush-browser-evidence
+          path: ${{ runner.temp }}/scorebrush-evidence
+          if-no-files-found: ignore
