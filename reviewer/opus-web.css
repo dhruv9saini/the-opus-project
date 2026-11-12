@@ -1,0 +1,12 @@
+.web-edition{font-size:.52em;letter-spacing:.03em;color:var(--muted);vertical-align:middle}
+#webActions{display:flex;align-items:center;gap:8px;margin-left:auto;padding-left:12px}
+#webActions button{font:inherit;font-size:12px;padding:3px 9px;border:0;background:transparent;border-radius:3px}
+#webActions button:hover{background:var(--accent-soft);color:var(--accent)}
+#webActions a{font-size:12px;color:var(--muted);text-decoration:none}
+#opusDialog{width:720px;max-width:calc(100vw - 24px)}
+#opusQueue{padding:0;list-style:none;display:grid;gap:8px;max-height:28vh;overflow:auto}
+#opusQueue button{width:100%;text-align:left}
+#opusReportForm,#opusSourceRecovery{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
+#opusReportForm[hidden],#opusSourceRecovery[hidden]{display:none}
+#opusReportForm label,#opusSourceRecovery label{display:grid;gap:4px}
+@media(max-width:650px){#webActions{gap:2px;padding-left:3px}#webActions a{display:none}#webActions button{padding:3px 5px;font-size:11px}}

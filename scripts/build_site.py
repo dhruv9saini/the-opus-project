@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import subprocess
@@ -35,6 +36,48 @@ SCORE_FILES = (
 
 def fail(message: str) -> None:
     raise ValueError(message)
+
+
+def scorebrush_assets(root: Path | None = None) -> dict[Path, Path]:
+    """Publish only the exact pinned ScoreBrush runtime, never QA or local data."""
+    root = ROOT if root is None else root
+    manifest = json.loads((root / "scripts/scorebrush_files.json").read_text(encoding="utf-8"))
+    if manifest.get("schema") != 1 or not isinstance(manifest.get("files"), list) or not manifest["files"]:
+        fail("invalid ScoreBrush runtime manifest")
+    names = set()
+    assets = {}
+    for record in manifest["files"]:
+        name = record.get("path")
+        if (not isinstance(name, str) or not name or chr(92) in name or ":" in name
+                or name.startswith("/") or any(part in ("", ".", "..") for part in name.split("/"))
+                or name.casefold() in names or "qa" in name.split("/")):
+            fail("unsafe or duplicate ScoreBrush runtime path")
+        names.add(name.casefold())
+        relative = Path("reviewer/scorebrush") / name
+        source = root / relative
+        if any(root.joinpath(*relative.parts[:i]).is_symlink() for i in range(1, len(relative.parts) + 1)):
+            fail(f"linked ScoreBrush runtime asset: {name}")
+        if (not source.is_file() or source.stat().st_size != record.get("size")
+                or hashlib.sha256(source.read_bytes()).hexdigest() != record.get("sha256")):
+            fail(f"missing or changed ScoreBrush runtime asset: {name}")
+        assets[relative] = source
+    for name in ("index.html", "opus-web.css", "app.mjs", "opus-review.mjs", "README.md"):
+        relative = Path("reviewer") / name
+        source = root / relative
+        if not source.is_file() or source.is_symlink():
+            fail(f"missing or linked OPUS reviewer asset: {name}")
+        assets[relative] = source
+    return assets
+
+
+def copy_reviewer_assets(output: Path, root: Path | None = None) -> None:
+    assets = scorebrush_assets(root)
+    if not output.is_dir() or output.is_symlink() or (output / "reviewer").exists() or (output / "reviewer").is_symlink():
+        fail("reviewer output must be a new directory in an existing output")
+    for relative, source in assets.items():
+        target = output / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
 
 
 def compile_score(source: Path, pdf: Path, *, cwd: Path) -> dict:
@@ -98,6 +141,23 @@ def copy_contributor_assets(output: Path, root: Path | None = None) -> None:
         shutil.copy2(source, target)
 
 
+def write_reviewer_index(output: Path, entries: list[dict]) -> None:
+    """Bind human review to the source edition and the actual deployed bytes."""
+    result = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, timeout=10, check=False)
+    revision = result.stdout.strip() if result.returncode == 0 else None
+    scores = []
+    for entry in entries:
+        if entry["step"] != 3:
+            continue
+        metadata = load_metadata(PIECES / entry["slug"] / "metadata.json")
+        scores.append({**entry, "source_sha256": metadata["source_sha256"],
+                       "code_sha256": hashlib.sha256((output / entry["lilypond_url"]).read_bytes()).hexdigest(),
+                       "render_sha256": hashlib.sha256((output / entry["pdf_url"]).read_bytes()).hexdigest(),
+                       "revision": revision})
+    (output / "reviewer/works.json").write_text(
+        json.dumps({"schema": 1, "scores": scores}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def review_queue() -> dict[str, object]:
     entries: list[dict[str, object]] = []
     for metadata_path in sorted(PIECES.glob("*/metadata.json")):
@@ -138,11 +198,13 @@ def main() -> int:
     catalog, _ = expected_catalog()
     reviews = review_queue()
     contributor_assets()
+    scorebrush_assets()
 
     output.mkdir(mode=0o755)
     for relative in PUBLIC_FILES:
         shutil.copy2(ROOT / relative, output / relative)
     copy_contributor_assets(output)
+    copy_reviewer_assets(output)
     (output / "catalog.json").write_text(render_catalog(catalog), encoding="utf-8")
     (output / "reviews.json").write_text(render_catalog(reviews), encoding="utf-8")
 
@@ -154,6 +216,8 @@ def main() -> int:
         shutil.copy2(source, deployed_source)
         pdf = output / Path(str(entry["pdf_url"]))
         compile_score(deployed_source, pdf, cwd=output)
+
+    write_reviewer_index(output, [*catalog["scores"], *reviews["scores"]])
 
     print(f"built {len(catalog['scores'])} catalog works and {len(reviews['scores'])} review drafts in {output}")
     return 0
