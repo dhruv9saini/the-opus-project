@@ -76,7 +76,7 @@ upperBattery = {
 upperSustained = {
   \global
   \override Fingering.direction = #UP
-  b'4. c''4.-1 |
+  b'4. c''4. |
   b'4. a'4.-5 |
   g'4. a'4. |
   g'4.-4 s4. |
