@@ -110,7 +110,7 @@ export async function makeReturnedBackup(review,files,round,payloads=null,{looku
   metadata.originalTaskData='history/original-task-data.json';payloads.set(metadata.originalTaskData,await originalTaskData(issued.payloads,delivery.payloads));
   for(const [path,blob]of entry.payloads){payloads.set('history/response/'+path,blob);metadata.responsePaths.push(path);}
   payloads.set('returned-workspace.json',json(metadata));const manifest=JSON.parse(await payloads.get('manifest.json').text());manifest.extensions=[{schema:metadata.schema,version:1,path:'returned-workspace.json'}];
-  payloads.set('review.txt',plain(await payloads.get('review.txt').text()+'\n'+observationText('RETURNED REVISION — historical, not approval',round.reported)));
+  payloads.set('review.txt',plain(await payloads.get('review.txt').text()+'\n'+observationText('RETURNED REVISION - historical, not approval',round.reported)));
   const associated=new Set(round.reported.map(f=>f.associationId).filter(Boolean));
   const comments=[...round.reported.map(f=>{const mark=review.findings.find(m=>m.id===f.associationId);return {...f,...(mark&&Object.hasOwn(mark,'type')?findingTypeFields(mark):{}),...(mark?{currentAnchor:{findingId:mark.id,page:mark.page,bounds:mark.bounds,comment:mark.comment}}:{})};}),...review.findings.filter(f=>!associated.has(f.id))];
   payloads.set('internal-comments.txt',plain(internalCommentText(comments)));return seal(payloads,manifest);

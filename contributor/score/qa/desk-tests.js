@@ -37,7 +37,7 @@ document.getElementById('run').onclick=async()=>{
     await stroke();assert(frame.contentDocument.activeElement===$('comment')&&$('comment').selectionStart===$('comment').selectionEnd,'first completed ordinary stroke focuses the textarea with a caret');edit('Typed immediately');assert(scene().review.findings[0].comment==='Typed immediately','immediate typing after the stroke belongs to the new finding');$('undo').click();let first=scene().review.findings[0];assert(first.strokes.length===1&&first.color===PALETTE[0].color,'completed stroke automatically creates the first finding');
     $('undo').click();assert(scene().review.findings.length===0&&scene().review.preferences.colorCursor===0,'one undo reverses automatic creation, stroke, number and color');
     $('redo').click();assert(scene().review.findings[0].id===first.id&&state().active===first.id,'redo restores identity and stroke destination together');
-    $('brush').focus();await stroke(100,120);assert(frame.contentDocument.activeElement===$('brush'),'additional strokes do not steal focus again');edit('First group — two strokes');await done();
+    $('brush').focus();await stroke(100,120);assert(frame.contentDocument.activeElement===$('brush'),'additional strokes do not steal focus again');edit('First group - two strokes');await done();
     assert(scene().review.findings.length===1&&scene().review.findings[0].strokes.length===2&&state().active===null&&state().prepared&&state().mode==='draw','Done & next finishes multiple strokes and prepares without an empty record');
     await stroke(130,150,true);assert(scene().review.preferences.colorCursor===1,'cancelled next stroke does not advance color');
     for(let i=0;i<3;i++){await stroke(60+i*30,170+i*25);edit('Repeated group '+i);await done();}

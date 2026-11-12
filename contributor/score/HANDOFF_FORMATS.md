@@ -112,7 +112,7 @@ pending. The browser itself never executes or extracts package files.
    snapshot first retains the prior saved review there. Existing snapshot CAS
    still rejects competing tab writes. There is no automatic merge.
 
-Code-only proposals say **Code changes received — updated rendering pending.**
+Code-only proposals say **Code changes received - updated rendering pending.**
 The old PDF is labeled previous rendering. Original crops/strokes belong only
 to that old render. No strokes are copied into a proposed PDF. Changed-code
 proposals cannot be visually approved until a producer supplies an updated PDF.

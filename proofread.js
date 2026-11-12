@@ -21,20 +21,21 @@ async function loadScores() {
   return {catalog: catalog.scores, reviews: reviews.scores};
 }
 
-function showQueue(reviews) {
-  titleNode.textContent = 'Scores for proofreading';
-  statusNode.textContent = 'Drafts are separate from the catalog and are not human verified.';
+function showQueue(catalog, reviews) {
+  titleNode.textContent = 'Scores to proofread';
+  statusNode.textContent = 'No one has checked these scores yet.';
   const queue = document.querySelector('[data-queue]');
-  for (const score of reviews) {
+  const waiting = catalog.filter((score) => score.step === 3 && !score.verified_by);
+  for (const score of [...waiting, ...reviews]) {
     const item = document.createElement('li');
     const link = document.createElement('a');
     link.href = `proofread.html?piece=${encodeURIComponent(score.slug)}`;
-    link.textContent = `${score.composer} — ${score.title} (${score.catalogue})`;
+    link.textContent = `${score.composer} - ${score.title} (${score.catalogue})`;
     item.append(link);
     queue.append(item);
   }
   queue.hidden = false;
-  if (!reviews.length) messageNode.textContent = 'No draft scores are available for review yet.';
+  if (!waiting.length && !reviews.length) messageNode.textContent = 'There is nothing to proofread right now.';
 }
 
 function showScore(score) {
@@ -44,15 +45,15 @@ function showScore(score) {
   for (const link of document.querySelectorAll('[data-score-desk]')) {
     link.href = `contributor/?piece=${encodeURIComponent(score.slug)}`;
   }
-  titleNode.textContent = `${score.composer} — ${score.title}`;
-  document.title = `${score.title} — Proofread — The OPUS Project`;
+  titleNode.textContent = `${score.composer} - ${score.title}`;
+  document.title = `${score.title} - Proofread - The OPUS Project`;
   statusNode.textContent = score.draft
-    ? 'Draft candidate — not in the catalog or human verified'
+    ? 'Unmerged draft'
     : score.verified_by
-      ? `Human verified by @${score.verified_by}`
+      ? `Checked by @${score.verified_by}`
       : score.step === 3
-        ? 'Reconciled score — needs human proofreading'
-        : `Agent step ${score.step}/3 — not yet reconciled`;
+        ? 'Needs proofreading'
+        : `Draft, step ${score.step} of 3`;
 
   document.querySelector('[data-source-link]').href = score.source_pdf;
   document.querySelector('[data-source-frame]').src = score.source_pdf;
@@ -68,10 +69,12 @@ function showScore(score) {
   document.querySelector('[data-rendered-frame]').src = score.pdf_url;
   document.querySelector('[data-lilypond-link]').href = score.lilypond_url;
 
-  const reportTitle = `Proofreading: ${score.composer} — ${score.title}`;
-  const reportBody = `Work: ${score.composer} — ${score.title}\nResult: [no errors found / corrections needed]\nPages and measures checked:\nRevision checked:\nDetails:\nSource PDF: ${score.source_pdf}\nRendered PDF: ${new URL(score.pdf_url, window.location.href).href}`;
+  const reportTitle = `Proofreading: ${score.composer} - ${score.title}`;
+  const reportBody = `Work: ${score.composer} - ${score.title}\nResult: [no errors found / corrections needed]\nPages and measures checked:\nRevision checked:\nDetails:\nSource PDF: ${score.source_pdf}\nRendered PDF: ${new URL(score.pdf_url, window.location.href).href}`;
   const params = new URLSearchParams({category: 'general', title: reportTitle, body: reportBody});
-  document.querySelector('[data-feedback]').href = `https://github.com/the-opus-project/the-opus-project.github.io/discussions/new?${params}`;
+  for (const link of document.querySelectorAll('[data-feedback]')) {
+    link.href = `https://github.com/the-opus-project/the-opus-project.github.io/discussions/new?${params}`;
+  }
 
   const discussionNode = document.querySelector('[data-discussion]');
   window.addEventListener('message', (event) => {
@@ -110,7 +113,7 @@ function showScore(score) {
 loadScores()
   .then(({catalog, reviews}) => {
     if (!piece) {
-      showQueue(reviews);
+      showQueue(catalog, reviews);
       return;
     }
     const score = [...catalog, ...reviews].find((entry) => entry.slug === piece);

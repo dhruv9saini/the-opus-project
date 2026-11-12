@@ -50,5 +50,5 @@ test('returned local candidate reports use its real code and render hashes',asyn
 });
 test('a different project open in ScoreBrush cannot be reported as the selected work',async()=>{
   const {work,scene}=await fixture();scene.projectId=await projectId('another-work');
-  await assert.rejects(makeReport(work,scene,'All pages','no-errors-found'),/different OPUS work/);
+  await assert.rejects(makeReport(work,scene,'All pages','no-errors-found'),/different score/);
 });

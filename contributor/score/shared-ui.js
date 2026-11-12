@@ -212,7 +212,7 @@ export function installShared(api) {
   }
   function renderWork() {
     const work = detail.work ?? detail;
-    $('sharedWorkTitle').textContent = [work.composer, work.title ?? work.slug ?? selected].filter(Boolean).join(' — ');
+    $('sharedWorkTitle').textContent = [work.composer, work.title ?? work.slug ?? selected].filter(Boolean).join(' - ');
     $('sharedRevision').textContent = detail.current ? `Score: ${detail.current.repositoryRevision ?? detail.current.snapshotId}. Reports: ${detail.revision ?? 'unknown'}.` : 'Score files are not ready yet.';
     completionWork();
     $('sharedFindings').replaceChildren();
@@ -455,7 +455,7 @@ export function installShared(api) {
   }
   function completionWork() {
     const work = detail?.work;
-    $('sharedCompletionWork').textContent = work && selected ? `Send to: ${[work.composer, work.title ?? work.slug ?? selected].filter(Boolean).join(' — ')}` : 'Choose the project work above.';
+    $('sharedCompletionWork').textContent = work && selected ? `Send to: ${[work.composer, work.title ?? work.slug ?? selected].filter(Boolean).join(' - ')}` : 'Choose the project work above.';
   }
   async function inspectCompletion(blob, expectedId = null) {
     if (!blob) return;
@@ -731,7 +731,7 @@ export function installShared(api) {
       client.addEventListener('outbox', () => refreshPending().catch(error => status(error.message, true)));
       await client.session(); const works = await client.all('/api/works');
       $('sharedWork').replaceChildren(new Option('Choose a project work…', ''));
-      for (const work of works) $('sharedWork').add(new Option(`${work.composer ? work.composer + ' — ' : ''}${work.title ?? work.slug ?? work.id}${work.outstanding ? ` · ${work.outstanding} outstanding` : ''}`, work.slug ?? work.id));
+      for (const work of works) $('sharedWork').add(new Option(`${work.composer ? work.composer + ' - ' : ''}${work.title ?? work.slug ?? work.id}${work.outstanding ? ` · ${work.outstanding} outstanding` : ''}`, work.slug ?? work.id));
       $('sharedAvailable').hidden = false;
       const params = new URLSearchParams(location.search), piece = params.get('piece');
       if (piece && works.some(work => (work.slug ?? work.id) === piece)) { selected = piece; $('sharedWork').value = piece; await refreshWork(); }

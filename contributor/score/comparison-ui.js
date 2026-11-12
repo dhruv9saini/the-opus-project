@@ -118,7 +118,7 @@ export function installComparison(api){
     await displayLeft(context.earlier&&context.original?'original':'before');if(token!==generation)return;
     const scene=api.capture(),location=adapter.candidate&&savedLocation(adapter.location(f.id),f.id,scene.review);
     await api.positionView('rendered',location?.position??positions.get(f.id)?.after??{page:context.page,zoom:'fit'});if(token!==generation)return;
-    refs.alignment.textContent=location?'This passage is remembered for this AI revision.':'Starting page only — the passage has not been matched.';
+    refs.alignment.textContent=location?'This passage is remembered for this AI revision.':'Starting page only - the passage has not been matched.';
     refs.notice.textContent='';viewReady=true;refresh();await adapter.onSelect?.(index);controls();measureReport();
   }
   function refresh(){

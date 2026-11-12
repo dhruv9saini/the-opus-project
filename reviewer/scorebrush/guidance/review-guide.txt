@@ -1,4 +1,4 @@
-ScoreBrush — PRIVATE TRANSCRIPTION REVIEW
+ScoreBrush - PRIVATE TRANSCRIPTION REVIEW
 
 ScoreBrush keeps local review data in its application profile. A linked working
 folder lets a local AI read the latest saved corrections directly. The user

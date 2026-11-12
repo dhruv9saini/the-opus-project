@@ -65,7 +65,7 @@ $('load').onclick=async()=>{
 async function scoreIndex(){
   return indexPromise??=fetchBounded(new URL('works.json',import.meta.url),{limit:2*1024*1024})
     .then(b=>b.text()).then(JSON.parse).then(index=>{
-      if(index.schema!==1||!Array.isArray(index.scores))throw new Error('The OPUS score list is unavailable.');
+      if(index.schema!==1||!Array.isArray(index.scores))throw new Error('The score list could not be loaded.');
       return index.scores.map(validateWork);
     }).catch(error=>{indexPromise=null;throw error;});
 }
@@ -74,20 +74,20 @@ async function showOpus(){
   $('workspaceDialog').close();
   if(!dialog.open)dialog.showModal();
   $('opusReportForm').hidden=!currentWork;syncScope();
-  status(currentWork?'Reviewing '+currentWork.composer+' — '+currentWork.title+'. Record your coverage here when ready.':'Choose an OPUS score to open, or use New Project for your own files.');
+  status(currentWork?'Reviewing '+currentWork.composer+' - '+currentWork.title+'. Record your coverage here when ready.':'Choose a score to open, or use New Project for your own files.');
   try{
     const scores=await scoreIndex();
     $('opusQueue').replaceChildren();
     for(const work of scores){
       const item=document.createElement('li'),button=document.createElement('button');
-      button.type='button';button.textContent=work.composer+' — '+work.title;
+      button.type='button';button.textContent=work.composer+' - '+work.title;
       button.onclick=()=>void selectWork(work);item.append(button);$('opusQueue').append(item);
     }
   }catch(error){status(error.message+' You can still open your own score files or restore a backup.');}
 }
 async function selectWork(work){
   const token=++selection;pending=null;$('opusSourceRecovery').hidden=true;$('opusReportForm').hidden=true;
-  status('Loading '+work.composer+' — '+work.title+'…');
+  status('Loading '+work.composer+' - '+work.title+'…');
   try{
     const [rendered,ly]=await Promise.all([
       fetchBounded(new URL(work.pdf_url,site)).then(b=>verified(b,work.render_sha256,'Rendered PDF')),
@@ -120,8 +120,8 @@ async function openSource(source,target){
     currentWork=target.work;pending=null;scopeKey=null;syncScope();
     $('opusSourceRecovery').hidden=true;$('opusReportForm').hidden=false;
     const url=new URL(location.href);url.searchParams.set('piece',currentWork.slug);history.replaceState(null,'',url);
-    document.title=currentWork.title+' — ScoreBrush Web';document.body.dataset.opusPiece=currentWork.slug;dialog.close();
-    api.message('Opened '+currentWork.composer+' — '+currentWork.title+'. Use OPUS scores & report to record coverage and export your review.');
+    document.title=currentWork.title+' - ScoreBrush Web';document.body.dataset.opusPiece=currentWork.slug;dialog.close();
+    api.message('Opened '+currentWork.composer+' - '+currentWork.title+'. When you finish, use Scores & report to record what you checked.');
   }catch(error){
     if(target.token!==selection)return;
     $('opusSourceRecovery').hidden=false;$('opusSourceError').textContent=error.message;
@@ -140,7 +140,7 @@ $('opusReportForm').onsubmit=async event=>{
     const report=await makeReport(currentWork,api.capture(),$('opusCoverage').value,$('opusOutcome').value);
     download(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'}),currentWork.slug+'-opus-review.json');
     $('opusDiscussion').href=reportDiscussion(report);$('opusDiscussion').hidden=false;
-    status('Report downloaded. Save a review backup and attach both to your OPUS discussion. Nothing has been submitted yet.');
+    status('Report downloaded. Save a review backup too, then attach both to a report on GitHub. Nothing has been posted yet.');
   }catch(error){status(error.message);}
   finally{exportBusy=false;button.disabled=false;}
 };
@@ -148,10 +148,10 @@ for(const field of ['opusCoverage','opusOutcome'])$(field).addEventListener('inp
 document.addEventListener('score-desk-controls',syncScope);
 const actions=document.createElement('div');actions.id='webActions';
 const newButton=document.createElement('button');newButton.id='webNewProject';newButton.type='button';newButton.textContent='New project';newButton.onclick=()=>void openNewProject();
-const opusButton=document.createElement('button');opusButton.id='opusProject';opusButton.type='button';opusButton.textContent='OPUS scores & report';opusButton.onclick=()=>void showOpus();
-const home=document.createElement('a');home.href='../proofread.html';home.textContent='OPUS';
+const opusButton=document.createElement('button');opusButton.id='opusProject';opusButton.type='button';opusButton.textContent='Scores & report';opusButton.onclick=()=>void showOpus();
+const home=document.createElement('a');home.href='../proofread.html';home.textContent='The OPUS Project';
 actions.append(newButton,opusButton,home);$('appMenu').append(actions);
-const about=document.createElement('p');about.className='hint';about.textContent='ScoreBrush Web is an OPUS browser port of ScoreBrush 0.1.1. ';
+const about=document.createElement('p');about.className='hint';about.textContent='ScoreBrush Web is a browser version of ScoreBrush 0.1.1. ';
 const source=document.createElement('a');source.href='https://github.com/the-opus-project/the-opus-project.github.io/tree/codex/scorebrush-human-review/reviewer';source.target='_blank';source.rel='noopener noreferrer';source.textContent='Web app source and licensing';
 about.append(source);$('aboutDialog').append(about);
 await ready;
@@ -159,6 +159,6 @@ document.body.dataset.webReady='true';
 const slug=new URLSearchParams(location.search).get('piece');
 if(slug){
   await showOpus();
-  try{const work=(await scoreIndex()).find(w=>w.slug===slug);if(!work)throw new Error('This OPUS work is unavailable for human review.');await selectWork(work);}
+  try{const work=(await scoreIndex()).find(w=>w.slug===slug);if(!work)throw new Error('This score is not available for proofreading.');await selectWork(work);}
   catch(error){status(error.message);}
 }
