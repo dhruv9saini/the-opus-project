@@ -40,7 +40,7 @@ upper = \absolute {
  e''4 a'8 b'!4 c''8) | a'4 r8 r4 d''8( |
  c''4^\markup\italic "poco riten."\p f'8 g'4 a'8 | f'4) r8 r4 r8 |
  f'4^\markup "a tempo" f'8 fis'4^\markup\italic "poco" fis'8 | \break
- g'4^\markup\italic "a poco cres — cen — do" g'8 c''4 b'8 |
+ g'4^\markup\italic "a poco cres - cen - do" g'8 c''4 b'8 |
  as'4 r8 r4 r8 | as'4 as'8 a'!4 a'8 |
  ais'4 ais'8 dis''4 cis''8 | \key b \major \pageBreak
  % Page4: systems5+4+5+4+4.
