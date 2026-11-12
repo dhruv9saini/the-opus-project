@@ -55,7 +55,7 @@ left = \absolute {
   g2-1 g4 e4-3 |
   fis2-2 fis4 d4-4 |
   g2-1 e2-3 |
-  a8\thumb[ gis-1 a\thumb b-1] a\thumb[ gis!-1 fis-2 e-3] |
+  a8\thumb[ gis-1 a\thumb b-1] a\thumb[ g-1 fis-2 e-3] |
   % Printed system 3, measures 9–12.
   d2 e4 d4 |
   cis2 d2 |
