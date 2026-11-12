@@ -226,7 +226,7 @@ left = \absolute {
  % 57–60
  es4. es,4.^\markup\italic "un poco agitato." |
  aes,4 g8 f4 g8 |
- aes4. f4. |
+ aes4. g4. |
  fis4. fis,4. |
  \bar "||" \key b \major
  % page 4: 61–65
@@ -243,12 +243,12 @@ left = \absolute {
  % 70–74
  <b, e>4.) cis4. |
  << { \voiceTwo b,4. b,4.~ | b,2. } \\ { \voiceOne s4. fis4. | e4. cis4. } >> \oneVoice |
- b,4. a4.^^ |
+ b,4. ais4.^^ |
  a!4.^^ ais4. |
  % 75–78
- b4.^^ a4. |
+ b4.^^ ais4. |
  a!4. ais4. |
- b4. a4.^^ |
+ b4. ais4.^^ |
  a!4.^^ gis4.^^ |
  % 79–82
  g!4.( g4.) |
