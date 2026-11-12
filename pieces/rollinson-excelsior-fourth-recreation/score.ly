@@ -9,7 +9,7 @@
   composer = "Composer uncredited"
   arranger = "Edited and compiled by T. H. Rollinson"
   copyright = "Transcription: CC0 1.0 · Printed source: J. W. Pepper, copyright 1881"
-  tagline = "The OPUS Project · Three agent steps complete · Human verification pending"
+  tagline = ##f
 }
 
 thumb = \finger \markup \normal-text "×"

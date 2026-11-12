@@ -6,7 +6,7 @@
   title = "The Favorite Vienna Waltz"
   composer = "Anonymous"
   subtitle = "G. Willig, Philadelphia, before 1820?"
-  tagline = "The OPUS Project · CC0 · Reconciled draft; human verification pending"
+  tagline = ##f
 }
 
 % Preserve the source's dots on both sides even at the end of the system.

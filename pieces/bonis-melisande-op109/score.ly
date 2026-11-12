@@ -7,7 +7,7 @@
 % Model: openai/gpt-6.1-sol; reasoning xhigh; other settings not exposed.
 \header {
  title = "MÉLISANDE"
- subtitle = "Cinq Pièces pour Piano — No 4"
+ subtitle = "Cinq Pièces pour Piano - No 4"
  dedication = "À Monsieur PAUL LOCARD"
  composer = "MEL-BONIS"
  opus = "Op. 109"

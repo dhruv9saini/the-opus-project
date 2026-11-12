@@ -5,7 +5,6 @@
   title = "Scottish Legend"
   composer = "Amy Beach (Mrs. H. H. A. Beach)"
   opus = "Op. 54, No. 1"
-  subtitle = "First transcription — awaiting independent review"
   tagline = ##f
 }
 \paper {
