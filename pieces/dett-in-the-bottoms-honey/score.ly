@@ -31,7 +31,7 @@ rh = \absolute {
  <f' a' c''>16-> r16 c''16(\mf_\markup\italic "lunga" f''16->\fermata~ f''16 c'' a' bes') | \break
  % System2: measures5–8.
  << { \voiceOne c''8(-> <d' d''>8~ <d' d''>4~ |
-    <d' d''>16) f'16(\> g' a' bes' a' f'8) s1*0\! }
+    <d' d''>16) g'16(\> a' bes' c'' bes' g'8) s1*0\! }
  \\ { \voiceTwo s4 a'8\rest a'8( | bes'16) s16*7 } >> \oneVoice |
  f'2~ | f'4 r4 \afterGrace s1*0 { \slurUp \once \override Flag.stroke-style = #"grace" a'8(~ } | \break
  % System3: measures9–12.
@@ -56,7 +56,7 @@ rh = \absolute {
  f'16 g' a' bes' c''8) g'8-> |
  \slurUp <f' a' c''>16-> r16 c''16(\mf_\markup\italic "lunga" f''16->\fermata~ f''16 c'' a' bes') |
  << { \voiceOne c''8(-> <d' d''>8~ <d' d''>4~ |
-    <d' d''>16) f'16( g' a' bes' a' f'8) }
+    <d' d''>16) g'16( a' bes' c'' bes' g'8) }
  \\ { \voiceTwo s4 a'8\rest a'8( | bes'16) s16*7 } >> \oneVoice | \break
  % System2: measures27–32.
  f'2~ | \tempo 4=72 f'4 r4 \bar "||" |
