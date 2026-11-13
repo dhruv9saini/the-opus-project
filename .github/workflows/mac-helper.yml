@@ -36,6 +36,13 @@ jobs:
           sleep 15
           screencapture -x mac/dist/screens/preview.png || true
           kill %1 || true
+          sleep 2
+          "mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" &
+          sleep 10
+          osascript -e 'tell application "System Events" to tell process "OPUSHelper" to click menu bar item 1 of menu bar 2' || true
+          sleep 3
+          screencapture -x mac/dist/screens/menubar-click.png || true
+          kill %1 || true
       - uses: actions/upload-artifact@v4
         with:
           name: OPUS-Helper
