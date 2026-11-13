@@ -68,7 +68,10 @@ public enum UsageReader {
         var blobs: [String] = []
         let r = Shell.run("/usr/bin/security", ["find-generic-password", "-s", "Claude Code-credentials", "-w"], timeout: 15)
         if r.ok { blobs.append(r.stdout) }
-        let file = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".claude/.credentials.json")
+        let env = ProcessInfo.processInfo.environment
+        let configDir = env["CLAUDE_CONFIG_DIR"].flatMap { $0.isEmpty ? nil : $0 }
+            ?? ((env["HOME"].flatMap { $0.isEmpty ? nil : $0 } ?? NSHomeDirectory()) + "/.claude")
+        let file = URL(fileURLWithPath: configDir).appendingPathComponent(".credentials.json")
         if let s = try? String(contentsOf: file, encoding: .utf8) { blobs.append(s) }
         for blob in blobs {
             if let data = blob.trimmingCharacters(in: .whitespacesAndNewlines).data(using: .utf8),
