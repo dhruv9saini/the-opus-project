@@ -11,12 +11,14 @@ public final class ToolEnvironment {
     public let path: String
     public let environment: [String: String]
 
-    public init() {
+    public init(preferProcessPath: Bool = false) {
         var env = ProcessInfo.processInfo.environment
         let home = NSHomeDirectory()
         var dirs: [String] = []
+        let processDirs = (env["PATH"] ?? "").split(separator: ":").map(String.init)
+        if preferProcessPath { dirs += processDirs }
         if let shellPath = ToolEnvironment.loginShellPath() { dirs += shellPath.split(separator: ":").map(String.init) }
-        dirs += (env["PATH"] ?? "").split(separator: ":").map(String.init)
+        dirs += processDirs
         dirs += ["/opt/homebrew/bin", "/usr/local/bin", "\(home)/.local/bin", "\(home)/.npm-global/bin",
                  "\(home)/.bun/bin", "\(home)/.volta/bin", "\(home)/.local/share/pnpm",
                  "/Applications/LilyPond.app/Contents/Resources/bin", "/usr/bin", "/bin", "/usr/sbin", "/sbin"]

@@ -9,7 +9,7 @@ enum CLI {
         if let i = args.firstIndex(of: "--agent"), i + 1 < args.count, let a = AgentKind(rawValue: args[i + 1]) { settings.agent = a }
         if let i = args.firstIndex(of: "--model"), i + 1 < args.count { settings.model = args[i + 1] }
         if let i = args.firstIndex(of: "--minutes"), i + 1 < args.count, let m = Int(args[i + 1]) { settings.maxRunMinutes = m }
-        let tools = ToolEnvironment()
+        let tools = ToolEnvironment(preferProcessPath: true)
         switch cmd {
         case "--status":
             print("Settings: \(store.settingsURL.path)")

@@ -23,8 +23,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             w.contentView = NSHostingView(rootView: MenuContent().environmentObject(Controller.shared))
             w.makeKeyAndOrderFront(nil)
             self.previewWindow = w
-            NSApp.activate(ignoringOtherApps: true)
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+            SettingsWindow.show()
         }
     }
 }
@@ -42,7 +41,7 @@ struct OPUSHelperApp: App {
         .menuBarExtraStyle(.window)
 
         Settings {
-            SettingsView().environmentObject(controller)
+            EmptyView()
         }
     }
 }
@@ -117,8 +116,7 @@ struct MenuContent: View {
 
             Divider()
             HStack {
-                SettingsLink { Text("Settings...") }
-                    .simultaneousGesture(TapGesture().onEnded { NSApp.activate(ignoringOtherApps: true) })
+                Button("Settings...") { SettingsWindow.show() }
                 Button("Website") { openURL(URL(string: "https://the-opus-project.github.io")!) }
                 Spacer()
                 Button("Quit") {
@@ -183,5 +181,24 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: 480)
         .padding(.vertical, 8)
+    }
+}
+
+@MainActor
+enum SettingsWindow {
+    static var window: NSWindow?
+
+    static func show() {
+        if window == nil {
+            let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 600),
+                             styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            w.title = "OPUS Helper Settings"
+            w.isReleasedWhenClosed = false
+            w.contentView = NSHostingView(rootView: SettingsView().environmentObject(Controller.shared))
+            w.center()
+            window = w
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        window?.makeKeyAndOrderFront(nil)
     }
 }

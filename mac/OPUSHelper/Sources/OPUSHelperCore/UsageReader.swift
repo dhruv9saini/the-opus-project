@@ -15,7 +15,7 @@ public enum UsageReader {
         let lines = [
             #"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"clientInfo":{"name":"opus-helper","version":"1"}}}"#,
             #"{"jsonrpc":"2.0","method":"initialized"}"#,
-            #"{"jsonrpc":"2.0","id":2,"method":"account/rateLimits/read","params":{"excludeResetCreditDetails":true}}"#,
+            #"{"jsonrpc":"2.0","id":2,"method":"account/rateLimits/read"}"#,
         ]
         guard let exe = tools.find("codex") else { return (nil, "codex not found") }
         let p = Process()
