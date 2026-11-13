@@ -19,39 +19,39 @@ global = { \key f \major \time 2/4 }
 right = \absolute {
   \global \voiceOne \set tieWaitForNote = ##t
   \tempo "Allegretto" 4 = 100
-  % Printed page 52, system 1: bars 1–4.
+  % Printed page 52, system 1: bars 1-4.
   f'16([ g' a' bes'] c''16[ g'~] \afterGrace g'8) { \once \override Flag.stroke-style = #"grace" f'8->~ } |
   f'16([ g' a' bes'] c''16[ g'~] \afterGrace g'8) { \once \override Flag.stroke-style = #"grace" f'8->~ } |
   f'16( g' a' bes' c''8) g'8-> |
   <f' a' c''>16-> r16 c''16( f''16~->^\fermata f''16[ c'' a' bes']) | \break
-  % System 2: bars 5–8.
+  % System 2: bars 5-8.
   c''8(-> d''8~ d''4~ | d''16)[ g'16( a' bes'] c''16[ bes'] g'8) |
   f'2~ | f'4 r4 \slashedGrace { \once \override Flag.stroke-style = #"grace" a'8~ } | \break
-  % System 3: bars 9–12.
+  % System 3: bars 9-12.
   a'16([ b'! c'' d''] e''16[ b'~] \afterGrace b'8) { \once \override Flag.stroke-style = #"grace" a'8~ } |
   a'16([ b'! c'' d''] e''16[ b'~] \afterGrace b'8) { \once \override Flag.stroke-style = #"grace" a'8~ } |
   a'16( b'! c'' d'' e''8)-> b'8-> |
   <a' c'' e''>16-> r16 e''16( a''16~->^\fermata a''16[ e'' c'' d'']) | \break
-  % System 4: bars 13–16.
+  % System 4: bars 13-16.
   e''8-. f''8(->~ f''4~ | f''16)[ b'!16( c'' d''] e''16[ d''] b'8 |
   b'2)~ | b'4 r4 | \break
-  % System 5: bars 17–21.
+  % System 5: bars 17-21.
   \tempo "meno mosso"
   ees''8.( d''16 c''8 a''8\( | d''8.\) c''16 bes'4) |
   ees''8.( d''16 c''8 a''8\( | c''8\)^\fermata bes'8^\fermata a'4)^\fermata |
   \tempo "Tempo I"
   f'16([ g' a' bes'] c''16[ g'~] \afterGrace g'8) { \once \override Flag.stroke-style = #"grace" f'8->~ } | \pageBreak
-  % Printed page 53, system 1: bars 22–26.
+  % Printed page 53, system 1: bars 22-26.
   f'16([ g' a' bes'] c''16[ g'~] \afterGrace g'8) { \once \override Flag.stroke-style = #"grace" f'8->~ } |
   f'16( g' a' bes' c''8) g'8-> |
   <f' a' c''>16-> r16 c''16( f''16~->^\fermata f''16[ c'' a' bes']) |
   c''8(-> d''8~ d''4~ | d''16)[ g'16( a' bes'] c''16[ bes'] g'8) | \break
-  % System 2: bars 27–32.
+  % System 2: bars 27-32.
   f'2~ | \tempo 4 = 72 f'4 r4 \bar "||" |
   a''8(^\markup\bold\italic "molto meno mosso e parlando" -> a''8-> a''16->~ a''16-> a''8) |
   aes''8( f''8~ f''4) |
   c''8( b''!4) g''8( | aes''2) | \break
-  % System 3: bars 33–38.
+  % System 3: bars 33-38.
   ees''8 ees''8[ ees''16~ ees''16 ees''8] |
   g''8-. g''4. |
   <des' f' aes' des''>8(-> <f'-1 aes'-2 des''-3 f''-5>8)->~
@@ -59,12 +59,12 @@ right = \absolute {
   <ees' aes' ees''-5>2 |
   ees''8(^\markup\bold\italic "molto teneramente e cantabile" ees''8 des''16 c''16~ c''8 |
   des''8-. des''4.--) | \break
-  % System 4: bars 39–43.
+  % System 4: bars 39-43.
   des''4( c''8 bes' | <a'! c''>2) |
   g''16( f'' e''! e''~ e''4) \bar "||" |
   g'''16( f''' d''' d'''~ d'''4) |
   g''16( f'' des'' des''~ des''4) \bar "||" | \break
-  % System 5: bars 44–48.
+  % System 5: bars 44-48.
   g'''16( f''' des''' des'''~ des'''8) r8^\fermata |
   \tempo "Allegro con brio" r4 r8 f'16[ g'] |
   a'16( g' a' c''~ c''8) f''16[ g''] |
@@ -73,30 +73,30 @@ right = \absolute {
 }
 innerRight = \absolute {
   \global \voiceTwo
-  % 1–4
+  % 1-4
   s2*4 |
-  % 5–6
+  % 5-6
   s8 d'8~ d'8 a'8( | <d' bes'>16) s16*7 |
-  % 7–12
+  % 7-12
   s2*6 |
-  % 13–14
+  % 13-14
   s8 f'8~ f'8 e''8( | <f' d''>16) s16*7 |
-  % 15–24
+  % 15-24
   s2*10 |
-  % 25–26
+  % 25-26
   s8 d'8~ d'8 a'8( | <d' bes'>16) s16*7 |
-  % 27–28
+  % 27-28
   s2*2 |
-  % 29–32
+  % 29-32
   <a' c'' f''>8 <a' c'' f''>4. | <aes' des''>2 |
   b'!8 <b' d''>4. | <aes' des''>2 |
-  % 33–36
+  % 33-36
   <ees' fis'>2 | <g' bes'>2 | s2*2 |
-  % 37–40
+  % 37-40
   s2*4 |
-  % 41–43
+  % 41-43
   g'4~ g'4 | s2 | f'4~ f'4 |
-  % 44–48
+  % 44-48
   s2*5 |
 }
 

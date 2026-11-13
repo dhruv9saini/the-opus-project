@@ -114,7 +114,7 @@ def load_task(raw):
     require(task.get("baseline") == baseline, "Task baseline does not match its exact files.")
     code = bounded_text(files[ROLES["ly"]].decode("utf-8"), "LilyPond", MAX_TEXT)
     findings = task.get("findings")
-    require(isinstance(findings, list) and 0 < len(findings) <= MAX_FINDINGS, "The restricted runner accepts 1–64 findings.")
+    require(isinstance(findings, list) and 0 < len(findings) <= MAX_FINDINGS, "The restricted runner accepts 1-64 findings.")
     ids, observations, documents = set(), [], [("Printed source", files[ROLES["source"]]), ("Original rendering", files[ROLES["rendered"]])]
     annotation_ids = {finding["id"] for finding in review["findings"]}
     for finding in findings:

@@ -12,14 +12,14 @@
 
 right = {
   \clef treble \key bes \major \time 3/8
-  % Source system 1, bars 1–6.
+  % Source system 1, bars 1-6.
   bes8.\turn[ c'16 d'16 ees'16] |
   d'16[ f' d'' f' d'' f'] |
   c'16[ ees' c'' ees' c'' ees'] |
   d'16[ f' bes' f' bes' f'] |
   bes8.\turn[ c'16 d'16 ees'16] |
   d'16[ f' d'' f' d'' f'] | \break
-  % Source system 2, bars 7–13.
+  % Source system 2, bars 7-13.
   c'16[ ees' c'' ees' c'' ees'] |
   <d' bes'>4 r8 \bar ":|.|:"
   r8 bes16[ c' d' ees'] |
@@ -27,7 +27,7 @@ right = {
   r8 c'16[ ees' f' g'] |
   c''16[ bes' a' bes' a' bes'] |
   bes8.\turn[ c'16 d'16 ees'16] | \break
-  % Source system 3, bars 14–20.
+  % Source system 3, bars 14-20.
   d'16[ f' d'' f' d'' f'] |
   c'16[ ees' c'' ees' c'' ees'] |
   <d' bes'>4. _\markup "Fine" \bar ":|.|:"
@@ -37,7 +37,7 @@ right = {
   << { \voiceOne \grace g'16 aes'8[ \grace g'16 aes'8 \grace g'16 aes'8] }
      \\ { \voiceTwo bes4. } >> \oneVoice |
   <bes f'>4 d'16[ bes] | \break
-  % Source system 4, bars 21–26, with the two endings and next pickup.
+  % Source system 4, bars 21-26, with the two endings and next pickup.
   g16[ bes ees' bes g' bes] |
   g16[ bes ees' bes g' bes] |
   << { \voiceOne \grace g'16 aes'8[ \grace g'16 aes'8] f'16[ d'] }

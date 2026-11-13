@@ -8,7 +8,7 @@ Status: **Self Reviewed; independent Step 2 still needed.** This replaces the wi
 - [IMSLP edition record](https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)), file **867556**, scanned from the University of Oregon copy.
 - [Exact printed PDF](https://imslp.org/imglnks/usimg/4/4c/IMSLP867556-PMLP20615-73666450z_content.pdf#page=2).
 - Whole downloaded PDF SHA-256: `0ab6ba017412949ef3e629e2514095f4908304e63f89a9d7ef87b5cf726784fe`.
-- Music: PDF pages 2–3, also printed pages 2–3. The cover and final advertisement page are outside the transcription.
+- Music: PDF pages 2-3, also printed pages 2-3. The cover and final advertisement page are outside the transcription.
 - Scope: an eighth-note pickup and 36 numbered measures, with a seven-eighth closing measure. Both pages have five systems; the replacement retains that system sequence and page turn.
 - Eligibility: the edition record labels this 1903 print public domain. Its 1903 publication also places it outside the U.S. publication copyright term. The project transcription is CC0; the scan is not relicensed.
 
@@ -28,10 +28,10 @@ The initial encoding was followed by two source/render comparison passes and fur
 
 | Printed page | Systems and numbered measures compared |
 | --- | --- |
-| 2 | System 1: pickup, 1–3; system 2: 4–7; system 3: 8–11; system 4: 12–14; system 5: 15–18 |
-| 3 | System 1: 19–22; system 2: 23–26; system 3: 27–29; system 4: 30–32; system 5: 33–36 |
+| 2 | System 1: pickup, 1-3; system 2: 4-7; system 3: 8-11; system 4: 12-14; system 5: 15-18 |
+| 3 | System 1: 19-22; system 2: 23-26; system 3: 27-29; system 4: 30-32; system 5: 33-36 |
 
-Corrections during self-review included the D-flat/F inner voice in measure 2; explicit B-flat spellings in the one-flat sections; accidental carry in measures 4, 10, 14, 18, 20, 26, 30 and 34; bass pitches and held-note durations; the grace-note ties in measures 8, 16 and 36; the triplet and tie in measure 6; the upper ledger notes and bass return in measures 26–28; pedal attacks before grace groups; and the closing partial bar. The printed words “ritenuto,” “molto ritenuto,” “marcato,” “lunga” and “m.s.” are retained. The cross-staff grace passages remain small notes, rather than counted beats.
+Corrections during self-review included the D-flat/F inner voice in measure 2; explicit B-flat spellings in the one-flat sections; accidental carry in measures 4, 10, 14, 18, 20, 26, 30 and 34; bass pitches and held-note durations; the grace-note ties in measures 8, 16 and 36; the triplet and tie in measure 6; the upper ledger notes and bass return in measures 26-28; pedal attacks before grace groups; and the closing partial bar. The printed words “ritenuto,” “molto ritenuto,” “marcato,” “lunga” and “m.s.” are retained. The cross-staff grace passages remain small notes, rather than counted beats.
 
 The three earlier withdrawal findings are **Corrected pending independent review**:
 
@@ -39,7 +39,7 @@ The three earlier withdrawal findings are **Corrected pending independent review
 - Both printed piano staves and their changing voices replace the simplified chord sequence.
 - The varying pedal, expression and articulation marks replace the repeated generic pedal pattern.
 
-Review priority: the small dot over the E-octave in measure 35 is interpreted as staccato; confirm its placement in the print. The cross-staff grace groups in measures 12, 28 and 32 and the dense upper-register chords in measures 26–28 also deserve a fresh independent reading. This record does not claim that self-review has eliminated every transcription error. No suspected compositional error has been silently corrected.
+Review priority: the small dot over the E-octave in measure 35 is interpreted as staccato; confirm its placement in the print. The cross-staff grace groups in measures 12, 28 and 32 and the dense upper-register chords in measures 26-28 also deserve a fresh independent reading. This record does not claim that self-review has eliminated every transcription error. No suspected compositional error has been silently corrected.
 
 Engraving differs from the print in font, spacing, some stem/slur directions, and the placement of tempo text. Measure numbers and the draft subtitle are editorial aids. “Ritenuto” is written as a word rather than distributed as syllables. These changes are not claims about an alternative musical edition.
 

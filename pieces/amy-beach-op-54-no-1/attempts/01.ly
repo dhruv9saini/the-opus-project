@@ -25,7 +25,7 @@ right = {
   \set tieWaitForNote = ##t
   \tempo "Lento con molto espressione."
   a8(^\markup\italic "sempre cantabile"
-  % Printed page 2, system 1: measures 1–3.
+  % Printed page 2, system 1: measures 1-3.
   | <f d'>8[ <a e'> <d' f'> <e' a'>] <a' d''>4)
     \rSplit { c''8.([ d''16] } { <e' a'>4 }
   | <f' a'>4) \grace { g'16^([ a'] }
@@ -33,7 +33,7 @@ right = {
     <a c' f' a'>4.) c'8(
   | <a f'>8[ <c' g'> <f' a'> <g' c''>] <f' f''>4)
     \rSplit { e''8.([\arpeggio d''16] } { <e' c''>4\arpeggio } \break
-  % Printed page 2, system 2: measures 4–7.
+  % Printed page 2, system 2: measures 4-7.
   | \rSplit { cis''16[ a'8.]) \grace { g'16^([ a'] } g'8.[ f'16] }
        { <cis' e'>4 d'4 }
     <cis' g'>4) <c'! fis'! b'! d''>8->([\arpeggio g'8]
@@ -47,7 +47,7 @@ right = {
   | <d' f'>8.([ d'16] \rSplit { f'8[ c''8]) } { d'4\repeatTie }
     <f' bes' f''>8([\arpeggio <e' e''>8 <d' g' bes' d''>8
     <cis' cis''>8^\markup\italic "poco"] \break
-  % Printed page 2, system 3: measures 8–11.
+  % Printed page 2, system 3: measures 8-11.
   | <d' f' a' d''>4)^\markup\italic "rit."
     \grace { <d' e'>32~([ bes'~ d''~ e''] }
     <d' e' bes' d''>8.[ <c'! c''!>16] <d' f' a' d''>4)
@@ -60,7 +60,7 @@ right = {
     <a cis' f'>8([ <g e'>8])
   | <a d'>8.([ e'16]) \rSplit { f'8([ a'8]) } { d'4 }
     <f' d''>8([ <a' f''> <g' e''> <f' d''>]) \break
-  % Printed page 2, system 4: measures 12–14.
+  % Printed page 2, system 4: measures 12-14.
   | \rSplit { e''16([ c''8.]) \grace { c''16([ d''] } c''8.[ bes'16] }
       { e'4 <d' f'>4 }
     <e' c''>4)
@@ -74,7 +74,7 @@ right = {
   | \rSplit { c''16([ a'8.]) \grace { a'16([ bes'] } a'8.[ g'16] a'4) }
       { <c' f'>4 <des' f'>4 cis'4 }
     <a cis' f'>8([ <g e'>8]) \break
-  % Printed page 2, system 5: measures 15–18.
+  % Printed page 2, system 5: measures 15-18.
   | <f d'>8([ <cis' e'>8]) \rSplit { f'8([ <bes' d''>8]) } { d'4 }
     <f' bes' f''>8([ <e' e''> <d' g' d''> <cis' cis''>])
   | <d' f' a' d''>4(
@@ -89,7 +89,7 @@ right = {
       <fis' a'>16([ <d' fis'>8.]) \grace { fis'16([ a'] }
       fis'8.[ e'16] fis'8)[ b'!8( a'8 fis'8])
     } { a4 <a d'>8[ <bes d'>8] a8[ d'8] cis'4 } \pageBreak
-  % Printed page 3, system 1: measures 19–22.
+  % Printed page 3, system 1: measures 19-22.
   | d'8.([ <cis' e'>16] \rSplit { fis'8[ a'8]) } { d'4 }
     <d' fis' a' d''>8([ <fis' d'' fis''> <e' cis'' e''> <d' a' d''>])
   | \rSplit {
@@ -102,7 +102,7 @@ right = {
   | <b d' g' b'>8.([ a'16]) <d' g' b'>8-.[ <b' d''>8-.]
     <b' d'' g'' b''>4->\arpeggio
     <a' cis'' fis'' a''>8([ <g' e'' g''>8]) \break
-  % Printed page 3, system 2: measures 23–26.
+  % Printed page 3, system 2: measures 23-26.
   | \rSplit { fis''16([ d''8.]) } { <fis' b'>4 }
     <e' a' cis''>8([ <g' b'>8]
     \rSplit { a'16[ d''8.]) cis''8([ b'8]) } { fis'4 <d' fis'>4 }
@@ -114,7 +114,7 @@ right = {
   | \rSplit { d''8.([ cis''16]) d''8-.[ <d'' fis''>8-.] }
       { <d' fis'>4 <gis' a'>8[ a'8] }
     <fis'' d''' fis'''>4 <e'' cis''' e'''>8([ <d'' b'' d'''>8]) \break
-  % Printed page 3, system 3: measures 27–29.
+  % Printed page 3, system 3: measures 27-29.
   | <d'' fis'' d'''>8->([ <e'' a''>8-> <d'' fis''>8-> <b' g'' b''>8->])
     <a' fis'' a''>8->([ <fis' d'' fis''>8])
     <fis' a' cis'' fis''>8->([ <e' e''>8])
@@ -131,7 +131,7 @@ right = {
       { <f' bes'>4\arpeggio <ees' a'>4 }
     <d' bes' d''>4)
     \rSplit { f''8.([\arpeggio d''16]) } { <f' bes'>4\arpeggio } \break
-  % Printed page 3, system 4: measures 30–32.
+  % Printed page 3, system 4: measures 30-32.
   | \rSplit { c''16([ a'8.]) \grace { a'16([ bes'] } a'8.[ g'16] a'4) }
       { <c' f'>4 <des' f'>4 cis'4 }
     <a cis' f'>8([ <g e'>8])
@@ -144,7 +144,7 @@ right = {
       \change Staff = "upper" cis' <f' a'> cis''] }
     \once \override TextScript.staff-padding = #6
     a''8.[\fermata^\markup\italic "m.s." <g' a' e'' g''>16]\) \break
-  % Printed page 3, system 5: measures 33–36 (final bar: seven eighths).
+  % Printed page 3, system 5: measures 33-36 (final bar: seven eighths).
   | \rSplit { f''16([ d''8.]) \grace { d''16([ e''] } d''8.[ cis''16] }
       { <f' a'>4 g'4 }
     <f' d''>4) <f' c'' f''>8.([\arpeggio des''16])

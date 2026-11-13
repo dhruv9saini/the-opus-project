@@ -1,7 +1,7 @@
 \version "2.24.3"
 % Step 3 reconciliation of two independent visual transcriptions.
 % Printed edition: A. Leduc 1925, plate A.L.16,935.
-% IMSLP30424, PDF pp. 2–4. Cover says No. 5; music header says No. 4.
+% IMSLP30424, PDF pp. 2-4. Cover says No. 5; music header says No. 4.
 % Direct source: https://s9.imslp.org/files/imglnks/usimg/3/39/IMSLP30424-PMLP68553-Bonis_Melisande_piano_2_hands.pdf
 % Whole-PDF SHA-256: 2ce22cd38a5e936bdaed69723e5ae5400e1432dfac90a77b07df515563beed06
 % Model: openai/gpt-6.1-sol; reasoning xhigh; other settings not exposed.

@@ -2,7 +2,7 @@
 
 % Step 1: direct visual transcription of the printed page.
 % Sole musical source: LOC2023842814, PDF page 25, printed page 23.
-% Historical fingering is preserved: x denotes the thumb, digits run 1–4.
+% Historical fingering is preserved: x denotes the thumb, digits run 1-4.
 \header {
   title = "2nd Recreation"
   subtitle = "Waltz · Excelsior Method for the Reed Organ"

@@ -2,7 +2,7 @@
 
 % Step 3: both independent attempts reconciled visually against
 % LOC2023842814, PDF page 25 / printed page 23, complete 16-bar work.
-% Historical fingering is retained: x is the thumb, digits are 1–4.
+% Historical fingering is retained: x is the thumb, digits are 1-4.
 \header {
   title = "2nd Recreation"
   subtitle = "Waltz · Excelsior Method for the Reed Organ"
@@ -23,7 +23,7 @@ upper = \absolute {
   \global \clef treble
   \override Fingering.direction = #UP
   \tempo "WALTZ."
-  % Source system 1, measures 1–8.
+  % Source system 1, measures 1-8.
   b'2.-2~ |
   b'4 a'4 b'4 |
   c''2.-3( |
@@ -32,7 +32,7 @@ upper = \absolute {
   c''4 b'4 c''4 |
   d''2.-4( |
   g'2.\thumb) | \break
-  % Source system 2, measures 9–16.
+  % Source system 2, measures 9-16.
   e''2.-2 |
   fis''2-3 e''4 |
   d''2.-1~ |
@@ -46,7 +46,7 @@ upper = \absolute {
 lower = \absolute {
   \global \clef bass
   \override Fingering.direction = #UP
-  % Source system 1, measures 1–8.
+  % Source system 1, measures 1-8.
   g4-4 <b d'>4\pairTwo <b d'>4 |
   g4 <b d'>4 <b d'>4 |
   fis4-4 <c' d'>4\adjacentPair <c' d'>4 |
@@ -55,7 +55,7 @@ lower = \absolute {
   d4 <fis a>4 <fis a>4 |
   b,4-4 <d g>4\pairTwo <d g>4 |
   b,4 <d g>4 <d g>4 |
-  % Source system 2, measures 9–16.
+  % Source system 2, measures 9-16.
   c4-4 <e a>4\pairTwo <e a>4 |
   c4 <e a>4 <e a>4 |
   d4-4 <g b>4\pairOne <g b>4 |

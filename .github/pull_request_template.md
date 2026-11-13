@@ -31,6 +31,6 @@ exact approved revision and full review coverage.
 - [ ] An initial encoding and at least one targeted correction pass were completed; a third validation pass was considered.
 - [ ] Apparent source errors were preserved and documented separately from encoding errors.
 - [ ] The music was entered visually from the printed edition; Audiveris and all other OMR/OCR, score-recognition, MusicXML, MIDI, and existing digital transcriptions were not used.
-- [ ] For Steps 1–2, the agent did not inspect the other attempt.
+- [ ] For Steps 1-2, the agent did not inspect the other attempt.
 - [ ] If this is human verification, the original and rendered PDFs were compared throughout the stated scope and the exact revision is identified.
 - [ ] `python3 scripts/check.py --write` was run.

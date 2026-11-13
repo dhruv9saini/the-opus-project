@@ -22,40 +22,40 @@ rh = \absolute {
  \global
  \tempo "Allegretto" 4 = 100
  \set fingeringOrientations = #'(left)
- % Printed p.52, system1: measures1–4.
+ % Printed p.52, system1: measures1-4.
  f'16(\pp_\markup\italic "capriccioso" g' a' bes' c'' g'~ \afterGrace g'8) { f'8->( } |
  f'16)( g' a' bes' c'' g'~ \afterGrace g'8) { f'8->( } |
  f'16)( g' a' bes' c''8) g'8-> |
  <f' a' c''>16-> r16 c''16(\mf_\markup\italic "lunga" f''16->\fermata~ f''16 c'' a' bes') | \break
- % System2: measures5–8.
+ % System2: measures5-8.
  << { \voiceOne c''8(-> <d' d''>8~ <d' d''>4~ |
     <d' d''>16) f'16(\> g' a' bes' a' f'8)\! }
  \\ { \voiceTwo s4 a'8\rest a'8( | bes'16) s16*7 } >> \oneVoice |
  f'2~ | f'4 r4 \afterGrace s1*0 { a'8( } | \break
- % System3: measures9–12.
+ % System3: measures9-12.
  a'16)(\pp b'! c'' d'' e'' b'~ \afterGrace b'8) { a'8->( } |
  a'16)( b'! c'' d'' e'' b'~ \afterGrace b'8) { a'8->( } |
  a'16)( b'! c'' d'' e''8) b'8-> |
  <a' c'' e''>16-> r16 e''16(\mf_\markup\italic "lunga" a''16->\fermata~ a''16 e'' c'' d'') | \break
- % System4: measures13–16.
+ % System4: measures13-16.
  << { \voiceOne e''8( -. <f' f''>8->~ <f' f''>4~ |
     <f' f''>16) b'!16( c'' d'' e'' d'' b'8) }
  \\ { \voiceTwo s4 d''8\rest e''8( | d''16) s16*7 } >> \oneVoice |
  a'2~ | a'4 r4 | \break
- % System5: measures17–21.
+ % System5: measures17-21.
  es''8.(^\markup\italic "meno mosso" _\markup\italic "molto espress. rit." d''16 c''8 a''8\( |
  e''8.\) d''16 c''4) |
  es''8.( d''16 c''8 a''8\( _\markup\italic "rit. molto rit." |
  c''8\)\fermata_\markup\italic "lusingando" bes'8\fermata a'4)\fermata |
  f'16(^\markup\bold "Tempo I" \pp_\markup\italic "a tempo" g' a' bes' c'' g'~ \afterGrace g'8) { f'8->( } | \pageBreak
- % Printed p.53, system1: measures22–26.
+ % Printed p.53, system1: measures22-26.
  f'16)( g' a' bes' c'' g'~ \afterGrace g'8) { f'8->( } |
  f'16)( g' a' bes' c''8) g'8-> |
  <f' a' c''>16-> r16 c''16(\mf_\markup\italic "lunga" f''16->\fermata~ f''16 c'' a' bes') |
  << { \voiceOne c''8(-> <d' d''>8~ <d' d''>4~ |
     <d' d''>16) f'16( g' a' bes' a' f'8) }
  \\ { \voiceTwo s4 a'8\rest a'8( | bes'16) s16*7 } >> \oneVoice | \break
- % System2: measures27–32.
+ % System2: measures27-32.
  f'2~ | \tempo 4=72 f'4 r4 \bar "||" |
  << { \voiceOne a''8(->^\markup\italic "molto meno mosso e parlando" a''8-> a''16-> a''16~ a''8) } \\
     { \voiceTwo <a' c'' f''>8\f <a' c'' f''>4. } >> |
@@ -65,7 +65,7 @@ rh = \absolute {
     { \voiceTwo a'!8\f <a' c''>4. } >> |
  << { \voiceOne as''2) } \\
     { \voiceTwo <as' des''>2\mf } >> | \break
- % System3: measures33–38.
+ % System3: measures33-38.
  << { \voiceOne es''8 es''8[ es''16 es''16~ es''8] } \\
     { \voiceTwo <es' fis'>2\mf_\markup\italic "recitando" } >> |
  << { \voiceOne f''8-. f''4. } \\
@@ -75,7 +75,7 @@ rh = \absolute {
  <es' as' es''-5>2) |
  es''8(^\markup\italic "molto teneramente e cantabile" _\markup\italic "a tempo" es''8 des''16 c''16~ c''8 |
  des''8-. des''4.)-- | \break
- % System4: measures39–43.
+ % System4: measures39-43.
  des''4(_\markup\italic "ritenuto" c''8 bes'8 |
  <a'! c''>2) |
  << { \voiceOne g''16( f''16 d''!16 d''16~ d''4) } \\
@@ -86,7 +86,7 @@ rh = \absolute {
  << { \voiceOne g''16( f''16 des''16 des''16~ des''4) } \\
     { \voiceTwo f'4(\mf_\markup\italic "rit. più espress." f'4) } >>
  \oneVoice \bar "||" s1*0^\markup { \musicglyph "scripts.ufermata" } | \break
- % System5: measures44–48.
+ % System5: measures44-48.
  a'''16(\pp_\markup\italic \center-column { "quasi echo rit. e" "più espress." }
  g'''16 es'''16 es'''16~ es'''8) r8\fermata^\markup\bold "Allegro con brio" |
  r4\mf r8 f'16[ g'16] |
