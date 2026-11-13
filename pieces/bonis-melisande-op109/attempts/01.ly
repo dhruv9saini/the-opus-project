@@ -5,7 +5,7 @@
   title = "MÉLISANDE"
   subtitle = \markup \center-column { "Cinq Pièces pour Piano" "Nº 4" }
   dedication = "À Monsieur PAUL LOCARD"
-  composer = "MEL–BONIS"
+  composer = "MEL-BONIS"
   opus = "Op. 109"
   copyright = "Paris : Alphonse Leduc, 1925 · A.L. 16,935"
   tagline = ##f
@@ -32,7 +32,7 @@ melody = \absolute {
   des'''4( f'''8 ges''' | ees''' des''' ees''' f''' | \break
   ees''' des''' ees''' f''' | s2) |
   s8 ees'4(^\markup\italic "espress." des'8) | r8 aes'8(^\markup\italic "m.g." bes' f'!8)^\markup\italic "m.d." | \pageBreak
-  % Printed page 2, systems 1–6.
+  % Printed page 2, systems 1-6.
   s8 ees'4(^\markup\italic "espress." des'8) | r8 bes'8(^\markup\italic \column { "m.g." "espress." } ces'' g'!8)^\markup\italic "m.d." |
   ges'8( f' ees' d'! | \break
   ees'8\< ges' aes' bes'\!)( | ces''8 bes' aes' g'! | aes' bes' ces'' des'') | \break
@@ -106,77 +106,77 @@ lowerMelody = \absolute {
 
 arpeggios = \absolute {
   \global \voiceTwo
-  % Printed page 1, system 1: measures 1–3.
+  % Printed page 1, system 1: measures 1-3.
   bes'32[ ges' ees' c'] \down bes[ ges ees aes,] ees[ aes, ees ges] bes \up c'[ ees' ges'] |
   ces''32[ aes' f' ces'] \down beses[ ges eses aes,] eses[ aes, eses ges] beses \up ces'[ f' aes'] |
   bes'32[ ges' ees' d'!] \down bes[ ges ees aes,] ees[ aes, ees ges] bes \up d'[ ees' ges'] |
-  % System 2: measures 4–7.
+  % System 2: measures 4-7.
   ces''32[ aes' f' ces'] \down beses[ ges eses aes,] eses[ aes, eses ges] beses \up ces'[ f' aes'] |
   ges''32[ ees'' bes' ges'] \down des'[ ges ees aes,] ees[ aes, ees ges] des' \up ges'[ bes' ees''] |
   ees''32[ bes' ges' ees'] \down aes[ ges ees aes,] d![ aes, d f] aes \up ces'[ d'! f'] |
   ges'32[ ees' bes ges] \down ees[ bes, ges, ees,] bes,[ ees, bes, ees] ges \up b[ c' ees'] |
-  % System 3: measures 8–11.
+  % System 3: measures 8-11.
   ges'32[ d'! ces' ges] \down d![ a,! eis, a,] \up ges[ ces' ees' ges'] ges'[ ees' ces' ges] |
   \down ees32[ bes, ees ges] \up c'[ f' aes' c''] f''[ c'' aes' f'] c' \down bes[ ges bes,] |
   ees32[ bes, ees ges] aes \up c'[ ges' aes'] ges''[ aes' ges' c'] \down aes[ ges ees aes,] \up |
   bes'32[ ges' des' ges'] ges'[ ges' des' ges'] r32 ges'[ des' ges'] a'![ ges' des' ges'] |
-  % System 4: measures 12–15.
+  % System 4: measures 12-15.
   bes'32[ ges' des' ges'] ges'[ ges' des' ges'] r32 ges'[ des' ges'] a'![ ges' des' ges'] |
   r32 ges'[ bes' ges'] r32 ges'[ bes' des''] r32 bes'[ des'' ges''] r32 des''[ ges'' bes''] |
   \down ces'32[ des' f' aes'] ces'' \up des''[ f'' aes''] \down bes[ des' f' aes'] bes' \up f''[ bes'' des'''] |
   \down a!32[ ces' des' f'] a'! \up des''[ f'' a''!] \down aes[ ces' des' f'] aes' \up f''[ des''' ees'''] |
-  % System 5: measures 16–19.
+  % System 5: measures 16-19.
   \down g!32[ des' f' bes'] \up des'''[ f'' bes'' des'''] ees'''[ f'' bes'' des'''] f'''[ f'' c''' ees'''] |
   r32 f''[ bes'' des'''] f'''[ des''' bes'' f''] des'' \down bes'[ f' des'] bes[ \clef bass ges^\markup\italic "m.d." des bes,] \up |
   \down r32 des[ ges bes] \up ees'32[ \down bes ges des] ges[ des ges bes] \up des'32[ \down bes ges des] \up |
   r32 fis[ c' d'!] r32 d'[ c' fis] r32 fis[ c' d'] f'![ d' c' fis] |
-  % Printed page 2, system 1: measures 20–22.
+  % Printed page 2, system 1: measures 20-22.
   \down r32 des[ ges bes] \up ees'32[ \down bes ges des] ges[ des ges bes] \up des'32[ \down bes ges des] \up |
   r32 g![ des' ees'] r32 ees'[ des' g] r32 g[ des' ees'] g'![ ees' des' g] |
   ges'32[ ees' bes ees'] f'[ ees' bes ees'] ees'[ ees' bes ees'] d'![ ees' bes ees'] |
-  % System 2: measures 23–25.
+  % System 2: measures 23-25.
   ees'32[ c' ges c'] ges'[ ees' c' ees'] aes'[ ges' c' ges'] bes'[ ges' c' ges'] |
   ces''32[ ges' ces' ges'] bes'[ ges' des' ges'] aes'[ ges' des' ges'] g'![ ges' des' ges'] |
   aes'32[ f' ces' f'] bes'[ aes' f' aes'] ces''[ aes' f' aes'] des''[ bes' f' bes'] |
-  % System 3: measures 26–28.
+  % System 3: measures 26-28.
   ees''32[ ces'' ges' ces''] ces''[ ces'' ges' ces''] r32 ces''[ ges' ces''] d''![ ces'' ges' ces''] |
   ees''32[ ces'' ges' ces''] ces''[ ces'' ges' ces''] r32 ces''[ ges' ces''] d''![ ces'' aes' ces''] |
   des''32[ ces'' aes' ces''] ees''[ ces'' aes' ces''] bes'[ fes' des' fes'] c''[ fes' des' fes'] |
-  % System 4: measures 29–31.
+  % System 4: measures 29-31.
   g'!32[ f'! ces' f'] aes'[ f' ces' f'] g'[ f' ces' f'] aes'[ f' ces' f'] |
   a'!32[ fis' c' a!] \down gis[ c a,! e,!] a,[ e, a, c] gis \up a[ c' fis'] |
   bes'32[ ges' ees' des'] \down des'[ ges ees aes,] ees[ aes, ees ges] bes \up des'[ ees' ges'] |
-  % System 5: measures 32–34.
+  % System 5: measures 32-34.
   a'!32[ fis' c' a!] \down gis[ c a,! e,!] a,[ e, a, c] gis \up a[ c' fis'] |
   bes'32[ ges' ees' des'] \down des'[ ges ees aes,] ees[ aes, ees ges] bes \up des'[ ees' ges'] |
   ges''32[ d''! c'' aes'] \down ges'[ d'! c' aes] c'[ aes c' d'] f' \up aes'[ c'' ees''] |
-  % System 6: measures 35–37.
+  % System 6: measures 35-37.
   ges''32[ c'' aes' ges'] ees''32[ \down c' aes ges] ees[ c ees ges] aes[ c' \up ees' ges'] |
   beses'32[ ges' d'! c'] \down aes[ ges d c] aes,[ c d ges] aes \up ges'[ d' c'] |
   beses'32[ ges' d'! c'] \down aes[ ges d c] aes,[ c d ges] aes \up ges'[ d' c'] |
-  % Printed page 3, system 1: measures 38–40.
+  % Printed page 3, system 1: measures 38-40.
   beses'32[ ges' d'! c'] \down aes[ ges d c] aes,[ c d ges] aes \up c'[ des' c'] |
   \down des32[ f aes \up des'] f'[ des' \down aes f] r32 f[ aes \up des'] f'[ des' \down aes f] \up |
   \down r32 f[ aes \up des'] f'[ des' \down aes f] r32 f[ aes \up des'] f'[ des' \down aes f] \up |
-  % System 2: measures 41–43.
+  % System 2: measures 41-43.
   r32 f''[ bes'' des'''] f'''[ des''' bes'' f''] r32 des''[ ges'' bes''] des'''[ bes'' ges'' des''] |
   r32 beses'[ ees'' ges''] beses''[ ges'' ees'' beses'] r32 b[ f' aes'] c''[ aes' f' b] |
   \clef bass r32 f[ aes des'] f'[ des' aes f] r32 f[ aes des'] f'[ des' aes f] |
-  % System 3: measures 44–46.
+  % System 3: measures 44-46.
   r32 f[ aes des'] f'[ des' aes f] r32 f[ aes des'] f'[ des' aes f] |
   \clef treble r32 ees'[ ges' bes'] ees''[ bes' ges' ees'] r32 ges'[ bes' des''] ges''[ des'' bes' ges'] r32 ees''[ ges'' bes''] des'''[ bes'' ges'' ees''] |
   \down c''32[ d''! ges'' aes''] \up \transpose c c' { \ottava #1 c''32[ d''! ges'' aes''] bes''[ aes'' ges'' d''] c''32 } \ottava #0 \down aes''[ ges'' d''] \up |
-  % System 4: measures 47–49.
+  % System 4: measures 47-49.
   \down c''32[ d''! ges'' aes''] \up \transpose c c' { \ottava #1 c''32[ d''! ges'' aes''] bes''[ aes'' ges'' d''] c''32 } \ottava #0 \down aes''[ ges'' d''] \up |
   \down c''32[ d''! ges'' aes''] \up \transpose c c' { \ottava #1 c''32[ d''! ges'' aes''] bes''[ aes'' ges'' d''] c''32 } \ottava #0 \down aes''[ ges'' d''] \up |
   \down c''32[ \up aes' ges' d'!] c'32[ \down \clef bass aes ges d] c32 aes,[ ges, d,] c,32 \ottava #-1 aes,,[ ges,, d,,] \ottava #0 \up |
-  % System 5: measures 50–54.
+  % System 5: measures 50-54.
   s2. <aes ees'>8[ <bes ees'>8~] |
   <bes ees'>8 s4. |
   <ges' c'' ees''>8[ <aes' des'' f''> <bes' ees'' ges'' ees'''> <c'' f'' aes''>8] |
   des''8[ <c'' ges'' aes''> <bes' ees'' ges'' ees'''> <c'' f'' aes''>] |
   des''8 <aes' ees'' f''>8~ <aes' des'' aes''>8 <f' c'' f''>8 |
-  % System 6: measures 55–60.
+  % System 6: measures 55-60.
   <ees' bes' ees''>8[ <c' ees' aes' c''> <bes des' ges' bes'> <aes c' ees' aes'>] |
   <ges bes des' ges'>8[ <aes c' f'> <bes des' ees'> <c' f' aes'>] |
   <ges bes des' ges'>8[ <aes c' f'> <bes des' ees'> <c' f' aes'>] |

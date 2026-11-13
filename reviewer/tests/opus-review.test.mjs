@@ -32,12 +32,12 @@ test('review identity rejects arbitrary project paths, credentials, schemes and 
 test('reports require stated coverage and never record human verification',async()=>{
   const {work,scene}=await fixture();
   await assert.rejects(makeReport(work,scene,'','partial'),/pages and passages/);
-  const report=await makeReport(work,scene,'Page 1, systems 1–2','partial');
+  const report=await makeReport(work,scene,'Page 1, systems 1-2','partial');
   assert.equal(report.verified_by,null);assert.equal(report.revision,work.revision);
   assert.equal(report.revision_kind,'published-build');assert.equal(report.findings[0].comment,'Check bar 2');
   const discussion=new URL(reportDiscussion(report));
   assert.equal(discussion.origin,'https://github.com');
-  assert.match(discussion.searchParams.get('body'),/Page 1, systems 1–2/);
+  assert.match(discussion.searchParams.get('body'),/Page 1, systems 1-2/);
 });
 test('returned local candidate reports use its real code and render hashes',async()=>{
   const {work,scene}=await fixture();

@@ -14,7 +14,7 @@
 
 upper = \absolute {
   \clef treble \key bes \major \time 3/8
-  % Printed system 1, measures 1–6.
+  % Printed system 1, measures 1-6.
   bes8.\turn[ c'16 d'16 es'16] |
   d'16[ f'16 d''16 f'16 d''16 f'16] |
   c'16[ es'16 c''16 es'16 c''16 es'16] |
@@ -22,7 +22,7 @@ upper = \absolute {
   bes8.\turn[ c'16 d'16 es'16] |
   d'16[ f'16 d''16 f'16 d''16 f'16] |
   \break
-  % Printed system 2, measures 7–13.
+  % Printed system 2, measures 7-13.
   c'16[ es'16 c''16 es'16 c''16 es'16] |
   <d' bes'>4 r8 \bar ":|.|:"
   r8 bes16[ d'16 f'16 bes'16] |
@@ -31,7 +31,7 @@ upper = \absolute {
   c''16[ bes'16 a'16 bes'16 a'16 bes'16] |
   bes8.\turn[ c'16 d'16 es'16] |
   \break
-  % Printed system 3, measures 14–20.
+  % Printed system 3, measures 14-20.
   d'16[ f'16 d''16 f'16 d''16 f'16] |
   c'16[ es'16 c''16 es'16 c''16 es'16] |
   <d' bes'>4. _\markup \italic "Fine" \bar ":|.|:"
@@ -45,7 +45,7 @@ upper = \absolute {
   >> \oneVoice |
   <bes f'>4 d'16[ bes16] |
   \break
-  % Printed system 4: measures 21–28, including both endings and pickup.
+  % Printed system 4: measures 21-28, including both endings and pickup.
   g16[ bes16 es'16 bes16 g'16 bes16] |
   g16[ bes16 es'16 bes16 g'16 bes16] |
   <<
@@ -62,7 +62,7 @@ upper = \absolute {
   bes'16[ c''16 bes'16 c''16 d''16 es''16] |
   <es' bes'>4 g'16[ bes'16] |
   \break
-  % Printed system 5, measures 29–35.
+  % Printed system 5, measures 29-35.
   \grace { bes'16 } aes'8[ aes'8] f'16[ d'16] |
   es'16[ g'16 bes8] bes'16[ c''16] |
   bes'16[ c''16 bes'16 c''16 d''16 es''16] |

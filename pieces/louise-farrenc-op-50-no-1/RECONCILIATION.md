@@ -22,9 +22,9 @@ numbers and brackets. The former 8+16+16 and 16+16+8 readings were wrong.
 All affected groups were corrected, then the one-page render was inspected.
 The LilyPond source declares 2.24.3 and compiles with 2.26.0.
 
-The earlier pitch reconciliation remains in place: bar 3's lower D–F–A
+The earlier pitch reconciliation remains in place: bar 3's lower D-F-A
 figure, bar 4's sustained upper G, and the later lower figures in bars
-20–22. The printed heading, dedication, dynamics and visible fingerings are
+20-22. The printed heading, dedication, dynamics and visible fingerings are
 represented. These observations do not amount to independent human review.
 A proofreader still needs to compare all 27 measures, both staves and every
 mark against the printed page, and report any remaining discrepancies before

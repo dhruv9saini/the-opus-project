@@ -28,7 +28,7 @@ upperBattery = {
   \mergeDifferentlyDottedOn
   \override Fingering.direction = #UP
   \tempo "Poco Allegro."
-  % First system, bars 1–4.
+  % First system, bars 1-4.
   b'16-4\p_\markup { \italic "e molto legato." } [g' e' g' e' g']
     c''16 [a' e' a' e' a'] |
   b'16-4 [g' e' g' e' g']
@@ -38,7 +38,7 @@ upperBattery = {
   g'16 [e' a e' a e']
     fis'16-3 [dis' b dis' fis' b'] | \break
 
-  % Second system, bars 5–8 and the two-eighth pickup.
+  % Second system, bars 5-8 and the two-eighth pickup.
   b'4.-3\mf \acciaccatura d''8 c''4. |
   b'4. a'4. |
   g'4.-1 fis'4.-3 |
@@ -48,7 +48,7 @@ upperBattery = {
   b'8-2 [e''8-5] | \break
   \set Timing.measureLength = #3/4
 
-  % Third system, bars 9–12.
+  % Third system, bars 9-12.
   d''4. c''4. |
   b'4. g'4-1 b'8-3 |
   d''16-3 [g' d' g' d' g']
@@ -56,13 +56,13 @@ upperBattery = {
   b'16-3 [g' d' g' d' fis']
     g'16-2 [fis' g' fis' g' b'] | \break
 
-  % Fourth system, bars 13–16.
+  % Fourth system, bars 13-16.
   e''4.-5 c''4~ c''16 [e''16] |
   d''4. b'4~ b'16 [d''16] |
   c''4. a'4. |
   b'4.-2 g'4. | \break
 
-  % Fifth system, bars 17–20.
+  % Fifth system, bars 17-20.
   e''16 [c''-2 g' c'' g' c'']
     g''16_\markup { \italic "cresc." } [e''-4 g' e'' g' e''] |
   g''16 [c''-2 a' c'' a' c'']
@@ -102,7 +102,7 @@ lowerBattery = {
   \clef bass
   \mergeDifferentlyDottedOn
   \override Fingering.direction = #DOWN
-  % Bars 1–4: the dotted bass notes are in the other voice.
+  % Bars 1-4: the dotted bass notes are in the other voice.
   s2.*4 |
   dis16-4 [fis b fis b fis] e16-4 [g c' g c' g] |
   dis16-5 [fis b fis b fis] c16-5 [e a e a e] |

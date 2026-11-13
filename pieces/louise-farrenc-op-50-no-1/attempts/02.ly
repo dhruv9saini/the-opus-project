@@ -1,9 +1,9 @@
 \version "2.24.0"
 
 % Independent visual transcription from IMSLP #511615, PDF page 3.
-% IN PROGRESS: printed measures 1–27 encoded as an independent visual draft.
+% IN PROGRESS: printed measures 1-27 encoded as an independent visual draft.
 % The small numerals over notes are fingerings. Three-note groups in m10,
-% m11, m18–19, m23, and m26–27 have visually unresolved secondary beams in both
+% m11, m18-19, m23, and m26-27 have visually unresolved secondary beams in both
 % available scans; their metrical 8+16+16 or 16+16+8 readings below are
 % provisional, and unmarked eighth-note triplets remain possible. Compare
 % each ambiguous group with a better scan before review or publication.
