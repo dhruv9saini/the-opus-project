@@ -98,13 +98,18 @@ public final class SpawnedProcess {
     private let lock = NSLock()
 
     public init(executable: String, arguments: [String], cwd: String, environment: [String: String], logPath: String, stdinPath: String = "/dev/null") throws {
+        #if os(macOS)
         var fileActions: posix_spawn_file_actions_t? = nil
+        var attr: posix_spawnattr_t? = nil
+        #else
+        var fileActions = posix_spawn_file_actions_t()
+        var attr = posix_spawnattr_t()
+        #endif
         posix_spawn_file_actions_init(&fileActions)
         defer { posix_spawn_file_actions_destroy(&fileActions) }
         posix_spawn_file_actions_addopen(&fileActions, 0, stdinPath, O_RDONLY, 0)
         posix_spawn_file_actions_addopen(&fileActions, 1, logPath, O_WRONLY | O_CREAT | O_APPEND, 0o644)
         posix_spawn_file_actions_adddup2(&fileActions, 1, 2)
-        var attr: posix_spawnattr_t? = nil
         posix_spawnattr_init(&attr)
         defer { posix_spawnattr_destroy(&attr) }
         posix_spawnattr_setflags(&attr, Int16(POSIX_SPAWN_SETPGROUP))
