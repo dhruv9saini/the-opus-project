@@ -139,7 +139,7 @@ struct SettingsView: View {
                 Picker("Run with", selection: $c.settings.agent) {
                     ForEach(AgentKind.allCases) { Text($0.displayName).tag($0) }
                 }
-                TextField("Model (blank uses the agent's default)", text: $c.settings.model)
+                TextField("Model", text: $c.settings.model, prompt: Text("Agent default"))
                 Stepper("Stop a run after \(c.settings.maxRunMinutes) min", value: $c.settings.maxRunMinutes, in: 20...480, step: 10)
             }
             Section("When to run") {

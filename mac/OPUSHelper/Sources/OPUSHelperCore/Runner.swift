@@ -34,7 +34,7 @@ public enum Prerequisites {
         let agentPath = tools.find(settings.agent.executableName)
         list.append(Prerequisite(name: settings.agent.displayName, ok: agentPath != nil, required: true,
                                  detail: agentPath ?? "Not installed",
-                                 fix: settings.agent == .codex ? "brew install codex && codex login" : "curl -fsSL https://claude.ai/install.sh | bash && claude"))
+                                 fix: settings.agent == .codex ? "brew install --cask codex && codex login" : "curl -fsSL https://claude.ai/install.sh | bash && claude"))
         let ly = tools.run("lilypond", ["--version"], timeout: 30)
         list.append(Prerequisite(name: "LilyPond", ok: ly.ok, required: true,
                                  detail: ly.ok ? (ly.stdout.split(separator: "\n").first.map(String.init) ?? "installed") : "Not installed",
