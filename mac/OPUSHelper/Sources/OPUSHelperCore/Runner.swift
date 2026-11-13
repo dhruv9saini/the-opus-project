@@ -202,6 +202,8 @@ public final class ContributionRunner {
 
         Do not work on these pieces, because another pull request is already open for them or this contributor already worked on them, and steps 1, 2 and 3 must come from different contributors: \(skip.isEmpty ? "(none)" : skip.sorted().joined(separator: ", ")).
 
+        Use only a clearly printed, engraved public-domain edition. Handwritten manuscripts, autographs and facsimiles of notebooks (for example the 1725 Anna Magdalena Bach notebook) are not allowed; if a wanted work has no printed edition you can verify, choose another work.
+
         Practical notes for this machine:
         - LilyPond is at \(lily). Keep scans and rendered PDFs outside the repository (for example in $TMPDIR) and never commit them.
         - \(docker ? "Docker is running, so run `python3 scripts/check.py --write` at the end and fix every failure." : "Docker is not available, so `scripts/check.py` cannot run here. Compile with the LilyPond above instead; OPUS Helper regenerates catalog.json and GitHub runs the full check.")
