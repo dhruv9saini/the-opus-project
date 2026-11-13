@@ -29,10 +29,21 @@ jobs:
         run: mac/build.sh
       - name: Smoke test
         run: '"mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" --help'
+      - name: Screenshot the menu and settings
+        run: |
+          mkdir -p mac/dist/screens
+          OPUS_HELPER_PREVIEW=1 "mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" &
+          sleep 15
+          screencapture -x mac/dist/screens/preview.png || true
+          kill %1 || true
       - uses: actions/upload-artifact@v4
         with:
           name: OPUS-Helper
           path: mac/dist/OPUS-Helper.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screens
+          path: mac/dist/screens
       - name: Publish latest build
         if: github.event_name == 'push'
         env:

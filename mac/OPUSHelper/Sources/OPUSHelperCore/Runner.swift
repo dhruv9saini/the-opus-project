@@ -172,7 +172,8 @@ public final class ContributionRunner {
             return settings.model.contains("/") ? settings.model : "\(settings.agent == .codex ? "openai" : "anthropic")/\(settings.model)"
         }
         if settings.agent == .codex {
-            let cfg = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".codex/config.toml")
+            let home = ProcessInfo.processInfo.environment["CODEX_HOME"].flatMap { $0.isEmpty ? nil : $0 } ?? NSHomeDirectory() + "/.codex"
+            let cfg = URL(fileURLWithPath: home).appendingPathComponent("config.toml")
             if let text = try? String(contentsOf: cfg, encoding: .utf8) {
                 for line in text.split(separator: "\n") {
                     let t = line.trimmingCharacters(in: .whitespaces)

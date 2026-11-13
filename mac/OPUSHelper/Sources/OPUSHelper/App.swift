@@ -11,8 +11,27 @@ enum Entry {
     }
 }
 
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    var previewWindow: NSWindow?
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        guard ProcessInfo.processInfo.environment["OPUS_HELPER_PREVIEW"] == "1" else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let w = NSWindow(contentRect: NSRect(x: 80, y: 200, width: 340, height: 420),
+                             styleMask: [.titled], backing: .buffered, defer: false)
+            w.title = "Menu preview"
+            w.contentView = NSHostingView(rootView: MenuContent().environmentObject(Controller.shared))
+            w.makeKeyAndOrderFront(nil)
+            self.previewWindow = w
+            NSApp.activate(ignoringOtherApps: true)
+            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        }
+    }
+}
+
 struct OPUSHelperApp: App {
-    @StateObject private var controller = Controller()
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    @StateObject private var controller = Controller.shared
 
     var body: some Scene {
         MenuBarExtra {
@@ -22,16 +41,14 @@ struct OPUSHelperApp: App {
         }
         .menuBarExtraStyle(.window)
 
-        Window("OPUS Helper Settings", id: "settings") {
+        Settings {
             SettingsView().environmentObject(controller)
         }
-        .windowResizability(.contentSize)
     }
 }
 
 struct MenuContent: View {
     @EnvironmentObject var c: Controller
-    @Environment(\.openWindow) private var openWindow
     @Environment(\.openURL) private var openURL
 
     var body: some View {
@@ -100,10 +117,8 @@ struct MenuContent: View {
 
             Divider()
             HStack {
-                Button("Settings...") {
-                    NSApp.activate(ignoringOtherApps: true)
-                    openWindow(id: "settings")
-                }
+                SettingsLink { Text("Settings...") }
+                    .simultaneousGesture(TapGesture().onEnded { NSApp.activate(ignoringOtherApps: true) })
                 Button("Website") { openURL(URL(string: "https://the-opus-project.github.io")!) }
                 Spacer()
                 Button("Quit") {

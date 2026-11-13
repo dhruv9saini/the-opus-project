@@ -5,6 +5,7 @@ import OPUSHelperCore
 
 @MainActor
 final class Controller: ObservableObject {
+    static let shared = Controller()
     let store = HelperStore()
     private(set) var tools = ToolEnvironment()
 
