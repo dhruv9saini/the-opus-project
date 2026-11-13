@@ -82,6 +82,8 @@ final class PolicyTests: XCTestCase {
     func testAllowedPaths() {
         XCTAssertTrue(ContributionRunner.allowed("pieces/x/attempts/01.ly"))
         XCTAssertTrue(ContributionRunner.allowed("catalog.json"))
+        XCTAssertTrue(ContributionRunner.allowed("pieces/x/metadata.json"))
+        XCTAssertFalse(ContributionRunner.allowed("pieces/x/SELF_REVIEW.md"))
         XCTAssertFalse(ContributionRunner.allowed("scripts/check.py"))
         XCTAssertEqual(ContributionRunner.slug("pieces/abc/metadata.json"), "abc")
         XCTAssertNil(ContributionRunner.slug("pieces/abc"))

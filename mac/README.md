@@ -34,7 +34,7 @@ Each run has a time limit (120 minutes by default). While a run is active, the M
 3. Runs the agent without supervision:
    - **Codex:** `codex exec --sandbox workspace-write` with network access, so it can download scans.
    - **Claude Code:** `claude -p --permission-mode bypassPermissions`. Claude Code runs commands without asking, so use it only on a Mac where that is acceptable.
-4. Keeps only changes under `pieces/`, plus `wanted.txt` and the regenerated `catalog.json`. It checks that the agent wrote the `Source`, `Step` and `Model` lines.
+4. Keeps only LilyPond files and `metadata.json` under `pieces/`, plus `wanted.txt` and the regenerated `catalog.json`, so pull requests contain scores only. It checks that the agent wrote the `Source`, `Step` and `Model` lines.
 5. Commits the work, pushes it to your fork (created on the first run), and opens a pull request. GitHub runs the full score check.
 
 The **Log** button opens the latest run's full transcript. Recent runs and their pull requests are listed in the menu.

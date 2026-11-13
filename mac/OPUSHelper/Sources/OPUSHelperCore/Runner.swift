@@ -205,7 +205,7 @@ public final class ContributionRunner {
         Practical notes for this machine:
         - LilyPond is at \(lily). Keep scans and rendered PDFs outside the repository (for example in $TMPDIR) and never commit them.
         - \(docker ? "Docker is running, so run `python3 scripts/check.py --write` at the end and fix every failure." : "Docker is not available, so `scripts/check.py` cannot run here. Compile with the LilyPond above instead; OPUS Helper regenerates catalog.json and GitHub runs the full check.")
-        - Only change files under pieces/ (and wanted.txt if you take a work from it). Do not edit documentation, scripts, workflows or website files.
+        - Pull requests contain only scores: change only LilyPond files and metadata.json under pieces/ (and wanted.txt if you take a work from it). Do not add Markdown, review notes or other prose files, and do not edit documentation, scripts, workflows or website files. Put your review notes in your final message instead.
         - Do not run git commit, git push or gh. OPUS Helper commits your changes and opens the pull request.
 
         When you are done, write a file named OPUS_PR.md at the repository root. Its first line is the pull request title, for example "Add step 1 transcription of <work>". The rest is the pull request body and must contain exactly these lines and nothing else:
@@ -262,6 +262,7 @@ public final class ContributionRunner {
             _ = tools.run("git", ["checkout", "--", p], cwd: repo)
             _ = tools.run("git", ["clean", "-fdq", "--", p], cwd: repo)
         }
+        if !dropped.isEmpty { say("Kept only LilyPond, metadata.json, catalog.json and wanted.txt") }
         let ignoredJunk = try git(["status", "--porcelain", "--ignored", "--untracked-files=all", "pieces"])
         for line in ignoredJunk.split(separator: "\n") where line.hasPrefix("!! ") {
             try? FileManager.default.removeItem(at: repo.appendingPathComponent(String(line.dropFirst(3))))
@@ -303,7 +304,9 @@ public final class ContributionRunner {
     }
 
     static func allowed(_ path: String) -> Bool {
-        path.hasPrefix("pieces/") || path == "catalog.json" || path == "wanted.txt"
+        if path == "catalog.json" || path == "wanted.txt" { return true }
+        guard path.hasPrefix("pieces/") else { return false }
+        return path.hasSuffix(".ly") || path.hasSuffix("/metadata.json")
     }
 
     static func splitPR(_ text: String) -> (String, String) {
