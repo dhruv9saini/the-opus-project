@@ -1,0 +1,39 @@
+name: mac-helper
+
+on:
+  pull_request:
+    paths:
+      - "mac/**"
+      - ".github/workflows/mac-helper.yml"
+  push:
+    branches: [main]
+    paths:
+      - "mac/**"
+      - ".github/workflows/mac-helper.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        working-directory: mac/OPUSHelper
+        run: swift test
+      - name: Build app
+        env:
+          OPUS_HELPER_BUILD: ${{ github.run_number }}
+        run: mac/build.sh
+      - name: Smoke test
+        run: '"mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" --help'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: OPUS-Helper
+          path: mac/dist/OPUS-Helper.zip
+      - name: Publish latest build
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete opus-helper-latest --yes --cleanup-tag || true
+          gh release create opus-helper-latest mac/dist/OPUS-Helper.zip --title "OPUS Helper (latest build)" --notes "Menu bar app that contributes to The OPUS Project with your Codex or Claude Code subscription. See mac/README.md." --target "$GITHUB_SHA"
