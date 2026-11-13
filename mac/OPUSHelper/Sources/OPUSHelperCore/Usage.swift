@@ -145,7 +145,7 @@ public enum Policy {
         }
         switch s.quotaMode {
         case .leftover:
-            if w.usedPercent >= 99 { return Decision(run: false, reason: "Weekly quota used up") }
+            if w.usedPercent >= leftoverStopPercent { return Decision(run: false, reason: "Weekly quota used up") }
             guard let reset = w.resetsAt else { return Decision(run: false, reason: "Weekly reset time unknown") }
             let window = Double(s.leftoverHours) * 3600
             if reset.timeIntervalSince(now) > window {
@@ -158,6 +158,21 @@ public enum Policy {
             }
             return Decision(run: true, reason: "Running")
         }
+    }
+
+    public static let leftoverStopPercent = 98.0
+
+    public static func stopReason(_ s: HelperSettings, _ usage: Usage?) -> String? {
+        guard let u = usage else { return nil }
+        if u.blocked { return "\(s.agent.displayName) usage limit reached" }
+        if let f = u.fiveHour, f.usedPercent >= Double(s.fiveHourCapPercent) {
+            return "5-hour usage reached \(Int(f.usedPercent))%"
+        }
+        if let w = u.weekly {
+            let cap = s.quotaMode == .leftover ? leftoverStopPercent : Double(s.weeklyCapPercent)
+            if w.usedPercent >= cap { return "Weekly usage reached \(Int(w.usedPercent))%" }
+        }
+        return nil
     }
 
     static func timeString(_ d: Date) -> String {

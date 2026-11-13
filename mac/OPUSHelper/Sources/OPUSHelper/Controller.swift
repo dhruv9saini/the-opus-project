@@ -88,6 +88,9 @@ final class Controller: ObservableObject {
     func evaluate() {
         if running {
             status = "Running: \(runStatus)"
+            if !checkingUsage, usageCheckedAt == nil || Date().timeIntervalSince(usageCheckedAt!) > 300 {
+                refreshUsage()
+            }
             return
         }
         if !settings.enabled {
@@ -132,6 +135,11 @@ final class Controller: ObservableObject {
                 self.usage = u
                 self.usageError = err
                 self.checkingUsage = false
+                if self.running, let reason = Policy.stopReason(self.settings, u) {
+                    self.runStatus = "\(reason); stopping"
+                    self.status = "Running: \(self.runStatus)"
+                    self.stopRun()
+                }
                 if thenEvaluate && !self.running { self.evaluate() }
             }
         }
@@ -151,6 +159,7 @@ final class Controller: ObservableObject {
         running = true
         manualRun = manual
         stopFlag.set(false)
+        usageCheckedAt = Date()
         runStarted = Date()
         runStatus = "Starting"
         status = "Running: Starting"

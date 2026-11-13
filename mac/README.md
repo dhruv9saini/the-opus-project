@@ -23,7 +23,7 @@ All conditions can be changed in **Settings**:
 - **Only after N minutes idle** (off by default).
 - **Usage limits.** By default it uses only quota that would otherwise go unused: it starts within 24 hours of your weekly reset and stops when the weekly limit runs out. Alternatively, it can run any time up to a weekly cap you choose, such as 50%. In both modes it pauses when the 5-hour limit reaches 90%.
 
-It reads your remaining usage from Codex (`codex app-server`) or from Claude Code's sign-in. Usage-based API keys report no weekly limit, so use the "any time" mode with them.
+It reads your remaining usage from Codex (`codex app-server`) or from Claude Code's sign-in, and checks again every 5 minutes during a run. A run stops when weekly usage reaches 98% (or your cap in "any time" mode), when the 5-hour limit reaches its cap, or when the agent reports its limit is reached. That way it never moves on to paid Codex credits or extra usage. Usage-based API keys report no weekly limit, so use the "any time" mode with them.
 
 Each run has a time limit (120 minutes by default). While a run is active, the Mac does not go to sleep.
 

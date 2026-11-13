@@ -49,6 +49,20 @@ final class PolicyTests: XCTestCase {
         XCTAssertTrue(Policy.decide(s, Conditions(onCharger: true, idleSeconds: 0, usage: nil, now: now)).run)
     }
 
+    func testStopReason() {
+        let leftover = settings(.leftover)
+        XCTAssertNil(Policy.stopReason(leftover, usage(week: 97)))
+        XCTAssertNotNil(Policy.stopReason(leftover, usage(week: 98)))
+        XCTAssertNotNil(Policy.stopReason(leftover, usage(five: 95)))
+        XCTAssertNotNil(Policy.stopReason(settings(.anytime), usage(week: 50)))
+        XCTAssertNil(Policy.stopReason(leftover, nil))
+        var blocked = usage()
+        blocked.blocked = true
+        XCTAssertNotNil(Policy.stopReason(leftover, blocked))
+        let weeklyOnly = Usage(fiveHour: nil, weekly: UsageWindow(usedPercent: 12, resetsAt: now.addingTimeInterval(3600)))
+        XCTAssertTrue(Policy.decide(leftover, Conditions(onCharger: true, idleSeconds: 0, usage: weeklyOnly, now: now)).run)
+    }
+
     func testBackoff() {
         let c = Conditions(onCharger: true, idleSeconds: 0, usage: usage(), now: now, backoffUntil: now.addingTimeInterval(60))
         XCTAssertFalse(Policy.decide(settings(), c).run)
