@@ -1,0 +1,21 @@
+{
+  "slug": "petzold-minuet-in-g-bwv-anh114",
+  "title": "Minuet in G major",
+  "composer": "Christian Petzold",
+  "catalogue": "BWV Anh. 114",
+  "year": "Before 1725",
+  "instrumentation": "Piano",
+  "license": "CC0 1.0",
+  "source_library": "IMSLP",
+  "source_id": "IMSLP02320",
+  "source_page": "https://imslp.org/wiki/Notebooks_for_Anna_Magdalena_Bach_(Bach,_Johann_Sebastian)",
+  "source_pdf": "https://imslp.org/imglnks/usimg/9/97/IMSLP02320-Bach-AnnaMagdalena1725.pdf#page=21",
+  "source_sha256": "3b693b6e1df65ecbf7bcdeed1556d5ebd1018ca22205e7bdae391a0fb9c7b7d4",
+  "crosscheck_name": "Bach-Gesellschaft Ausgabe 43.2 (1894), ed. Paul Waldersee; printed p. 26, No. IV (PDF p. 21); IMSLP file #02320",
+  "crosscheck_url": "https://imslp.org/wiki/File:Bach-AnnaMagdalena1725.pdf",
+  "step": 1,
+  "models": [
+    "openai/gpt-6.1-sol"
+  ],
+  "verified_by": null
+}

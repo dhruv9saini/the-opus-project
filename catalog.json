@@ -112,6 +112,22 @@
       "source_pdf": "https://imslp.org/imglnks/usimg/4/4c/IMSLP867556-PMLP20615-73666450z_content.pdf#page=2",
       "crosscheck_name": "IMSLP file record #867556",
       "crosscheck_url": "https://imslp.org/wiki/2_Piano_Pieces,_Op.54_(Beach,_Amy_Marcy)"
+    },
+    {
+      "slug": "petzold-minuet-in-g-bwv-anh114",
+      "title": "Minuet in G major",
+      "composer": "Christian Petzold",
+      "catalogue": "BWV Anh. 114",
+      "year": "Before 1725",
+      "instrumentation": "Piano",
+      "step": 1,
+      "verified_by": null,
+      "lilypond_url": "pieces/petzold-minuet-in-g-bwv-anh114/attempts/01.ly",
+      "pdf_url": "pieces/petzold-minuet-in-g-bwv-anh114/attempts/01.pdf",
+      "source_page": "https://imslp.org/wiki/Notebooks_for_Anna_Magdalena_Bach_(Bach,_Johann_Sebastian)",
+      "source_pdf": "https://imslp.org/imglnks/usimg/9/97/IMSLP02320-Bach-AnnaMagdalena1725.pdf#page=21",
+      "crosscheck_name": "Bach-Gesellschaft Ausgabe 43.2 (1894), ed. Paul Waldersee; printed p. 26, No. IV (PDF p. 21); IMSLP file #02320",
+      "crosscheck_url": "https://imslp.org/wiki/File:Bach-AnnaMagdalena1725.pdf"
     }
   ]
 }
