@@ -1,15 +1,15 @@
 import Foundation
 import AppKit
 import ServiceManagement
-import OPUSHelperCore
+import OPUSAtHomeCore
 
 @MainActor
 final class Controller: ObservableObject {
     static let shared = Controller()
-    let store = HelperStore()
+    let store = DataStore()
     private(set) var tools = ToolEnvironment()
 
-    @Published var settings: HelperSettings {
+    @Published var settings: AppSettings {
         didSet {
             guard settings != oldValue else { return }
             store.save(settings)
@@ -163,7 +163,7 @@ final class Controller: ObservableObject {
         runStarted = Date()
         runStatus = "Starting"
         status = "Running: Starting"
-        sleepAssertion.hold("OPUS Helper is transcribing a score")
+        sleepAssertion.hold("OPUS@Home is transcribing a score")
         let runner = ContributionRunner(store: store, tools: tools, settings: settings,
                                         options: RunOptions(openPullRequest: settings.openPullRequests, maxMinutes: settings.maxRunMinutes))
         runner.onStatus = { [weak self] s in
@@ -204,7 +204,7 @@ final class Controller: ObservableObject {
         do {
             if on { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
         } catch {
-            NSLog("OPUS Helper login item: \(error)")
+            NSLog("OPUS@Home login item: \(error)")
         }
         launchAtLogin = SMAppService.mainApp.status == .enabled
     }

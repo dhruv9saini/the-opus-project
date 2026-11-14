@@ -1,13 +1,13 @@
 import SwiftUI
 import AppKit
-import OPUSHelperCore
+import OPUSAtHomeCore
 
 @main
 enum Entry {
     static func main() {
         let args = Array(CommandLine.arguments.dropFirst())
         if let code = CLI.handle(args) { exit(code) }
-        OPUSHelperApp.main()
+        OPUSAtHomeApp.main()
     }
 }
 
@@ -15,7 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     var previewWindow: NSWindow?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        guard ProcessInfo.processInfo.environment["OPUS_HELPER_PREVIEW"] == "1" else { return }
+        guard ProcessInfo.processInfo.environment["OPUS_AT_HOME_PREVIEW"] == "1" else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let w = NSWindow(contentRect: NSRect(x: 80, y: 200, width: 340, height: 420),
                              styleMask: [.titled], backing: .buffered, defer: false)
@@ -28,7 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-struct OPUSHelperApp: App {
+struct OPUSAtHomeApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @StateObject private var controller = Controller.shared
 
@@ -53,7 +53,7 @@ struct MenuContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("OPUS Helper").font(.headline)
+                Text("OPUS@Home").font(.headline)
                 Spacer()
                 Toggle("", isOn: $c.settings.enabled).toggleStyle(.switch).labelsHidden()
             }
@@ -163,7 +163,7 @@ struct SettingsView: View {
             }
             Section("Contributions") {
                 Toggle("Open pull requests from my GitHub account", isOn: $c.settings.openPullRequests)
-                Toggle("Start OPUS Helper when I log in", isOn: Binding(get: { c.launchAtLogin }, set: { c.setLaunchAtLogin($0) }))
+                Toggle("Start OPUS@Home when I log in", isOn: Binding(get: { c.launchAtLogin }, set: { c.setLaunchAtLogin($0) }))
             }
             Section("Setup") {
                 ForEach(c.prerequisites) { p in
@@ -192,7 +192,7 @@ enum SettingsWindow {
         if window == nil {
             let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 600),
                              styleMask: [.titled, .closable], backing: .buffered, defer: false)
-            w.title = "OPUS Helper Settings"
+            w.title = "OPUS@Home Settings"
             w.isReleasedWhenClosed = false
             w.contentView = NSHostingView(rootView: SettingsView().environmentObject(Controller.shared))
             w.center()

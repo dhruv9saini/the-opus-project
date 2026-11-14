@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>OPUS Helper</string>
+	<string>OPUS@Home</string>
 	<key>CFBundleDisplayName</key>
-	<string>OPUS Helper</string>
+	<string>OPUS@Home</string>
 	<key>CFBundleIdentifier</key>
-	<string>io.github.the-opus-project.helper</string>
+	<string>io.github.the-opus-project.opusathome</string>
 	<key>CFBundleExecutable</key>
-	<string>OPUSHelper</string>
+	<string>OPUSAtHome</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

@@ -1,11 +1,11 @@
 import XCTest
-@testable import OPUSHelperCore
+@testable import OPUSAtHomeCore
 
 final class PolicyTests: XCTestCase {
     let now = Date(timeIntervalSince1970: 1_800_000_000)
 
-    func settings(_ mode: QuotaMode = .leftover) -> HelperSettings {
-        var s = HelperSettings()
+    func settings(_ mode: QuotaMode = .leftover) -> AppSettings {
+        var s = AppSettings()
         s.enabled = true
         s.quotaMode = mode
         return s
