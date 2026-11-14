@@ -112,7 +112,7 @@ public struct Decision: Equatable {
 }
 
 public enum Policy {
-    public static func gates(_ s: HelperSettings, _ c: Conditions) -> Decision? {
+    public static func gates(_ s: AppSettings, _ c: Conditions) -> Decision? {
         if !s.enabled { return Decision(run: false, reason: "Off") }
         if s.requireCharging && !c.onCharger { return Decision(run: false, reason: "Waiting for the charger") }
         if s.idleMinutes > 0 && c.idleSeconds < Double(s.idleMinutes * 60) {
@@ -124,11 +124,11 @@ public enum Policy {
         return nil
     }
 
-    public static func decide(_ s: HelperSettings, _ c: Conditions) -> Decision {
+    public static func decide(_ s: AppSettings, _ c: Conditions) -> Decision {
         gates(s, c) ?? quota(s, c.usage, now: c.now)
     }
 
-    public static func quota(_ s: HelperSettings, _ usage: Usage?, now: Date) -> Decision {
+    public static func quota(_ s: AppSettings, _ usage: Usage?, now: Date) -> Decision {
         guard let u = usage else {
             if s.quotaMode == .leftover {
                 return Decision(run: false, reason: "Can't read \(s.agent.displayName) usage, so leftover quota is unknown")
@@ -162,7 +162,7 @@ public enum Policy {
 
     public static let leftoverStopPercent = 98.0
 
-    public static func stopReason(_ s: HelperSettings, _ usage: Usage?) -> String? {
+    public static func stopReason(_ s: AppSettings, _ usage: Usage?) -> String? {
         guard let u = usage else { return nil }
         if u.blocked { return "\(s.agent.displayName) usage limit reached" }
         if let f = u.fiveHour, f.usedPercent >= Double(s.fiveHourCapPercent) {

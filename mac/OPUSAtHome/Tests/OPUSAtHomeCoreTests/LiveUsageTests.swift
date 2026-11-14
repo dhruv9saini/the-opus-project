@@ -1,5 +1,5 @@
 import XCTest
-@testable import OPUSHelperCore
+@testable import OPUSAtHomeCore
 
 final class LiveUsageTests: XCTestCase {
     func testLiveUsage() throws {
@@ -11,7 +11,7 @@ final class LiveUsageTests: XCTestCase {
             let (usage, error) = UsageReader.read(agent, tools: tools)
             print("LIVE \(agent.rawValue): \(usage.map { "\($0.summary()) blocked=\($0.blocked) 5h=\($0.fiveHour?.usedPercent ?? -1) week=\($0.weekly?.usedPercent ?? -1) weekReset=\(String(describing: $0.weekly?.resetsAt))" } ?? "nil") error=\(error ?? "none")")
             XCTAssertNotNil(usage, "\(agent.rawValue): \(error ?? "")")
-            var s = HelperSettings()
+            var s = AppSettings()
             s.enabled = true
             s.agent = agent
             for mode in QuotaMode.allCases {

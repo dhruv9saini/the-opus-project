@@ -35,7 +35,7 @@ public enum QuotaMode: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-public struct HelperSettings: Codable, Equatable {
+public struct AppSettings: Codable, Equatable {
     public var enabled = false
     public var agent: AgentKind = .codex
     public var model = ""
@@ -52,7 +52,7 @@ public struct HelperSettings: Codable, Equatable {
 
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        let d = HelperSettings()
+        let d = AppSettings()
         enabled = try c.decodeIfPresent(Bool.self, forKey: .enabled) ?? d.enabled
         agent = try c.decodeIfPresent(AgentKind.self, forKey: .agent) ?? d.agent
         model = try c.decodeIfPresent(String.self, forKey: .model) ?? d.model
@@ -86,7 +86,7 @@ public struct ContributionRecord: Codable, Identifiable, Equatable {
     }
 }
 
-public final class HelperStore {
+public final class DataStore {
     public let directory: URL
     public var settingsURL: URL { directory.appendingPathComponent("settings.json") }
     public var historyURL: URL { directory.appendingPathComponent("history.json") }
@@ -96,23 +96,23 @@ public final class HelperStore {
     public init(directory: URL? = nil) {
         if let directory {
             self.directory = directory
-        } else if let env = ProcessInfo.processInfo.environment["OPUS_HELPER_HOME"], !env.isEmpty {
+        } else if let env = ProcessInfo.processInfo.environment["OPUS_AT_HOME_HOME"], !env.isEmpty {
             self.directory = URL(fileURLWithPath: env)
         } else {
             let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
                 ?? URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Library/Application Support")
-            self.directory = base.appendingPathComponent("OPUS Helper")
+            self.directory = base.appendingPathComponent("OPUS@Home")
         }
         try? FileManager.default.createDirectory(at: logsURL, withIntermediateDirectories: true)
     }
 
-    public func loadSettings() -> HelperSettings {
+    public func loadSettings() -> AppSettings {
         guard let data = try? Data(contentsOf: settingsURL),
-              let s = try? JSONDecoder().decode(HelperSettings.self, from: data) else { return HelperSettings() }
+              let s = try? JSONDecoder().decode(AppSettings.self, from: data) else { return AppSettings() }
         return s
     }
 
-    public func save(_ settings: HelperSettings) {
+    public func save(_ settings: AppSettings) {
         let enc = JSONEncoder()
         enc.outputFormatting = [.prettyPrinted, .sortedKeys]
         if let data = try? enc.encode(settings) { try? data.write(to: settingsURL, options: .atomic) }

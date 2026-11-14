@@ -13,7 +13,7 @@ public enum UsageReader {
 
     public static func codex(_ tools: ToolEnvironment) -> (Usage?, String?) {
         let lines = [
-            #"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"clientInfo":{"name":"opus-helper","version":"1"}}}"#,
+            #"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"clientInfo":{"name":"opus-at-home","version":"1"}}}"#,
             #"{"jsonrpc":"2.0","method":"initialized"}"#,
             #"{"jsonrpc":"2.0","id":2,"method":"account/rateLimits/read"}"#,
         ]

@@ -12,7 +12,7 @@ public struct Prerequisite: Identifiable {
 }
 
 public enum Prerequisites {
-    public static func check(_ settings: HelperSettings, tools: ToolEnvironment) -> [Prerequisite] {
+    public static func check(_ settings: AppSettings, tools: ToolEnvironment) -> [Prerequisite] {
         var list: [Prerequisite] = []
         let git = tools.run("git", ["--version"], timeout: 20)
         list.append(Prerequisite(name: "Git", ok: git.ok, required: true,
@@ -57,15 +57,15 @@ public struct RunOptions {
 }
 
 public final class ContributionRunner {
-    let store: HelperStore
+    let store: DataStore
     let tools: ToolEnvironment
-    let settings: HelperSettings
+    let settings: AppSettings
     let options: RunOptions
     let logURL: URL
     private var log: FileHandle?
     public var onStatus: ((String) -> Void)?
 
-    public init(store: HelperStore, tools: ToolEnvironment, settings: HelperSettings, options: RunOptions) {
+    public init(store: DataStore, tools: ToolEnvironment, settings: AppSettings, options: RunOptions) {
         self.store = store
         self.tools = tools
         self.settings = settings
@@ -79,7 +79,7 @@ public final class ContributionRunner {
     var repo: URL { store.repoURL }
 
     func say(_ s: String) {
-        let line = "[opus-helper \(ISO8601DateFormatter().string(from: Date()))] \(s)\n"
+        let line = "[opus-at-home \(ISO8601DateFormatter().string(from: Date()))] \(s)\n"
         log?.seekToEndOfFile()
         log?.write(line.data(using: .utf8)!)
         onStatus?(s)
@@ -196,7 +196,7 @@ public final class ContributionRunner {
             ? "`Model: provider/exact-model-id` with the exact identifier of the model you are running as"
             : "`Model: \(model)`"
         return """
-        You are running unattended from OPUS Helper, a background app on a volunteer's Mac. Nobody is watching and nobody can answer questions, so never ask for input; decide and keep working.
+        You are running unattended from OPUS@Home, a background app on a volunteer's Mac. Nobody is watching and nobody can answer questions, so never ask for input; decide and keep working.
 
         Contribute exactly one bounded piece of work to The OPUS Project. Read AGENTS.md and HANDBOOK.md in this repository and follow them as if the contributor had said "help The OPUS Project". Do the full required self-review: render your LilyPond and compare it with the printed scan bar by bar before you finish.
 
@@ -206,9 +206,9 @@ public final class ContributionRunner {
 
         Practical notes for this machine:
         - LilyPond is at \(lily). Keep scans and rendered PDFs outside the repository (for example in $TMPDIR) and never commit them.
-        - \(docker ? "Docker is running, so run `python3 scripts/check.py --write` at the end and fix every failure." : "Docker is not available, so `scripts/check.py` cannot run here. Compile with the LilyPond above instead; OPUS Helper regenerates catalog.json and GitHub runs the full check.")
+        - \(docker ? "Docker is running, so run `python3 scripts/check.py --write` at the end and fix every failure." : "Docker is not available, so `scripts/check.py` cannot run here. Compile with the LilyPond above instead; OPUS@Home regenerates catalog.json and GitHub runs the full check.")
         - Pull requests contain only scores: change only LilyPond files and metadata.json under pieces/ (and wanted.txt if you take a work from it). Do not add Markdown, review notes or other prose files, and do not edit documentation, scripts, workflows or website files. Put your review notes in your final message instead.
-        - Do not run git commit, git push or gh. OPUS Helper commits your changes and opens the pull request.
+        - Do not run git commit, git push or gh. OPUS@Home commits your changes and opens the pull request.
 
         When you are done, write a file named OPUS_PR.md at the repository root. Its first line is the pull request title, for example "Add step 1 transcription of <work>". The rest is the pull request body and must contain exactly these lines and nothing else:
         Source: https://... (the printed source URL)
@@ -233,7 +233,7 @@ public final class ContributionRunner {
             if !settings.model.isEmpty { args += ["--model", settings.model] }
         }
         var env = tools.environment
-        env["OPUS_HELPER"] = "1"
+        env["OPUS_AT_HOME"] = "1"
         log?.seekToEndOfFile()
         let proc = try SpawnedProcess(executable: exe, arguments: args, cwd: repo.path, environment: env, logPath: logURL.path)
         let r = proc.wait(timeout: TimeInterval(max(10, options.maxMinutes) * 60), shouldStop: shouldStop)
@@ -289,12 +289,12 @@ public final class ContributionRunner {
         let catalog = tools.run("python3", ["-B", "-c", "import sys; sys.path.insert(0, 'scripts'); import check; open('catalog.json', 'w', encoding='utf-8').write(check.render_catalog(check.expected_catalog()[0]))"], cwd: repo, timeout: 120)
         if !catalog.ok { say("Could not regenerate catalog.json: \(catalog.stderr.prefix(400))") }
 
-        let branch = "opus-helper/\(Int(Date().timeIntervalSince1970))"
+        let branch = "opus-at-home/\(Int(Date().timeIntervalSince1970))"
         try git(["checkout", "-b", branch])
         try git(["add", "-A", "--", "pieces", "catalog.json", "wanted.txt"])
         let identity = gitIdentity()
         try git(["-c", "user.name=\(identity.name)", "-c", "user.email=\(identity.email)", "commit", "--quiet", "-m", title,
-                 "-m", "Generated by \(settings.agent.displayName) through OPUS Helper."])
+                 "-m", "Generated by \(settings.agent.displayName) through OPUS@Home."])
         say("Committed \(title)")
 
         guard options.openPullRequest else {
@@ -336,7 +336,7 @@ public final class ContributionRunner {
         let r = tools.run("gh", ["api", "user", "--jq", "[.login, (.id|tostring)] | join(\" \")"], timeout: 30)
         let parts = r.stdout.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ")
         if r.ok, parts.count == 2 { return (String(parts[0]), "\(parts[1])+\(parts[0])@users.noreply.github.com") }
-        return ("OPUS Helper", "opus-helper@users.noreply.github.com")
+        return ("OPUS@Home", "opus-at-home@users.noreply.github.com")
     }
 
     func openPullRequest(branch: String, title: String, body: String) throws -> String {

@@ -1,15 +1,15 @@
-name: mac-helper
+name: opus-at-home
 
 on:
   pull_request:
     paths:
       - "mac/**"
-      - ".github/workflows/mac-helper.yml"
+      - ".github/workflows/opus-at-home.yml"
   push:
     branches: [main]
     paths:
       - "mac/**"
-      - ".github/workflows/mac-helper.yml"
+      - ".github/workflows/opus-at-home.yml"
   workflow_dispatch:
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Test
-        working-directory: mac/OPUSHelper
+        working-directory: mac/OPUSAtHome
         run: swift test
       - name: Import Developer ID certificate
         if: env.MACOS_CERT_P12 != ''
@@ -48,30 +48,30 @@ jobs:
           fi
       - name: Build app
         env:
-          OPUS_HELPER_BUILD: ${{ github.run_number }}
+          OPUS_AT_HOME_BUILD: ${{ github.run_number }}
           OPUS_NOTARY_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           OPUS_NOTARY_ISSUER: ${{ secrets.ASC_ISSUER_ID }}
         run: mac/build.sh
       - name: Smoke test
-        run: '"mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" --help'
+        run: '"mac/dist/OPUS@Home.app/Contents/MacOS/OPUSAtHome" --help'
       - name: Screenshot the menu and settings
         run: |
           mkdir -p mac/dist/screens
-          OPUS_HELPER_PREVIEW=1 "mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" &
+          OPUS_AT_HOME_PREVIEW=1 "mac/dist/OPUS@Home.app/Contents/MacOS/OPUSAtHome" &
           sleep 15
           screencapture -x mac/dist/screens/preview.png || true
           kill %1 || true
           sleep 2
-          "mac/dist/OPUS Helper.app/Contents/MacOS/OPUSHelper" &
+          "mac/dist/OPUS@Home.app/Contents/MacOS/OPUSAtHome" &
           sleep 10
-          osascript -e 'tell application "System Events" to tell process "OPUSHelper" to click menu bar item 1 of menu bar 2' || true
+          osascript -e 'tell application "System Events" to tell process "OPUSAtHome" to click menu bar item 1 of menu bar 2' || true
           sleep 3
           screencapture -x mac/dist/screens/menubar-click.png || true
           kill %1 || true
       - uses: actions/upload-artifact@v4
         with:
-          name: OPUS-Helper
-          path: mac/dist/OPUS-Helper.zip
+          name: OPUS-at-Home
+          path: mac/dist/OPUS-at-Home.zip
       - uses: actions/upload-artifact@v4
         with:
           name: screens
@@ -81,5 +81,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete opus-helper-latest --yes --cleanup-tag || true
-          gh release create opus-helper-latest mac/dist/OPUS-Helper.zip --title "OPUS Helper (latest build)" --notes "Menu bar app that contributes to The OPUS Project with your Codex or Claude Code subscription. See mac/README.md." --target "$GITHUB_SHA"
+          gh release delete opus-at-home-latest --yes --cleanup-tag || true
+          gh release create opus-at-home-latest mac/dist/OPUS-at-Home.zip --title "OPUS@Home (latest build)" --notes "Menu bar app that contributes to The OPUS Project with your Codex or Claude Code subscription. See mac/README.md." --target "$GITHUB_SHA"

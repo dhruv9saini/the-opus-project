@@ -128,7 +128,7 @@ public final class SpawnedProcess {
         }
         var newPid: pid_t = 0
         let rc = posix_spawn(&newPid, executable, &fileActions, &attr, argv, envp)
-        if rc != 0 { throw NSError(domain: "OPUSHelper", code: Int(rc), userInfo: [NSLocalizedDescriptionKey: "posix_spawn failed: \(String(cString: strerror(rc)))"]) }
+        if rc != 0 { throw NSError(domain: "OPUSAtHome", code: Int(rc), userInfo: [NSLocalizedDescriptionKey: "posix_spawn failed: \(String(cString: strerror(rc)))"]) }
         pid = newPid
     }
 

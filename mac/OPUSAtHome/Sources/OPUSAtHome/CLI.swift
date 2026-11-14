@@ -1,10 +1,10 @@
 import Foundation
-import OPUSHelperCore
+import OPUSAtHomeCore
 
 enum CLI {
     static func handle(_ args: [String]) -> Int32? {
         guard let cmd = args.first, cmd.hasPrefix("--"), !cmd.hasPrefix("-NS"), !cmd.hasPrefix("-Apple") else { return nil }
-        let store = HelperStore()
+        let store = DataStore()
         var settings = store.loadSettings()
         if let i = args.firstIndex(of: "--agent"), i + 1 < args.count, let a = AgentKind(rawValue: args[i + 1]) { settings.agent = a }
         if let i = args.firstIndex(of: "--model"), i + 1 < args.count { settings.model = args[i + 1] }
@@ -41,7 +41,7 @@ enum CLI {
             print("Log: \(record.logPath ?? "")")
             return record.outcome.hasPrefix("Failed") ? 1 : 0
         case "--help":
-            print("OPUS Helper\n  --status            show setup, power, usage and whether a run would start\n  --prompt            print the agent prompt\n  --run-once [--no-pr] [--agent codex|claude] [--model M] [--minutes N]")
+            print("OPUS@Home\n  --status            show setup, power, usage and whether a run would start\n  --prompt            print the agent prompt\n  --run-once [--no-pr] [--agent codex|claude] [--model M] [--minutes N]")
             return 0
         default:
             return nil
